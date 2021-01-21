@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fathym | The Data Application Framework</title>
+    <base href="/" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <script id="lcu-reg">
+      window.LCU = {
+        // APIRoot: "https://localhost:44387",
+        APIRoot: "https://www.fathym-int.com",
+        Application: {
+        },
+        State: {
+          ActionRoot: "/api/state",
+          Root: "/api/state",
+          // Environment: 'local',
+          UsernameMock: 'george.hatch@fathym.com',
+          Stripe: {
+            PublicKey: 'pk_test_KnI6QApAae5tFIxuwuoSBFx6'
+          },
+          LicenseType: 'forecast'
+        },
+        Settings: {
+        }
+      };
+    </script>
+  </head>
+
+  <body>
+    <lcu-root></lcu-root>
+  </body>
+</html>

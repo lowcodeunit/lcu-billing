@@ -1,0 +1,13 @@
+<lcu-toolbar 
+></lcu-toolbar>
+<!-- [show-back-button]="ShowBackButton"
+(back-button-clicked)="BackButtonClicked()" -->
+
+<div [className]="SelectedTheme" style="height: calc(100% - 94px)">
+  <div class="billing-app-container" >
+    <div class='router-container'>
+      <router-outlet (activate)="OnActivate($event)"></router-outlet>
+    </div>
+  </div>
+
+</div>
