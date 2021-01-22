@@ -1,11 +1,14 @@
 <!-- MAIN SCREEN -->
 <div [fxShow]="!State.Loading" class="plan-page-container"  fxLayout="column" fxLayoutAlign="center center" >
   <h3 class="choose-header" fxLayoutAlign="center center">Choose Your Perfect Plan</h3>
-  <div  fxLayout.xl="row" fxLayout.lg="row" fxLayout.md="column" fxLayout.sm="column" fxLayout.xs="column"
-        fxLayoutAlign="center center"
-        fxLayoutGap="30px"  >
-  <lcu-billing-display></lcu-billing-display>
-  </div>
+  <lcu-billing-display
+  [featured]="State.FeaturedPlanGroup"
+  [popular]="State.PopularPlanGroup"
+  [plan-options]="State.Plans"
+  [displayed-plans]="DisplayedPlans"
+  [show-button]="ShowButton"
+  (buy-now)="BuyNowClicked($event)"
+  ></lcu-billing-display>
   <h2 fxLayoutAlign="center center" class="tag-line">If You Can Fathym It, You Can Build It.</h2>
 </div>
 
