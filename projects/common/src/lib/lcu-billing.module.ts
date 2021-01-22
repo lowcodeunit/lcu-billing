@@ -14,16 +14,16 @@ import { PlanCardComponent } from './controls/plan-card/plan-card.component';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    MaterialModule
+    MaterialModule,
   ],
   exports: [LcuComponent, LcuDirective, PlanCardComponent],
-  entryComponents: []
+  entryComponents: [],
 })
 export class LcuBillingModule {
   static forRoot(): ModuleWithProviders<LcuBillingModule> {
     return {
       ngModule: LcuBillingModule,
-      providers: [LcuService]
+      providers: [LcuService],
     };
   }
 }
