@@ -1,4 +1,4 @@
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, Input, OnInit, Injector } from '@angular/core';
 import { LCUElementContext, LcuElementComponent } from '@lcu/common';
 
 export class LcuBillingBillingPlanViewElementState {}
@@ -16,7 +16,9 @@ export class LcuBillingBillingPlanViewElementComponent extends LcuElementCompone
   //  Fields
 
   //  Properties
-
+  @Input('plan-group')
+  public PlanGroup: string;
+  
   //  Constructors
   constructor(protected injector: Injector) {
     super(injector);
