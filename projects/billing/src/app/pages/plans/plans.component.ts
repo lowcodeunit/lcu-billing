@@ -59,17 +59,17 @@ export class PlansComponent implements OnInit {
   protected stateChanged(): void {
     // console.log('state plan page = ', this.State);
 
-    if (this.State.Plans) {
-      this.DisplayedPlans = new Array<BillingPlanOption>();
-      this.State.Plans.forEach((plan: BillingPlanOption) => {
-        // so the page only shows 1 card per plan group
-        if (
-          this.DisplayedPlans.filter((e) => e.PlanGroup === plan.PlanGroup)
-            .length === 0
-        ) {
-          this.DisplayedPlans.push(plan);
-        }
-      });
-    }
+    // if (this.State.Plans) {
+    //   this.DisplayedPlans = new Array<BillingPlanOption>();
+    //   this.State.Plans.forEach((plan: BillingPlanOption) => {
+    //     // so the page only shows 1 card per plan group
+    //     if (
+    //       this.DisplayedPlans.filter((e) => e.PlanGroup === plan.PlanGroup)
+    //         .length === 0
+    //     ) {
+    //       this.DisplayedPlans.push(plan);
+    //     }
+    //   });
+    // }
   }
 }

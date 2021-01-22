@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { emit } from 'process';
 import { BillingPlanOption } from '../../state/user-billing/user-billing.state';
 
@@ -7,14 +7,14 @@ import { BillingPlanOption } from '../../state/user-billing/user-billing.state';
   templateUrl: './billing-display.component.html',
   styleUrls: ['./billing-display.component.scss']
 })
-export class BillingDisplayComponent implements OnInit {
+export class BillingDisplayComponent implements OnChanges, OnInit {
   //  Fields
 
   //  Properties
   @Output('buy-now')
   public BuyNow: EventEmitter<BillingPlanOption>;
 
-  @Input('displayed-plans')
+  //@Input('displayed-plans')
   public DisplayedPlans: BillingPlanOption[];
 
   @Input('featured')
@@ -26,8 +26,8 @@ export class BillingDisplayComponent implements OnInit {
   @Input('show-button')
   public ShowButton: boolean;
 
-  @Input('plan-options')
-  public PlanOptions: BillingPlanOption[];
+  @Input('plans')
+  public Plans: BillingPlanOption[];
 
   //  Constructors
   constructor() { 
@@ -37,7 +37,15 @@ export class BillingDisplayComponent implements OnInit {
   }
 
   //  Life Cycle
+  public ngOnChanges(changes: SimpleChanges) {
+    if(changes.Plans)
+    {
+      this.setDisplayedPlans();
+    }
+  }
+
   public ngOnInit(): void {
+    this.setDisplayedPlans();
   }
 
   //  API Methods
@@ -46,4 +54,19 @@ export class BillingDisplayComponent implements OnInit {
   }
 
   //  Helpers
+  protected setDisplayedPlans(){
+    if (this.Plans) {
+      this.DisplayedPlans = new Array<BillingPlanOption>();
+
+      this.Plans.forEach((plan: BillingPlanOption) => {
+        // so the page only shows 1 card per plan group
+        if (
+          this.DisplayedPlans.filter((e) => e.PlanGroup === plan.PlanGroup)
+            .length === 0
+        ) {
+          this.DisplayedPlans.push(plan);
+        }
+      });
+    }
+  }
 }
