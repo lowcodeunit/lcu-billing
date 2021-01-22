@@ -6,14 +6,18 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
-import { FathymSharedModule, LCUServiceSettings, MaterialModule } from '@lcu/common';
-import { LcuBillingModule, UserBillingStateContext } from '@lowcodeunit/lcu-billing-common';
-
+import {
+  FathymSharedModule,
+  LCUServiceSettings,
+  MaterialModule,
+} from '@lcu/common';
+import {
+  LcuBillingModule,
+  UserBillingStateContext,
+} from '@lowcodeunit/lcu-billing-common';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     FathymSharedModule.forRoot(),
     BrowserAnimationsModule,
@@ -22,17 +26,17 @@ import { LcuBillingModule, UserBillingStateContext } from '@lowcodeunit/lcu-bill
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    LcuBillingModule
-    ],
+    LcuBillingModule,
+  ],
   providers: [
     UserBillingStateContext,
     {
       provide: LCUServiceSettings,
-      useValue: FathymSharedModule.DefaultServiceSettings(environment)
-    }
+      useValue: FathymSharedModule.DefaultServiceSettings(environment),
+    },
   ],
   bootstrap: [AppComponent],
   exports: [],
-  entryComponents: []
+  entryComponents: [],
 })
 export class AppModule {}

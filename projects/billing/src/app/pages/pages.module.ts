@@ -19,10 +19,10 @@ import { PlansComponent } from './plans/plans.component';
     FlexLayoutModule,
     MaterialModule,
     LcuBillingModule,
-    PipeModule
+    PipeModule,
   ],
-  exports: [BillingComponent, PlansComponent],
+  exports: [BillingComponent, CompleteComponent, PlansComponent],
   providers: [],
-  entryComponents: [PlansComponent]
+  entryComponents: [BillingComponent, CompleteComponent, PlansComponent],
 })
 export class PagesModule {}
