@@ -4,22 +4,7 @@
   <div  fxLayout.xl="row" fxLayout.lg="row" fxLayout.md="column" fxLayout.sm="column" fxLayout.xs="column"
         fxLayoutAlign="center center"
         fxLayoutGap="30px"  >
-
-    <div *ngFor="let plan of DisplayedPlans">
-
-      <lcu-plan-card
-        class='lcu-plan-card'
-        [featured-plan-group]="State.FeaturedPlanGroup"
-        [popular-plan-group] = "State.PopularPlanGroup"
-        [plan]="plan"
-        [all-plans]="State.Plans"
-        [displayed-plans]="DisplayedPlans"
-        [show-button]="ShowButton"
-        (buy-now-clicked)="BuyNowClicked($event)"
-        >
-      </lcu-plan-card>
-
-    </div>
+  <lcu-billing-display></lcu-billing-display>
   </div>
   <h2 fxLayoutAlign="center center" class="tag-line">If You Can Fathym It, You Can Build It.</h2>
 </div>

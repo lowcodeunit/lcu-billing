@@ -6,9 +6,10 @@ import { LcuService } from './services/lcu.service';
 import { LcuComponent } from './controls/lcu/lcu.component';
 import { LcuDirective } from './directives/lcu.directive';
 import { PlanCardComponent } from './controls/plan-card/plan-card.component';
+import { BillingDisplayComponent } from './controls/billing-display/billing-display.component';
 
 @NgModule({
-  declarations: [LcuComponent, LcuDirective, PlanCardComponent],
+  declarations: [LcuComponent, LcuDirective, PlanCardComponent, BillingDisplayComponent],
   imports: [
     FathymSharedModule,
     FormsModule,
@@ -16,7 +17,7 @@ import { PlanCardComponent } from './controls/plan-card/plan-card.component';
     FlexLayoutModule,
     MaterialModule,
   ],
-  exports: [LcuComponent, LcuDirective, PlanCardComponent],
+  exports: [LcuComponent, LcuDirective, PlanCardComponent, BillingDisplayComponent],
   entryComponents: [],
 })
 export class LcuBillingModule {
