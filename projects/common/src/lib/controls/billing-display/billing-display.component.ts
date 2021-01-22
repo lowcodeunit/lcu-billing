@@ -6,10 +6,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./billing-display.component.scss']
 })
 export class BillingDisplayComponent implements OnInit {
+  //  Fields
 
+  //  Properties
+
+  //  Constructors
   constructor() { }
 
+  //  Life Cycle
   ngOnInit(): void {
   }
 
+  // API Methods
+
+  //  Helpers
 }
