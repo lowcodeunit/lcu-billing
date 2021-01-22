@@ -1,5 +1,5 @@
 {
-	"name": "@lowcodeunit/lcu-billing-billing",
+	"name": "@lowcodeunit/lcu-billing",
 	"version": "0.0.1",
 	"peerDependencies": {
 		"@angular/common": "~8.1.2",

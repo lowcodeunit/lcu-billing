@@ -10,7 +10,7 @@
 		],
 		"solutions": {
 			"billing-plan-view": {
-				"element": "lcu-billing-billing-plan-view-element"
+				"element": "lcu-billing-plan-view-element"
 			}
 		},
 		"elements": {},
