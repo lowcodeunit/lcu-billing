@@ -16,9 +16,8 @@ import {
 import {
   UserBillingStateContext,
   UserBillingState,
-  NapkinIDESetupStepTypes,
   BillingPlanOption,
-} from '@napkin-ide/lcu-napkin-ide-common';
+} from '@lowcodeunit/lcu-billing-common';
 import { LCUServiceSettings } from '@lcu/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -102,8 +101,6 @@ export class BillingComponent implements OnInit, AfterViewChecked {
    * Whether or not to show the back button in the plan card
    */
   public ShowBackButton: boolean = true;
-
-  public NapkinIDESetupStepTypes = NapkinIDESetupStepTypes;
 
   /**
    * Whether or not the user has accepted the Terms of Service

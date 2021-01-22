@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { FathymSharedModule, LCUServiceSettings, MaterialModule } from '@lcu/common';
-import { LcuNapkinIdeModule, UserBillingStateContext } from '@napkin-ide/lcu-napkin-ide-common';
+import { LcuBillingModule, UserBillingStateContext } from '@lowcodeunit/lcu-billing-common';
 
 
 @NgModule({
@@ -22,7 +22,7 @@ import { LcuNapkinIdeModule, UserBillingStateContext } from '@napkin-ide/lcu-nap
     MaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    LcuNapkinIdeModule
+    LcuBillingModule
     ],
   providers: [
     UserBillingStateContext,

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {
   UserBillingStateContext,
   BillingPlanOption,
-} from '@napkin-ide/lcu-napkin-ide-common';
+} from '@lowcodeunit/lcu-billing-common';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

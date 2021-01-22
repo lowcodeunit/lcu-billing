@@ -6,7 +6,7 @@ import { BillingComponent } from './billing/billing.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CompleteComponent } from './complete/complete.component';
-import { LcuNapkinIdeModule } from '@napkin-ide/lcu-napkin-ide-common';
+import { LcuBillingModule } from '@lowcodeunit/lcu-billing-common';
 import { PlansComponent } from './plans/plans.component';
 
 @NgModule({
@@ -18,7 +18,7 @@ import { PlansComponent } from './plans/plans.component';
     PagesRoutingModule,
     FlexLayoutModule,
     MaterialModule,
-    LcuNapkinIdeModule,
+    LcuBillingModule,
     PipeModule
   ],
   exports: [BillingComponent, PlansComponent],

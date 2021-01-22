@@ -10,7 +10,7 @@ import {
 import {
   UserBillingStateContext,
   UserBillingState,
-} from '@napkin-ide/lcu-napkin-ide-common';
+} from '@lowcodeunit/lcu-billing-common';
 import { PagesRoutingModule } from './pages/pages-routing.module';
 import { combineLatest, Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';

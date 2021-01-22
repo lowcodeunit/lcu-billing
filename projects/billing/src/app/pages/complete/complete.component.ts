@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import {
   UserBillingStateContext,
   UserBillingState,
-} from '@napkin-ide/lcu-napkin-ide-common';
+} from '@lowcodeunit/lcu-billing-common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BillingPlanOption } from 'projects/common/src/lcu.api';
 import { identifierModuleUrl } from '@angular/compiler';
