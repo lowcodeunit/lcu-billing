@@ -1,11 +1,19 @@
-import { Component, EventEmitter, Input, OnInit, OnChanges, Output, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { emit } from 'process';
 import { BillingPlanOption } from '../../state/user-billing/user-billing.state';
 
 @Component({
   selector: 'lcu-billing-display',
   templateUrl: './billing-display.component.html',
-  styleUrls: ['./billing-display.component.scss']
+  styleUrls: ['./billing-display.component.scss'],
 })
 export class BillingDisplayComponent implements OnChanges, OnInit {
   //  Fields
@@ -14,7 +22,7 @@ export class BillingDisplayComponent implements OnChanges, OnInit {
   @Output('buy-now')
   public BuyNow: EventEmitter<BillingPlanOption>;
 
-  //@Input('displayed-plans')
+  // @Input('displayed-plans')
   public DisplayedPlans: BillingPlanOption[];
 
   @Input('featured')
@@ -30,7 +38,7 @@ export class BillingDisplayComponent implements OnChanges, OnInit {
   public Plans: BillingPlanOption[];
 
   //  Constructors
-  constructor() { 
+  constructor() {
     this.BuyNow = new EventEmitter();
 
     this.ShowButton = true;
@@ -38,8 +46,7 @@ export class BillingDisplayComponent implements OnChanges, OnInit {
 
   //  Life Cycle
   public ngOnChanges(changes: SimpleChanges) {
-    if(changes.Plans)
-    {
+    if (changes.Plans) {
       this.setDisplayedPlans();
     }
   }
@@ -54,7 +61,7 @@ export class BillingDisplayComponent implements OnChanges, OnInit {
   }
 
   //  Helpers
-  protected setDisplayedPlans(){
+  protected setDisplayedPlans() {
     if (this.Plans) {
       this.DisplayedPlans = new Array<BillingPlanOption>();
 
