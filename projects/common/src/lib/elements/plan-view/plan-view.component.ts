@@ -66,9 +66,9 @@ export class LcuBillingPlanViewElementComponent
   public BuyNowClicked(plan: BillingPlanOption) {
     this.BuyNowClick.emit(plan);
 
-    const link = `https://www.iot-ensemble.com/billing/iot/plan/${plan.PlanGroup}/${plan.Interval}`;
+    // const link = `https://www.iot-ensemble.com/billing/iot/plan/${plan.PlanGroup}/${plan.Interval}`;
 
-    window.location.href = link;
+    // window.location.href = link;
   }
 
   //  Helpers
