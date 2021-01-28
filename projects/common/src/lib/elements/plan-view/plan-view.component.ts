@@ -31,7 +31,7 @@ export class LcuBillingPlanViewElementComponent
   protected http: HttpClient;
 
   //  Properties
-  @Input('billing-plan-option')
+  @Input('billing-plan-options')
   public BillingPlanOptions: (BillingPlanOption & any)[];
 
   @Output('buy-now-click')
