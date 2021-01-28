@@ -10,7 +10,13 @@ import { PlanCardComponent } from './controls/plan-card/plan-card.component';
 import { LcuBillingPlanViewElementComponent } from './elements/plan-view/plan-view.component';
 
 @NgModule({
-  declarations: [LcuComponent, LcuDirective, PlanCardComponent, BillingDisplayComponent, LcuBillingPlanViewElementComponent],
+  declarations: [
+    LcuComponent,
+    LcuDirective,
+    PlanCardComponent,
+    BillingDisplayComponent,
+    LcuBillingPlanViewElementComponent,
+  ],
   imports: [
     FathymSharedModule,
     FormsModule,
@@ -18,8 +24,14 @@ import { LcuBillingPlanViewElementComponent } from './elements/plan-view/plan-vi
     FlexLayoutModule,
     MaterialModule,
   ],
-  exports: [LcuComponent, LcuDirective, PlanCardComponent, BillingDisplayComponent, LcuBillingPlanViewElementComponent],
-  entryComponents: [],
+  exports: [
+    LcuComponent,
+    LcuDirective,
+    PlanCardComponent,
+    BillingDisplayComponent,
+    LcuBillingPlanViewElementComponent,
+  ],
+  entryComponents: [LcuBillingPlanViewElementComponent],
 })
 export class LcuBillingModule {
   static forRoot(): ModuleWithProviders<LcuBillingModule> {
