@@ -5,10 +5,9 @@ import { BillingPlanOption } from '../../state/user-billing/user-billing.state';
 @Component({
   selector: 'lcu-plan-card',
   templateUrl: './plan-card.component.html',
-  styleUrls: ['./plan-card.component.scss']
+  styleUrls: ['./plan-card.component.scss'],
 })
 export class PlanCardComponent implements OnInit {
-
   /**
    * The Displayed plans from the state
    */
@@ -30,9 +29,9 @@ export class PlanCardComponent implements OnInit {
    */
   // @Input('intervals') Intervals: string[];
 
-/**
- * The plan to be displayed
- */
+  /**
+   * The plan to be displayed
+   */
   @Input('plan') Plan: BillingPlanOption;
 
   /**
@@ -54,9 +53,9 @@ export class PlanCardComponent implements OnInit {
    * Whether or not to show the back button
    */
   @Input('show-back-button') ShowBackButton: boolean;
-/**
- * Whether or not to display the toggle button
- */
+  /**
+   * Whether or not to display the toggle button
+   */
   // @Input('show-toggle') ShowToggle: boolean;
 
   /**
@@ -80,7 +79,7 @@ export class PlanCardComponent implements OnInit {
   public OtherIntervalPrice: any;
 
   /**
-   * The other plan to display in the price section 
+   * The other plan to display in the price section
    */
   public OtherPlan: BillingPlanOption;
 
@@ -99,8 +98,7 @@ export class PlanCardComponent implements OnInit {
    */
   public ToggleChecked: boolean;
 
-
-  constructor() { 
+  constructor() {
     this.BuyNowClicked = new EventEmitter<any>();
     this.IntervalToggled = new EventEmitter<BillingPlanOption>();
     this.GoBackClicked = new EventEmitter<any>();
@@ -110,91 +108,92 @@ export class PlanCardComponent implements OnInit {
     // console.log('All plans: ',this.AllPlans);
     // this.getOtherIntervalPrice();
     this.getIntervalValue();
-
   }
-  ngOnChanges(){
-    this.determinePlanGroups()
+  ngOnChanges() {
+    this.determinePlanGroups();
     this.getOtherIntervalPrice(this.Plan);
     this.extractPlanFeatures();
   }
-/**
- * 
- * Passes the selected plan back to the plans component to determine which plan to display
- * 
- * in the billing component
- */
-  public BuyNow(plan: any){
+  /**
+   *
+   * Passes the selected plan back to the plans component to determine which plan to display
+   *
+   * in the billing component
+   */
+  public BuyNow(plan: any) {
     // console.log("Plan selected from plan page: ", plan);
     this.BuyNowClicked.emit(plan);
     // console.log("plan passed = ", plan)
   }
 
-  public IntervalSelected(interval: string){
+  public IntervalSelected(interval: string) {
     this.ToggleChanged(interval);
-    this.IntervalToggled.emit(this.Plan); 
+    this.IntervalToggled.emit(this.Plan);
 
     this.getOtherIntervalPrice(this.Plan);
   }
 
-  public DeterminePlanFeatIndex(index: any){
-    if(index < this.PlanFeatures.length -1){
+  public DeterminePlanFeatIndex(index: any) {
+    if (index < this.PlanFeatures.length - 1) {
       return true;
-    }
-    else{
+    } else {
       return false;
     }
   }
 
   /**
-  * Toggles planid and plan card to the selected plan
-  * @param toggleSelected
-  */
- public ToggleChanged(toggleSelected: any): void {
-   let intervalSelected: string;
-   
-   if(toggleSelected.checked === true){
-     intervalSelected = "year"
-   }
-   else{
-     intervalSelected = "month"
-   }
-  //  console.log("toggle changed: ", toggleSelected);
-   this.AllPlans.forEach((plan: BillingPlanOption) => {
-     if (
-       this.Plan.PlanGroup === plan.PlanGroup &&
-       plan.Interval === intervalSelected
-     ) {
-       this.Plan = plan;
-      //  this.planID = this.SelectedPlan.Lookup;
-      //  console.log("Toggled to: ", this.Plan);
-     }
-   });
- }
+   * Toggles planid and plan card to the selected plan
+   * @param toggleSelected
+   */
+  public ToggleChanged(toggleSelected: any): void {
+    let intervalSelected: string;
 
- public GoBack(){
-  this.GoBackClicked.emit(this.Plan.LicenseType);
- }
+    if (toggleSelected.checked === true) {
+      intervalSelected = 'year';
+    } else {
+      intervalSelected = 'month';
+    }
+    //  console.log("toggle changed: ", toggleSelected);
+    this.AllPlans.forEach((plan: BillingPlanOption) => {
+      if (
+        this.Plan.PlanGroup === plan.PlanGroup &&
+        plan.Interval === intervalSelected
+      ) {
+        this.Plan = plan;
+        //  this.planID = this.SelectedPlan.Lookup;
+        //  console.log("Toggled to: ", this.Plan);
+      }
+    });
+  }
 
-  protected getOtherIntervalPrice(selectedPlan: BillingPlanOption){
+  public GoBack() {
+    this.GoBackClicked.emit(this.Plan.LicenseType);
+  }
+
+  protected getOtherIntervalPrice(selectedPlan: BillingPlanOption) {
     // console.log("selected plan = ", selectedPlan);
-    let temp = this.AllPlans.filter(plan => plan.Interval !== selectedPlan.Interval && plan.PlanGroup === selectedPlan.PlanGroup);
+    let temp = this.AllPlans.filter(
+      (plan) =>
+        plan.Interval !== selectedPlan.Interval &&
+        plan.PlanGroup === selectedPlan.PlanGroup
+    );
     this.OtherPlan = temp[0];
     // console.log("Other plan interval:", this.OtherPlan);
-    if(this.OtherPlan){
-    this.OtherIntervalPrice = this.OtherPlan.Price;
+    if (this.OtherPlan) {
+      this.OtherIntervalPrice = this.OtherPlan.Price;
     }
   }
 
-  protected extractPlanFeatures(){
-    if(this.Plan.PlanFeatures){
-      this.PlanFeatures = this.Plan.PlanFeatures.split("|");
+  protected extractPlanFeatures() {
+    if (this.Plan.PlanFeatures) {
+      this.PlanFeatures = this.Plan.PlanFeatures.split('|');
     }
     // console.log("Plan feats = ", this.PlanFeatures)
   }
 
-  protected determinePlanGroups(){
+  protected determinePlanGroups() {
     if (this.AllPlans) {
-    this.PlanGroups = new Array<string>();
+      this.PlanGroups = new Array<string>();
       // this.Intervals = new Array<string>();
 
       this.AllPlans.forEach((plan: BillingPlanOption) => {
@@ -210,14 +209,11 @@ export class PlanCardComponent implements OnInit {
     }
   }
 
-  protected getIntervalValue(){
-    if(this.Plan.Interval === "year"){
+  protected getIntervalValue() {
+    if (this.Plan.Interval === 'year') {
       this.ToggleChecked = true;
-    }
-    else{
+    } else {
       this.ToggleChecked = false;
     }
   }
-  
-
 }
