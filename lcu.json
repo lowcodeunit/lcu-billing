@@ -1,14 +1,20 @@
 {
-  "templates": {
-    "repository": "lowcodeunit-devkit/lcu-cli-templates-core",
-    "scope": "@lowcodeunit",
-    "workspace": "lcu-billing"
-  },
-  "config": {
-    "wc": ["wc/lcu-billing.lcu.js"],
-    "solutions": {},
-    "elements": {},
-    "data-flow": {},
-    "dependencies": {}
-  }
+	"templates": {
+		"repository": "lowcodeunit-devkit/lcu-cli-templates-core",
+		"scope": "@lowcodeunit",
+		"workspace": "lcu-billing"
+	},
+	"config": {
+		"wc": [
+			"wc/lcu-billing.lcu.js"
+		],
+		"solutions": {
+			"billing-plan-view": {
+				"element": "lcu-billing-plan-view-element"
+			}
+		},
+		"elements": {},
+		"data-flow": {},
+		"dependencies": {}
+	}
 }

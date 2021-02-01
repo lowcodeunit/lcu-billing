@@ -1,0 +1,10 @@
+<lcu-billing-display
+*ngIf="BillingPlanOptions"
+[featured]=""
+[popular]=""
+[plans]="BillingPlanOptionsSorted"
+[show-button]="true"
+(buy-now)="BuyNowClicked($event)"
+></lcu-billing-display>
+
+<!-- <lcu-loader *ngIf="!BillingPlanOptions"></lcu-loader> -->
