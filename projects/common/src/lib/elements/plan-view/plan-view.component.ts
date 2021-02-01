@@ -32,13 +32,10 @@ export class LcuBillingPlanViewElementComponent
 
   //  Properties
 
-  public BillingPlanOptions: (BillingPlanOption & any)[];
+  public BillingPlanOptionsSorted: (BillingPlanOption)[];
 
-  @Input('billing-plan-options-prefix')
-  public BillingPlanOptionsPrefix: (BillingPlanOption & any)[];
-
-  @Input('billing-plan-options-suffix')
-  public BillingPlanOptionsSuffix: (BillingPlanOption & any)[];
+  @Input('billing-plan-options')
+  public BillingPlanOptions: (BillingPlanOption)[];
 
   @Output('buy-now-click')
   public BuyNowClick: EventEmitter<BillingPlanOption>;
@@ -80,12 +77,12 @@ export class LcuBillingPlanViewElementComponent
   //  Helpers
   protected loadBillingOptions() {
     // tslint:disable-next-line:max-line-length
-    this.http.get('https://www.iot-ensemble.com/api/state/usermanagement/ListBillingOptions?licenseType=${this.LiscenseType}').subscribe((result: BaseModeledResponse<BillingPlanOption[]>)=>{
-      this.BillingPlanOptions = [
-        ...(this.BillingPlanOptionsPrefix || []),
-        ...(result.Model || []),
-        ...(this.BillingPlanOptionsSuffix || [])
+    this.http.get(`https://www.iot-ensemble.com/api/state/usermanagement/ListBillingOptions?licenseType=${this.LicenseType}`).subscribe((result: BaseModeledResponse<BillingPlanOption[]>)=>{
+      this.BillingPlanOptionsSorted = [
+        ...(this.BillingPlanOptions || []),
+        ...(result.Model || [])
       ]
+      this.BillingPlanOptionsSorted.sort((a, b) => a.Priority < b.Priority ? -1 : a.Priority > b.Priority ? 1 : 0);
     });
   }
 }

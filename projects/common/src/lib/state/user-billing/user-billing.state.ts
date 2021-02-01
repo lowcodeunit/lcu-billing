@@ -32,6 +32,8 @@ export class UserBillingState {
 }
 
 export class BillingPlanOption {
+  public ContactText?: string;
+
   public DataApps?: number;
 
   public Description?: string;
@@ -57,6 +59,8 @@ export class BillingPlanOption {
   public PlanGroup?: string;
 
   public Price?: number;
+
+  public Priority?: number;
 
   public PlanFeatures?: string;
 
