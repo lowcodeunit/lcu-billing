@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { BillingPlanOption } from 'projects/common/src/lib/state/user-billing/user-billing.state';
+import { BillingPlanOption } from '@lowcodeunit/lcu-billing-common';
 
 
 @Component({
@@ -60,4 +60,7 @@ export class HomeComponent implements OnInit {
 
   public ngOnInit(): void { }
 
+  public BuyNowClick(plan: BillingPlanOption) {
+    console.log(plan);
+  }
 }

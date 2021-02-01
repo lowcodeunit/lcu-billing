@@ -40,17 +40,12 @@ export class LcuBillingPlanViewElementComponent
   @Output('buy-now-click')
   public BuyNowClick: EventEmitter<BillingPlanOption>;
 
-  @Output('buyNowClick')
-  public buyNowClick: EventEmitter<BillingPlanOption>;
-
   @Input('license-type')
   public LicenseType: string;
 
   //  Constructors
   constructor(protected injector: Injector) {
     super(injector);
-
-    this.buyNowClick = new EventEmitter();
 
     this.BuyNowClick = new EventEmitter();
 
@@ -73,12 +68,6 @@ export class LcuBillingPlanViewElementComponent
   //  API Methods
   public BuyNowClicked(plan: BillingPlanOption) {
     this.BuyNowClick.emit(plan);
-
-    this.buyNowClick.emit(plan);
-
-    // const link = `https://www.iot-ensemble.com/billing/iot/plan/${plan.PlanGroup}/${plan.Interval}`;
-
-    // window.location.href = link;
   }
 
   //  Helpers
