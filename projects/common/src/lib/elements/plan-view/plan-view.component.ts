@@ -54,6 +54,8 @@ export class LcuBillingPlanViewElementComponent
 
   //  Life Cycle
   public ngOnChanges(changes: SimpleChanges) {
+    console.log(changes);
+
     if (changes.LiscenseType) {
       this.loadBillingOptions();
     }
@@ -61,6 +63,8 @@ export class LcuBillingPlanViewElementComponent
 
   public ngOnInit() {
     super.ngOnInit();
+
+    console.log(this.BillingPlanOptions);
 
     this.loadBillingOptions();
   }
