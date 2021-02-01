@@ -81,9 +81,14 @@
       *ngIf="Plan?.DiscountedFrom === 0"
       fxLayoutAlign="center center"
     >
-      <ng-container class="free-content">
         <div class="price">FREE</div>
-      </ng-container>
+    </div>
+    <div
+      class="pricing-container"
+      *ngIf="Plan?.ContactText"
+      fxLayoutAlign="center center"
+    >
+        <div class="contact-sales">{{Plan.ContactText}}</div>
     </div>
 
     <!-- FEATURES -->
