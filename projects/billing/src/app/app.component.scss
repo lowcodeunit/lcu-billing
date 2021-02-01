@@ -15,3 +15,8 @@ $Fathym-Green: mat-color(map-get($global-theme, primary), A700);
     min-height: 100%;
     padding-top: 30px;
 }
+
+.user-account-dialog-container .mat-dialog-container{
+  padding:5px !important;
+  overflow: hidden;
+}
