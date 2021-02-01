@@ -4,7 +4,18 @@
 */
 @import "../../common/assets/common-theme";
 
-.user-account-dialog-container .mat-dialog-container {
-  padding: 5px !important;
-  overflow: hidden;
+$Fathym-Green: mat-color(map-get($global-theme, primary), A700);
+
+.billing-app-container{
+    // background-image: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(../assets/img/bubble-clean.jpg);
+    background-image: linear-gradient(rgba(0,0,0,.1), rgba(0,0,0,.1)), url(assets/img/thinky-outside-the-box.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100%;
+    padding-top: 30px;
 }
+
+.user-account-dialog-container .mat-dialog-container{
+    padding:5px !important;
+    overflow: hidden;
+  }
