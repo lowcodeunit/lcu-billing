@@ -43,6 +43,8 @@ export class LcuBillingPlanViewElementComponent
   @Input('license-type')
   public LicenseType: string;
 
+  public Loading: boolean;
+
   //  Constructors
   constructor(protected injector: Injector) {
     super(injector);
@@ -50,6 +52,8 @@ export class LcuBillingPlanViewElementComponent
     this.BuyNowClick = new EventEmitter();
 
     this.http = injector.get(HttpClient);
+
+    this.Loading = true;
   }
 
   //  Life Cycle
@@ -83,6 +87,10 @@ export class LcuBillingPlanViewElementComponent
         ...(result.Model || [])
       ]
       this.BillingPlanOptionsSorted.sort((a, b) => a.Priority < b.Priority ? -1 : a.Priority > b.Priority ? 1 : 0);
+      this.Loading = false;
+    },
+    error => {
+      this.Loading = false
     });
   }
 }
