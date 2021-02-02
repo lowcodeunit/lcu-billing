@@ -90,6 +90,7 @@ export class LcuBillingPlanViewElementComponent
       this.Loading = false;
     },
     error => {
+      console.error('HTTP error ', error);
       this.Loading = false
     });
   }
