@@ -9,7 +9,6 @@ import { LcuDirective } from './directives/lcu.directive';
 import { PlanCardComponent } from './controls/plan-card/plan-card.component';
 import { LcuBillingPlanViewElementComponent } from './elements/plan-view/plan-view.component';
 
-
 @NgModule({
   declarations: [
     LcuComponent,
