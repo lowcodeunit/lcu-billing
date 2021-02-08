@@ -67,7 +67,7 @@ export class AppComponent implements OnInit {
 
     this.Toolbar = {
       Title: 'IoT Ensemble Beta',
-      Logo: '/assets/logo.svg',
+      Logo: './assets/logo.svg',
       Actions: [
         // {
         //   Text: 'Docs',
