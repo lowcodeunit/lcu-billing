@@ -48,6 +48,8 @@ export class AppComponent implements OnInit {
    */
   // public ShowBackButton: boolean;
 
+  public Toolbar: any;
+
   constructor(
     protected overlayContainer: OverlayContainer,
     protected route: ActivatedRoute,
@@ -62,6 +64,24 @@ export class AppComponent implements OnInit {
     //   // console.log('path = ', path);
     //   this.determineBackButtonVisibility();
     // });
+
+    this.Toolbar = {
+      Title: 'IoT Ensemble Beta',
+      Logo: '/assets/logo.svg',
+      Actions: [
+        {
+          Text: 'Docs',
+          Path: '/docs',
+          Align: 'start',
+          Target: '_blank',
+        },
+        {
+          Text: 'Sign Out',
+          Path: '/.oauth/logout',
+          Align: 'end',
+        },
+      ],
+    };
   }
 
   public ngOnInit(): void {
