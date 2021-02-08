@@ -1,14 +1,13 @@
-<!-- <lcu-toolbar
-></lcu-toolbar>
+<lcu-toolbar
+  class="page-toolbar"
+  [state]="Toolbar"
+>
+</lcu-toolbar>
 
 <div [className]="SelectedTheme" style="height: calc(100% - 94px)">
-  <div class="billing-app-container" >
-    <div class='router-container'>
+  <div class="billing-app-container">
+    <div class="router-container">
       <router-outlet (activate)="OnActivate($event)"></router-outlet>
     </div>
   </div>
-
-</div> -->
-
-
-<router-outlet (activate)="OnActivate($event)"></router-outlet>
+</div>
