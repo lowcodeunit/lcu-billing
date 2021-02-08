@@ -15,7 +15,6 @@ import {
   LcuBillingModule,
   UserBillingStateContext,
 } from '@lowcodeunit/lcu-billing-common';
-import { AppHostModule } from '@lowcodeunit/app-host-common';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,7 +27,6 @@ import { AppHostModule } from '@lowcodeunit/app-host-common';
     ReactiveFormsModule,
     FormsModule,
     LcuBillingModule,
-    AppHostModule,
   ],
   providers: [
     UserBillingStateContext,

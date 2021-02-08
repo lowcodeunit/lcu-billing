@@ -8,6 +8,7 @@ import { LcuComponent } from './controls/lcu/lcu.component';
 import { LcuDirective } from './directives/lcu.directive';
 import { PlanCardComponent } from './controls/plan-card/plan-card.component';
 import { LcuBillingPlanViewElementComponent } from './elements/plan-view/plan-view.component';
+import { AppHostModule } from '@lowcodeunit/app-host-common';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { LcuBillingPlanViewElementComponent } from './elements/plan-view/plan-vi
     ReactiveFormsModule,
     FlexLayoutModule,
     MaterialModule,
+    AppHostModule,
   ],
   exports: [
     LcuComponent,
@@ -30,6 +32,7 @@ import { LcuBillingPlanViewElementComponent } from './elements/plan-view/plan-vi
     PlanCardComponent,
     BillingDisplayComponent,
     LcuBillingPlanViewElementComponent,
+    AppHostModule,
   ],
   entryComponents: [LcuBillingPlanViewElementComponent],
 })
