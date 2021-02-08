@@ -69,12 +69,12 @@ export class AppComponent implements OnInit {
       Title: 'IoT Ensemble Beta',
       Logo: '/assets/logo.svg',
       Actions: [
-        {
-          Text: 'Docs',
-          Path: '/docs',
-          Align: 'start',
-          Target: '_blank',
-        },
+        // {
+        //   Text: 'Docs',
+        //   Path: '/docs',
+        //   Align: 'start',
+        //   Target: '_blank',
+        // },
         {
           Text: 'Sign Out',
           Path: '/.oauth/logout',
