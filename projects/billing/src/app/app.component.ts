@@ -165,7 +165,6 @@ export class AppComponent implements OnInit {
             ...snapshot.queryParams,
             ...snapshot.params,
           };
-
           if (!this.connectedToStateSub) {
             this.connectedToStateSub = this.userBillState.ConnectedToState.subscribe(
               (status: Status) => {
@@ -173,7 +172,7 @@ export class AppComponent implements OnInit {
                   status.Code === 0 &&
                   (!this.State.LicenseType ||
                     this.State.LicenseType.Lookup !== args.licenseType)
-                ) {
+                ) {                
                   this.userBillState.$Refresh(args);
                 }
               }

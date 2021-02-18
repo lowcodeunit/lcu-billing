@@ -43,7 +43,9 @@
         </div>
         <div *ngIf="SelectedPlan?.PlanGroup === 'hobby'" class="important-note-container"fxLayout="row" fxFlex="70%">
           <span class="asterisk">*</span>
-          <div class="important-note">&nbsp;Fathym will only charge your credit card if you exceed the allocated API calls for the Hobby tier.</div>
+          <div *ngIf="State.LicenseType?.Lookup !== 'forecast'" class="important-note">&nbsp;Fathym will only charge your credit card if you exceed the allocated API calls for the Hobby tier.</div>
+          <div *ngIf="State.LicenseType?.Lookup === 'forecast'" class="important-note">&nbsp;Fathym will only charge your credit card if you exceed the allocated point queries for the Hobby tier.</div>
+
         </div>
           <p class="fathym-header">Enter payment information</p>
         </div>
