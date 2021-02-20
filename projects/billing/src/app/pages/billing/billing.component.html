@@ -1,19 +1,39 @@
 <div [fxShow]="!State.Loading">
-
   <!-- <mat-icon class="back-arrow" (click)="GoBack()">arrow_back</mat-icon> -->
 
-  <div class="billing-page-container" fxLayout.lg="row" fxLayout.md="row" fxLayout.sm="column" fxLayout.xs="column"
-  fxLayoutAlign.xl="center end" fxLayoutAlign.lg="center end" fxLayoutAlign.md="center end" fxLayoutAlign.sm="center center" fxLayoutAlign.xs="center center"
-  fxLayoutGap.xl="50px" fxLayoutGap.lg="50px" fxLayoutGap.md="50px" fxLayoutGap.sm="30px" fxLayoutGap.xs="30px">
-
+  <div
+    class="billing-page-container"
+    fxLayout.lg="row"
+    fxLayout.md="row"
+    fxLayout.sm="column"
+    fxLayout.xs="column"
+    fxLayoutAlign.xl="center end"
+    fxLayoutAlign.lg="center end"
+    fxLayoutAlign.md="center end"
+    fxLayoutAlign.sm="center center"
+    fxLayoutAlign.xs="center center"
+    fxLayoutGap.xl="50px"
+    fxLayoutGap.lg="50px"
+    fxLayoutGap.md="50px"
+    fxLayoutGap.sm="30px"
+    fxLayoutGap.xs="30px"
+  >
     <!-- PRICING CONTAINER -->
-    <div class='plan-card-container' fxLayout="row"
-      fxLayoutAlign="start center">
-
-      <lcu-plan-card *ngIf="State.Plans" [plan]="SelectedPlan" [all-plans]="State.Plans"
-        [show-back-button]="ShowBackButton" [featured-plan-group]="State.FeaturedPlanGroup"
-        [popular-plan-group] = "State.PopularPlanGroup"(interval-toggled)="IntervalToggled($event)"
-        (go-back-clicked)="GoBackClicked($event)">
+    <div
+      class="plan-card-container"
+      fxLayout="row"
+      fxLayoutAlign="start center"
+    >
+      <lcu-plan-card
+        *ngIf="State.Plans"
+        [plan]="SelectedPlan"
+        [all-plans]="State.Plans"
+        [show-back-button]="ShowBackButton"
+        [featured-plan-group]="State.FeaturedPlanGroup"
+        [popular-plan-group]="State.PopularPlanGroup"
+        (interval-toggled)="IntervalToggled($event)"
+        (go-back-clicked)="GoBackClicked($event)"
+      >
       </lcu-plan-card>
 
       <!-- <div class='vertical-line'></div> -->
@@ -27,62 +47,129 @@
     'four-billing': SelectedPlan?.PlanGroup === PlanGroups[3]
    }" fxFlex="45%" fxFlex.xs="15%" style="height: 100%"> -->
 
-    <mat-card class="billing-card" fxFlex="45%" fxFlex.xs="15%" style="height: 100%" fxLayout="column">
-
-      <mat-card-header class="billing-header-container" fxLayout="row" fxLayoutAlign="start center">
+    <mat-card
+      class="billing-card"
+      fxFlex="45%"
+      fxFlex.xs="15%"
+      style="height: 100%"
+      fxLayout="column"
+    >
+      <mat-card-header
+        class="billing-header-container"
+        fxLayout="row"
+        fxLayoutAlign="start center"
+      >
         <div class="fathym-logo-container">
           <div class="fathym-logo"></div>
         </div>
-        <div class="billing-header-section" fxLayout="column" fxLayoutAlign="start start">
-          <h2 class="fathym-header" *ngIf="SelectedPlan?.LicenseType">{{SelectedPlan?.HeaderName}}</h2>
+        <div
+          class="billing-header-section"
+          fxLayout="column"
+          fxLayoutAlign="start start"
+        >
+          <h2 class="fathym-header" *ngIf="SelectedPlan?.LicenseType">
+            {{ SelectedPlan?.HeaderName }}
+          </h2>
           <div fxLayout="row">
-          <h3 class="fathym-header" *ngIf="SelectedPlan?.PlanGroup && SelectedPlan?.Interval">
-            {{SelectedPlan.PlanGroup | titlecase}} Package          <span *ngIf="SelectedPlan?.PlanGroup === 'hobby'" class="asterisk">*</span>
-            - {{SelectedPlan.Interval | titlecase}}ly Billing</h3>
-          <!-- <span *ngIf="SelectedPlan?.PlanGroup === 'hobby'" class="asterisk">*</span> -->
-        </div>
-        <div *ngIf="SelectedPlan?.PlanGroup === 'hobby'" class="important-note-container"fxLayout="row" fxFlex="70%">
-          <span class="asterisk">*</span>
-          <div class="important-note">&nbsp;Fathym will only charge your credit card if you exceed the allocated API calls for the Hobby tier.</div>
-        </div>
+            <h3
+              class="fathym-header"
+              *ngIf="SelectedPlan?.PlanGroup && SelectedPlan?.Interval"
+            >
+              {{ SelectedPlan.PlanGroup | titlecase }} Package
+              <span *ngIf="SelectedPlan?.PlanGroup === 'hobby'" class="asterisk"
+                >*</span
+              >
+              - {{ SelectedPlan.Interval | titlecase }}ly Billing
+            </h3>
+            <!-- <span *ngIf="SelectedPlan?.PlanGroup === 'hobby'" class="asterisk">*</span> -->
+          </div>
+          <div
+            *ngIf="SelectedPlan?.PlanGroup === 'hobby'"
+            class="important-note-container"
+            fxLayout="row"
+            fxFlex="70%"
+          >
+            <span class="asterisk">*</span>
+            <div class="important-note">
+              &nbsp;Fathym will only charge your credit card if you exceed the
+              allocated API calls for the Hobby tier.
+            </div>
+          </div>
           <p class="fathym-header">Enter payment information</p>
         </div>
       </mat-card-header>
 
-
       <!-- STRIPE STUFF -->
-      <mat-card-content class="billing-page-container" fxLayout="column" fxLayoutAlign="space-around center">
-
-        <div class="payment-info-container" fxLayout="column" fxLayoutAlign="center center">
-
-          <form action="/charge" method="post" class="billing-form" id="payment-form" [formGroup]="BillingForm"
-            (ngSubmit)="SubmitBilling($event)" fxFlex="80%">
-
-            <div class="form-row" fxLayout="column" fxLayoutAlign="space-around center">
-
+      <mat-card-content
+        class="billing-page-container"
+        fxLayout="column"
+        fxLayoutAlign="space-around center"
+      >
+        <div
+          class="payment-info-container"
+          fxLayout="column"
+          fxLayoutAlign="center center"
+        >
+          <form
+            action="/charge"
+            method="post"
+            class="billing-form"
+            id="payment-form"
+            [formGroup]="BillingForm"
+            (ngSubmit)="SubmitBilling($event)"
+            fxFlex="80%"
+          >
+            <div
+              class="form-row"
+              fxLayout="column"
+              fxLayoutAlign="space-around center"
+            >
               <div class="billing-info" fxLayoutAlign="center center">
                 <!-- <label fxLayout="column" ></label> -->
                 <!-- <span id="input-span">Name on Card</span> -->
                 <!-- <div fxLayout="row" fxLayoutAlign="start center" fxFlex="80%"> -->
                 <!-- <mat-icon>account_circle</mat-icon> -->
                 <!-- class to disable autocomplete 'disable-autofill-background-default', -->
-                <mat-form-field  [ngClass]="[ 'cardholder-name-input']">
-                  <mat-label class="cardholder-label">&nbsp; Cardholder Name</mat-label>
-                  <mat-icon matPrefix class="user-input-icon" fxLayoutAlign="center end">account_circle</mat-icon>
-                  <input autocomplete="off" matInput name="cardholder-name" id="cardholder-name-input" formControlName="userName"
-                    placeholder="Cardholder Name" fxFlex="100%" />
+                <mat-form-field [ngClass]="['cardholder-name-input']">
+                  <mat-label class="cardholder-label"
+                    >&nbsp; Cardholder Name</mat-label
+                  >
+                  <mat-icon
+                    matPrefix
+                    class="user-input-icon"
+                    fxLayoutAlign="center end"
+                    >account_circle</mat-icon
+                  >
+                  <input
+                    autocomplete="off"
+                    matInput
+                    name="cardholder-name"
+                    id="cardholder-name-input"
+                    formControlName="userName"
+                    placeholder="Cardholder Name"
+                    fxFlex="100%"
+                  />
                 </mat-form-field>
                 <!-- </div> -->
-
               </div>
-              <div class="billing-info" fxLayout="column" fxLayoutAlign="center center">
+              <div
+                class="billing-info"
+                fxLayout="column"
+                fxLayoutAlign="center center"
+              >
                 <label for="card-element" fxLayout="column"></label>
-                <div id="card-element" [ngClass]="{'stripe-card': !StripeError, 'stripe-card-error': StripeError}"  fxFlex="100%"></div>
+                <div
+                  id="card-element"
+                  [ngClass]="{
+                    'stripe-card': !StripeError,
+                    'stripe-card-error': StripeError
+                  }"
+                  fxFlex="100%"
+                ></div>
 
                 <!-- <div fxLayout="row" fxLayoutAlign="start center"> -->
                 <!-- <mat-icon >credit_card</mat-icon> -->
                 <!-- </div> -->
-
 
                 <!-- <div class="stripe-container" fxLayout="row" fxLayoutAlign="start start"> -->
 
@@ -112,16 +199,23 @@
                     </div>
                   </div> -->
                 <!-- </div> -->
-                <div id="card-errors mat-error" role="alert" class="spread" *ngIf="StripeError">
+                <div
+                  id="card-errors mat-error"
+                  role="alert"
+                  class="spread"
+                  *ngIf="StripeError"
+                >
                   {{ StripeError }}
                 </div>
               </div>
             </div>
 
-
             <!-- TOGGLE & BUTTON -->
-            <div class="checkbox-container" fxLayout="column" fxLayoutAlign="center center">
-
+            <div
+              class="checkbox-container"
+              fxLayout="column"
+              fxLayoutAlign="center center"
+            >
               <!-- <lcu-interval-toggle *ngIf="SelectedPlan" [current-interval]="SelectedPlan.Interval"
                 [intervals]="Intervals" (interval-selected)="ToggleChanged($event)">
               </lcu-interval-toggle> -->
@@ -147,45 +241,69 @@
 
               <!-- TOS & EA CHECKBOXES *ngIf="State?.RequiredOptIns?.length > 0"-->
               <!-- *ngIf="State.RequiredOptIns.includes('ToS') || State.RequiredOptIns.includes('EA')" -->
-              <div class="required-opt-ins" fxLayout="row" fxLayoutAlign="start center"
-
+              <div
+                class="required-opt-ins"
+                fxLayout="row"
+                fxLayoutAlign="start center"
+              >
+                <mat-checkbox
+                  (change)="ReqOptsChanged($event)"
+                  class="checkbox-label"
                 >
-                <mat-checkbox (change)="ReqOptsChanged($event)" class="checkbox-label">
                   By checking this box, you agree to Fathym's
-                  <a target="blank" href="https://fathym.com/enterprise-agreement/" id="ea-anchor">Enterprise
-                    Agreement</a>
+                  <a
+                    target="blank"
+                    href="https://fathym.com/enterprise-agreement/"
+                    id="ea-anchor"
+                    >Enterprise Agreement</a
+                  >
                   and
-                  <a target='blank' href="https://fathym.com/terms-of-services/" id="tos-anchor">Terms of Service</a>
-
+                  <a
+                    target="blank"
+                    href="https://fathym.com/terms-of-services/"
+                    id="tos-anchor"
+                    >Terms of Service</a
+                  >
                 </mat-checkbox>
               </div>
-              <div class="billing-card-footer" fxLayout="row" fxLayoutAlign="end end">
-              <!-- <div *ngIf="SelectedPlan?.PlanGroup === 'hobby'" class="important-note-container"fxLayout="row" fxFlex="70%">
+              <div
+                class="billing-card-footer"
+                fxLayout="row"
+                fxLayoutAlign="end end"
+              >
+                <!-- <div *ngIf="SelectedPlan?.PlanGroup === 'hobby'" class="important-note-container"fxLayout="row" fxFlex="70%">
                 <span class="asterisk">*</span>
                 <div class="important-note">&nbsp;Fathym will only charge your credit card if you exceed the allocated API calls for the Hobby tier.</div>
               </div> -->
-              <div class="button-container" fxLayoutAlign="end end" fxFlex="30%">
-                <button mat-raised-button id="payment-button" class="buy-now-button" *ngIf="SelectedPlan"
-                  [disabled]="IsButtonDisabled()">PURCHASE NOW</button>
+                <div
+                  class="button-container"
+                  fxLayoutAlign="end end"
+                  fxFlex="30%"
+                >
+                  <button
+                    mat-raised-button
+                    id="payment-button"
+                    class="buy-now-button"
+                    *ngIf="SelectedPlan"
+                    [disabled]="IsButtonDisabled()"
+                  >
+                    PURCHASE NOW
+                  </button>
+                </div>
               </div>
             </div>
-            </div>
-
-
           </form>
         </div>
-
       </mat-card-content>
-
     </mat-card>
   </div>
-  <h1 fxLayoutAlign="center center" class="slogan">If you can Fathym it, you can build it.</h1>
-
+  <h1 fxLayoutAlign="center center" class="slogan">
+    If you can Fathym it, you can build it.
+  </h1>
 </div>
 
 <!-- LOADING SCREEN -->
 <div [fxShow]="State.Loading">
-
   <div fxLayout="row" fxLayoutAlign="center center" class="spinner-container">
     <mat-spinner diameter="75"></mat-spinner>
     <div class="spinner-logo" logo-alt="Fathym Logo"></div>
