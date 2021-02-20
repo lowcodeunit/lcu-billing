@@ -9,7 +9,12 @@ import {
   EventEmitter,
   Output,
 } from '@angular/core';
-import { LCUElementContext, LcuElementComponent, BaseModeledResponse } from '@lcu/common';
+import {
+  LCUElementContext,
+  LcuElementComponent,
+  BaseModeledResponse,
+  LCUServiceSettings,
+} from '@lcu/common';
 import { BillingPlanOption } from '../../state/user-billing/user-billing.state';
 
 export class LcuBillingPlanViewElementState {}
@@ -32,10 +37,10 @@ export class LcuBillingPlanViewElementComponent
 
   //  Properties
 
-  public BillingPlanOptionsSorted: (BillingPlanOption)[];
+  public BillingPlanOptionsSorted: BillingPlanOption[];
 
   @Input('billing-plan-options')
-  public BillingPlanOptions: (BillingPlanOption)[];
+  public BillingPlanOptions: BillingPlanOption[];
 
   @Output('buy-now-click')
   public BuyNowClick: EventEmitter<BillingPlanOption>;
@@ -46,7 +51,10 @@ export class LcuBillingPlanViewElementComponent
   public Loading: boolean;
 
   //  Constructors
-  constructor(protected injector: Injector) {
+  constructor(
+    protected injector: Injector,
+    protected settings: LCUServiceSettings
+  ) {
     super(injector);
 
     this.BuyNowClick = new EventEmitter();
@@ -54,6 +62,8 @@ export class LcuBillingPlanViewElementComponent
     this.http = injector.get(HttpClient);
 
     this.Loading = true;
+
+    this.LicenseType = this.settings.State?.Billing?.LicenseType;
   }
 
   //  Life Cycle
@@ -81,17 +91,25 @@ export class LcuBillingPlanViewElementComponent
   //  Helpers
   protected loadBillingOptions() {
     // tslint:disable-next-line:max-line-length
-    this.http.get(`https://www.iot-ensemble.com/api/state/usermanagement/ListBillingOptions?licenseType=${this.LicenseType}`).subscribe((result: BaseModeledResponse<BillingPlanOption[]>)=>{
-      this.BillingPlanOptionsSorted = [
-        ...(this.BillingPlanOptions || []),
-        ...(result.Model || [])
-      ]
-      this.BillingPlanOptionsSorted.sort((a, b) => a.Priority < b.Priority ? -1 : a.Priority > b.Priority ? 1 : 0);
-      this.Loading = false;
-    },
-    error => {
-      console.error('HTTP error ', error);
-      this.Loading = false
-    });
+    this.http
+      .get(
+        `https://www.iot-ensemble.com/api/state/usermanagement/ListBillingOptions?licenseType=${this.LicenseType}`
+      )
+      .subscribe(
+        (result: BaseModeledResponse<BillingPlanOption[]>) => {
+          this.BillingPlanOptionsSorted = [
+            ...(this.BillingPlanOptions || []),
+            ...(result.Model || []),
+          ];
+          this.BillingPlanOptionsSorted.sort((a, b) =>
+            a.Priority < b.Priority ? -1 : a.Priority > b.Priority ? 1 : 0
+          );
+          this.Loading = false;
+        },
+        (error) => {
+          console.error('HTTP error ', error);
+          this.Loading = false;
+        }
+      );
   }
 }
