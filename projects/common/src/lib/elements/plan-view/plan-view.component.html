@@ -1,15 +1,14 @@
 <lcu-billing-display
-*ngIf="BillingPlanOptions"
-[featured]=""
-[popular]=""
-[plans]="BillingPlanOptionsSorted"
-[show-button]="true"
-(buy-now)="BuyNowClicked($event)"
+  [featured]=""
+  [popular]=""
+  [plans]="BillingPlanOptionsSorted"
+  [show-button]="true"
+  (buy-now)="BuyNowClicked($event)"
+  *ngIf="BillingPlanOptionsSorted?.length > 0"
 ></lcu-billing-display>
 
-
 <div *ngIf="Loading">
-    <div fxLayout="row" fxLayoutAlign="center center">
-      <mat-spinner></mat-spinner>
-    </div>
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <mat-spinner></mat-spinner>
+  </div>
 </div>
