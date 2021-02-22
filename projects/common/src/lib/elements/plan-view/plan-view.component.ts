@@ -19,7 +19,11 @@ import { BillingPlanOption } from '../../state/user-billing/user-billing.state';
 
 export class LcuBillingPlanViewElementState {}
 
-export class LcuBillingPlanViewContext extends LCUElementContext<LcuBillingPlanViewElementState> {}
+export class LcuBillingPlanViewContext extends LCUElementContext<LcuBillingPlanViewElementState> {
+  public BillingPlanAPIRoot: string;
+
+  public LicenseType: string;
+}
 
 export const SELECTOR_LCU_BILLING_PLAN_VIEW_ELEMENT =
   'lcu-billing-plan-view-element';
@@ -36,7 +40,6 @@ export class LcuBillingPlanViewElementComponent
   protected http: HttpClient;
 
   //  Properties
-
   public BillingPlanOptionsSorted: BillingPlanOption[];
 
   @Input('billing-plan-options')
@@ -51,10 +54,7 @@ export class LcuBillingPlanViewElementComponent
   public Loading: boolean;
 
   //  Constructors
-  constructor(
-    protected injector: Injector,
-    protected settings: LCUServiceSettings
-  ) {
+  constructor(protected injector: Injector) {
     super(injector);
 
     this.BuyNowClick = new EventEmitter();
@@ -92,9 +92,7 @@ export class LcuBillingPlanViewElementComponent
   protected loadBillingOptions() {
     // tslint:disable-next-line:max-line-length
     this.http
-      .get(
-        `https://www.iot-ensemble.com/api/state/usermanagement/ListBillingOptions?licenseType=${this.LicenseType}`
-      )
+      .get(this.context.BillingPlanAPIRoot)
       .subscribe(
         (result: BaseModeledResponse<BillingPlanOption[]>) => {
           this.BillingPlanOptionsSorted = [
