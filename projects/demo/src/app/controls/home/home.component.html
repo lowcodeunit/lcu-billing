@@ -3,7 +3,7 @@
   <div fxLayout="column">
     <div fxLayout="row">
       <lcu-billing-plan-view-element
-      license-type="iot"
+      [context]="Context"
       [billing-plan-options]="BillingPlanArray"
       (buy-now-click)="BuyNowClick($event)"
       >

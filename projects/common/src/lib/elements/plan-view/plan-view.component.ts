@@ -20,9 +20,9 @@ import { BillingPlanOption } from '../../state/user-billing/user-billing.state';
 export class LcuBillingPlanViewElementState {}
 
 export class LcuBillingPlanViewContext extends LCUElementContext<LcuBillingPlanViewElementState> {
-  public BillingPlanAPIRoot: string;
+  public BillingPlansAPIPath: string;
 
-  public LicenseType: string;
+  public BillingPlanOptions: BillingPlanOption[];
 }
 
 export const SELECTOR_LCU_BILLING_PLAN_VIEW_ELEMENT =
@@ -42,14 +42,8 @@ export class LcuBillingPlanViewElementComponent
   //  Properties
   public BillingPlanOptionsSorted: BillingPlanOption[];
 
-  @Input('billing-plan-options')
-  public BillingPlanOptions: BillingPlanOption[];
-
   @Output('buy-now-click')
   public BuyNowClick: EventEmitter<BillingPlanOption>;
-
-  @Input('license-type')
-  public LicenseType: string;
 
   public Loading: boolean;
 
@@ -62,8 +56,6 @@ export class LcuBillingPlanViewElementComponent
     this.http = injector.get(HttpClient);
 
     this.Loading = true;
-
-    this.LicenseType = this.settings.State?.Billing?.LicenseType;
   }
 
   //  Life Cycle
@@ -78,7 +70,7 @@ export class LcuBillingPlanViewElementComponent
   public ngOnInit() {
     super.ngOnInit();
 
-    console.log(this.BillingPlanOptions);
+    console.log(this.Context.BillingPlanOptions);
 
     this.loadBillingOptions();
   }
@@ -91,23 +83,21 @@ export class LcuBillingPlanViewElementComponent
   //  Helpers
   protected loadBillingOptions() {
     // tslint:disable-next-line:max-line-length
-    this.http
-      .get(this.context.BillingPlanAPIRoot)
-      .subscribe(
-        (result: BaseModeledResponse<BillingPlanOption[]>) => {
-          this.BillingPlanOptionsSorted = [
-            ...(this.BillingPlanOptions || []),
-            ...(result.Model || []),
-          ];
-          this.BillingPlanOptionsSorted.sort((a, b) =>
-            a.Priority < b.Priority ? -1 : a.Priority > b.Priority ? 1 : 0
-          );
-          this.Loading = false;
-        },
-        (error) => {
-          console.error('HTTP error ', error);
-          this.Loading = false;
-        }
-      );
+    this.http.get(this.Context.BillingPlansAPIPath).subscribe(
+      (result: BaseModeledResponse<BillingPlanOption[]>) => {
+        this.BillingPlanOptionsSorted = [
+          ...(this.Context.BillingPlanOptions || []),
+          ...(result.Model || []),
+        ];
+        this.BillingPlanOptionsSorted.sort((a, b) =>
+          a.Priority < b.Priority ? -1 : a.Priority > b.Priority ? 1 : 0
+        );
+        this.Loading = false;
+      },
+      (error) => {
+        console.error('HTTP error ', error);
+        this.Loading = false;
+      }
+    );
   }
 }
