@@ -157,6 +157,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
     this.PlanGroups = new Array<string>();
     this.AcceptedTOS = false;
     this.AcceptedEA = false;
+    this.ImportantNoteText = "";
   }
 
   //  Life Cycle
@@ -323,9 +324,6 @@ export class BillingComponent implements OnInit, AfterViewChecked {
   protected setupImportantNote(){
     if(this.settings.State?.ImportantNote){
       this.ImportantNoteText = this.settings.State?.ImportantNote;
-    }
-    else{
-      this.ImportantNoteText = "Fathym will only charge your credit card if you exceed the allocated API calls for the Hobby tier."
     }
   }
 
