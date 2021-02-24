@@ -1,17 +1,22 @@
-<div  fxLayout.xl="row" fxLayout.lg="row" fxLayout.md="column" fxLayout.sm="column" fxLayout.xs="column"
-fxLayoutAlign="center center"
-fxLayoutGap="30px"  >
-    <div *ngFor="let plan of DisplayedPlans">
-        <lcu-plan-card
-            class='lcu-plan-card'
-            [featured-plan-group]="FeaturedPlanGroup"
-            [popular-plan-group] = "PopularPlanGroup"
-            [plan]="plan"
-            [all-plans]="Plans"
-            [displayed-plans]="DisplayedPlans"
-            [show-button]="ShowButton"
-            (buy-now-clicked)="BuyNowClicked($event)"
-            >
-            </lcu-plan-card>
-    </div>
+<div
+  fxLayout.xl="row"
+  fxLayout.lg="row"
+  fxLayout.md="column"
+  fxLayout.sm="column"
+  fxLayout.xs="column"
+  fxLayoutAlign="center center"
+>
+  <div class="margin-2" *ngFor="let plan of DisplayedPlans">
+    <lcu-plan-card
+      class="lcu-plan-card"
+      [featured-plan-group]="FeaturedPlanGroup"
+      [popular-plan-group]="PopularPlanGroup"
+      [plan]="plan"
+      [all-plans]="Plans"
+      [displayed-plans]="DisplayedPlans"
+      [show-button]="ShowButton"
+      (buy-now-clicked)="BuyNowClicked($event)"
+    >
+    </lcu-plan-card>
+  </div>
 </div>

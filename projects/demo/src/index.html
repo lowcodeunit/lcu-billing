@@ -1,13 +1,293 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Demo</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <lcu-root></lcu-root>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>Demo</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+    <script id="lcu-reg">
+      const appHost = {
+        Toolbar: {
+          Title: "IoT Ensemble Beta",
+          Logo: "./assets/logo.svg",
+          Actions: [
+            {
+              Text: "Products",
+              Align: "end",
+              Actions: [
+                {
+                  Text: "IoT Ensemble",
+                  Path: "https://www.iot-ensemble.com/home",
+                  Align: "end",
+                  Target: "_blank",
+                },
+                {
+                  Text: "Habistack",
+                  Path: "https://www.habistack.com/home",
+                  Align: "end",
+                  Target: "_blank",
+                },
+              ],
+            },
+            {
+              Text: "Pricing",
+              Path: "/pricing",
+              Align: "end",
+              ByRoute: true,
+            },
+            {
+              Text: "Docs",
+              Path: "/docs",
+              Align: "end",
+              Target: "_blank",
+            },
+            {
+              Text: "Upgrade",
+              Path: "/billing/iot",
+              Align: "end",
+            },
+            {
+              Text: "Sign Out",
+              Path: "/.oauth/logout",
+              Align: "end",
+            },
+          ],
+        },
+        Header: {
+          BrandTitle: "IoT Ensemble",
+          InfoText:
+            "Emulate, simulate, and connect your devices to unlock the power of your IoT applications.",
+          InfoTitle: "Device Dashboard",
+          WelcomeTitle: "Welcome to",
+        },
+        Frame: {
+          Collapsed: true,
+          Opened: true,
+          StaticMenuTop: 250,
+          StickyNav: true,
+        },
+        Nav: {
+          ShowCollapse: true,
+          Actions: [
+            {
+              Text: "Dashboard",
+              Path: "/",
+              Icon: "dashboard",
+            },
+            {
+              Text: "Landing Page",
+              Path: "/landing-page",
+              Icon: "cloud",
+              ByRoute: true,
+            },
+          ],
+        },
+        Footer: {
+          ActionGroups: [
+            {
+              Title: "Next Steps",
+              Actions: [
+                {
+                  Text: "Getting started",
+                  Path: "/docs",
+                },
+                {
+                  Text: "Pricing",
+                  Path: "/pricing",
+                },
+                {
+                  Text: "Support",
+                  Path: "/docs/introduction/support",
+                },
+              ],
+            },
+            {
+              Title: "Community",
+              Actions: [
+                {
+                  Text: "Stack Overflow",
+                  Path: "https://stackoverflow.com/questions/tagged/fathym",
+                  Target: "_blank",
+                },
+                {
+                  Text: "Discord",
+                  Path: "https://discordapp.com/invite/fathym",
+                  Target: "_blank",
+                },
+                {
+                  Text: "Twitter",
+                  Path: "https://twitter.com/fathym",
+                  Target: "_blank",
+                },
+              ],
+            },
+          ],
+          Partners: {
+            Actions: [
+              {
+                Image: "./assets/images/gold-cloud-partner.gif",
+                Path: "https://www.microsoft.com",
+                Target: "_blank",
+              },
+            ],
+          },
+        },
+        SEO: {
+          Title: "IoT Ensemble",
+          Description: "IoT Made Easy",
+        },
+        Theme: {
+          UsePageMargin: true,
+        },
+        ElementConfigs: {
+          "lcu-device-data-flow-manage-element": {
+            Scripts: [
+              // "/assets/lcu-device-data-flow.lcu.js",
+              "https://www.iot-ensemble.com/_lcu/lcu-device-data-flow-lcu/wc/lcu-device-data-flow.lcu.js",
+            ],
+            Styles: [
+              // "/assets/lcu-device-data-flow.lcu.css",
+              "https://www.iot-ensemble.com/_lcu/lcu-device-data-flow-lcu/wc/lcu-device-data-flow.lcu.css",
+            ],
+            ElementName: "lcu-device-data-flow-manage-element",
+          },
+          "landing-pages-blocks-element": {
+            Scripts: [
+              "/assets/landing-pages.lcu.js",
+              // "https://www.iot-ensemble.com/_lcu/lcu-landing-pages-lcu/wc/landing-pages.lcu.js",
+            ],
+            Styles: [
+              "/assets/landing-pages.lcu.css",
+              // "https://www.iot-ensemble.com/_lcu/lcu-landing-pages-lcu/wc/landing-pages.lcu.css",
+            ],
+            ElementName: "landing-pages-home-page-element",
+          },
+        },
+        Pages: [
+          {
+            Route: "/",
+            ElementConfigs: [
+              {
+                Name: "lcu-device-data-flow-manage-element",
+                StateKey: null,
+              },
+            ],
+            SEO: {
+              Title: "++Do It!",
+              Description: "IoT Made Easy-ish",
+            },
+            Theme: {
+              UsePageBackground: true,
+            },
+          },
+          {
+            Route: "/landing-page",
+            ElementConfigs: [
+              {
+                Name: "landing-pages-blocks-element",
+                StateKey: "LandingPages.Blocks",
+              },
+            ],
+            Frame: null,
+            Nav: null,
+            Header: null,
+            Theme: null,
+          },
+        ],
+      };
+
+      const blocksLandingPage = {
+        Hero: {
+          Title: "Supercharge Cloud",
+          SubTitle: "with Virtual Developers",
+          Message: `Don't wait for the right hire, use the team you have.  Take control of Cloud.`,
+          Action: {
+            Text: "Get started for free",
+            Target: "_blank",
+            Path: "/dashboard",
+            Color: "accent",
+            Raised: true,
+          },
+          Image: "./assets/images/fathym-cloud.svg",
+          BackgroundImage:
+            "url(./assets/images/background-wave-iot-ensemble.svg)",
+        },
+        HeroCallToAction: {
+          Message:
+            "Modular and reusable components and tools that help your team deliver repeatable, low-code solutions.",
+          Image: "./assets/images/fathym-cloud-dashboard.png",
+        },
+        InfoCards: [
+          {
+            Icon: "auto_awesome",
+            Info:
+              "Teams get value from their Cloud on day one, skipping the multi-month learning curves and tedius hiring processes.",
+            Title: "Accelerate",
+          },
+          {
+            Icon: "apps",
+            Info:
+              "Deliver your solutions faster and more reliably on cloud infrastructure, with out the massive learning curve.",
+            Title: "Deliver",
+          },
+          {
+            Icon: "cloud",
+            Info:
+              "Bring control to adoption and usage of cloud-native technology with best practices anyone on the team can leverage, today.",
+            Title: "Control",
+          },
+        ],
+        CallToAction: {
+          Action: {
+            Text: "Sign up today",
+            Target: "_blank",
+            Path: "#",
+            Color: "accent",
+            Raised: true,
+          },
+          Title: "Sign up for free",
+          Message:
+            "Learn how fathym can save thousands of dollars in time and efficiency.",
+          BackgroundImage:
+            "url(./assets/images/background-wave-cta-iot-ensemble.svg)",
+        },
+      };
+
+      window.LCU = {
+        // APIRoot: "https://localhost:44387",
+        APIRoot: "https://www.iot-ensemble.com",
+        Application: {},
+        State: {
+          ActionRoot: "/api/state",
+          Root: "/api/state",
+          // Environment: "local",
+          UsernameMock: "michael.gearhardt@fathym.com",
+          FreeboardURL: "https://www.iot-ensemble.com/freeboard",
+          Analytics: {
+            Google: {
+              Token: "G-NEWEXH7W8C",
+            },
+            Oribi: {
+              Token: "XzcwMzAwMzkyNA",
+            },
+          },
+          Google: {
+            Analytics: {
+              MeasurementID: "G-NEWEXH7W8C",
+            },
+          },
+          AppHost: appHost,
+        },
+        Settings: {},
+        User: {
+          Email: "local-tester@fathym.com",
+        },
+      };
+    </script>
+  </head>
+  <body>
+    <lcu-root></lcu-root>
+  </body>
 </html>

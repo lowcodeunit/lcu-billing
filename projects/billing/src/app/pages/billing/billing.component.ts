@@ -33,6 +33,10 @@ export class BillingComponent implements OnInit, AfterViewChecked {
   //  Fields
 
   @ViewChild('cardElement') cardElement: ElementRef;
+/**
+ * Service settings
+ */
+  protected settings: LCUServiceSettings
   /**
    * Stripe card info
    */
@@ -77,6 +81,11 @@ export class BillingComponent implements OnInit, AfterViewChecked {
    * The header to display in the billing form
    */
   public HeaderName: string;
+
+  /**
+   * The text to display when the user enters  cc info for free plan
+   */
+  public ImportantNoteText: string;
 
   // public productPlan: any;
 
@@ -164,6 +173,9 @@ export class BillingComponent implements OnInit, AfterViewChecked {
         this.stateChanged();
       }
     });
+
+    this.setupImportantNote();
+
   }
 
   public ngAfterViewChecked(): void {
@@ -294,6 +306,8 @@ export class BillingComponent implements OnInit, AfterViewChecked {
       );
     }
   }
+  
+
   /**
    * Sets up Billing form
    */
@@ -305,6 +319,16 @@ export class BillingComponent implements OnInit, AfterViewChecked {
 
     this.StripeValid = false;
   }
+
+  protected setupImportantNote(){
+    if(this.settings.State?.ImportantNote){
+      this.ImportantNoteText = this.settings.State?.ImportantNote;
+    }
+    else{
+      this.ImportantNoteText = "Fathym will only charge your credit card if you exceed the allocated API calls for the Hobby tier."
+    }
+  }
+
   /**
    * Sets up the stripe credit card input and styles
    */
@@ -425,6 +449,8 @@ export class BillingComponent implements OnInit, AfterViewChecked {
   //   });
   //   this.stripeCardCvc.mount('#card-cvc');
   // }
+
+ 
 
   protected stateChanged() {
     this.findPlan();

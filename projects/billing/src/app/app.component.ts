@@ -142,6 +142,8 @@ export class AppComponent implements OnInit {
     classList.add(ToggleThemeUtil.Toggle(element.classList, val));
   }
 
+  
+
   /**
    * Called when state changes
    */
