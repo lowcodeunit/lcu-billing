@@ -33,10 +33,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
   //  Fields
 
   @ViewChild('cardElement') cardElement: ElementRef;
-/**
- * Service settings
- */
-  protected settings: LCUServiceSettings
+
   /**
    * Stripe card info
    */
@@ -322,8 +319,8 @@ export class BillingComponent implements OnInit, AfterViewChecked {
   }
 
   protected setupImportantNote(){
-    if(this.settings.State?.ImportantNote){
-      this.ImportantNoteText = this.settings.State?.ImportantNote;
+    if(this.lcuSettings.State?.ImportantNote){
+      this.ImportantNoteText = this.lcuSettings.State?.ImportantNote;
     }
   }
 
