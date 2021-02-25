@@ -62,9 +62,7 @@ export class LcuBillingPlanViewElementComponent
   public ngOnChanges(changes: SimpleChanges) {
     console.log(changes);
 
-    if (changes.LiscenseType) {
-      this.loadBillingOptions();
-    }
+    this.loadBillingOptions();
   }
 
   public ngOnInit() {
