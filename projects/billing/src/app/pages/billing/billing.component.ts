@@ -33,6 +33,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
   //  Fields
 
   @ViewChild('cardElement') cardElement: ElementRef;
+
   /**
    * Stripe card info
    */
@@ -77,6 +78,11 @@ export class BillingComponent implements OnInit, AfterViewChecked {
    * The header to display in the billing form
    */
   public HeaderName: string;
+
+  /**
+   * The text to display when the user enters  cc info for free plan
+   */
+  public ImportantNoteText: string;
 
   // public productPlan: any;
 
@@ -148,6 +154,7 @@ export class BillingComponent implements OnInit, AfterViewChecked {
     this.PlanGroups = new Array<string>();
     this.AcceptedTOS = false;
     this.AcceptedEA = false;
+    this.ImportantNoteText = "";
   }
 
   //  Life Cycle
@@ -164,6 +171,9 @@ export class BillingComponent implements OnInit, AfterViewChecked {
         this.stateChanged();
       }
     });
+
+    this.setupImportantNote();
+
   }
 
   public ngAfterViewChecked(): void {
@@ -294,6 +304,8 @@ export class BillingComponent implements OnInit, AfterViewChecked {
       );
     }
   }
+  
+
   /**
    * Sets up Billing form
    */
@@ -305,6 +317,13 @@ export class BillingComponent implements OnInit, AfterViewChecked {
 
     this.StripeValid = false;
   }
+
+  protected setupImportantNote(){
+    if(this.lcuSettings.State?.ImportantNote){
+      this.ImportantNoteText = this.lcuSettings.State?.ImportantNote;
+    }
+  }
+
   /**
    * Sets up the stripe credit card input and styles
    */
@@ -425,6 +444,8 @@ export class BillingComponent implements OnInit, AfterViewChecked {
   //   });
   //   this.stripeCardCvc.mount('#card-cvc');
   // }
+
+ 
 
   protected stateChanged() {
     this.findPlan();
