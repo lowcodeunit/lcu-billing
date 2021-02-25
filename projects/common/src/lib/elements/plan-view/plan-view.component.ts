@@ -62,15 +62,11 @@ export class LcuBillingPlanViewElementComponent
   public ngOnChanges(changes: SimpleChanges) {
     console.log(changes);
 
-    if (changes.LiscenseType) {
-      this.loadBillingOptions();
-    }
+    this.loadBillingOptions();
   }
 
   public ngOnInit() {
     super.ngOnInit();
-
-    console.log(this.Context.BillingPlanOptions);
 
     this.loadBillingOptions();
   }
@@ -82,22 +78,25 @@ export class LcuBillingPlanViewElementComponent
 
   //  Helpers
   protected loadBillingOptions() {
-    // tslint:disable-next-line:max-line-length
-    this.http.get(this.Context.BillingPlansAPIPath).subscribe(
-      (result: BaseModeledResponse<BillingPlanOption[]>) => {
-        this.BillingPlanOptionsSorted = [
-          ...(this.Context.BillingPlanOptions || []),
-          ...(result.Model || []),
-        ];
-        this.BillingPlanOptionsSorted.sort((a, b) =>
-          a.Priority < b.Priority ? -1 : a.Priority > b.Priority ? 1 : 0
-        );
-        this.Loading = false;
-      },
-      (error) => {
-        console.error('HTTP error ', error);
-        this.Loading = false;
-      }
-    );
+    if (this.Context) {
+      this.http.get(this.Context.BillingPlansAPIPath).subscribe(
+        (result: BaseModeledResponse<BillingPlanOption[]>) => {
+          console.log(this.Context?.BillingPlanOptions);
+
+          this.BillingPlanOptionsSorted = [
+            ...(this.Context.BillingPlanOptions || []),
+            ...(result.Model || []),
+          ];
+          this.BillingPlanOptionsSorted.sort((a, b) =>
+            a.Priority < b.Priority ? -1 : a.Priority > b.Priority ? 1 : 0
+          );
+          this.Loading = false;
+        },
+        (error) => {
+          console.error('HTTP error ', error);
+          this.Loading = false;
+        }
+      );
+    }
   }
 }

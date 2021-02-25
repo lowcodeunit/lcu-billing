@@ -86,7 +86,7 @@ export class BillingPlanOption {
 // }
 
 export class LicenseTypeDetails {
-  public Lookup: string; // Would contain the actual license type value 'LCU' or 'forecaster' or whatever else comes down the line
+  public Lookup: string; // Would contain the actual license type value 'LCU' or 'forecast' or whatever else comes down the line
 
   public Name: string;  //  Use this value for display the license type name to a user
 }
