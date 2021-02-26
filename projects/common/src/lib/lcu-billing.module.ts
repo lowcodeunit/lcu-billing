@@ -9,6 +9,9 @@ import { LcuDirective } from './directives/lcu.directive';
 import { PlanCardComponent } from './controls/plan-card/plan-card.component';
 import { LcuBillingPlanViewElementComponent } from './elements/plan-view/plan-view.component';
 import { AppHostModule } from '@lowcodeunit/app-host-common';
+import { StripeFormComponent } from './controls/stripe-form/stripe-form.component';
+import { LcuBillingUpgradeElementComponent } from './elements/upgrade/upgrade.component';
+import { LcuBillingUpdateCreditCardElementComponent } from './elements/update-credit-card/update-credit-card.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +20,9 @@ import { AppHostModule } from '@lowcodeunit/app-host-common';
     PlanCardComponent,
     BillingDisplayComponent,
     LcuBillingPlanViewElementComponent,
+    LcuBillingUpgradeElementComponent,
+    LcuBillingUpdateCreditCardElementComponent,
+    StripeFormComponent,
   ],
   imports: [
     FathymSharedModule,
@@ -32,9 +38,17 @@ import { AppHostModule } from '@lowcodeunit/app-host-common';
     PlanCardComponent,
     BillingDisplayComponent,
     LcuBillingPlanViewElementComponent,
+    LcuBillingUpgradeElementComponent,
+    LcuBillingUpdateCreditCardElementComponent,
     AppHostModule,
+    StripeFormComponent,
   ],
-  entryComponents: [LcuBillingPlanViewElementComponent],
+  entryComponents: [
+    LcuBillingPlanViewElementComponent, 
+    LcuBillingUpgradeElementComponent, 
+    LcuBillingUpdateCreditCardElementComponent, 
+    StripeFormComponent
+  ],
 })
 export class LcuBillingModule {
   static forRoot(): ModuleWithProviders<LcuBillingModule> {

@@ -7,7 +7,6 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { emit } from 'process';
 import { BillingPlanOption } from '../../state/user-billing/user-billing.state';
 
 @Component({

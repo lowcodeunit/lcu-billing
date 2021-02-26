@@ -2,7 +2,6 @@ import {
   Component,
   OnInit,
   ViewChild,
-  AfterViewInit,
   ChangeDetectorRef,
   ElementRef,
   AfterViewChecked,
@@ -331,7 +330,6 @@ export class BillingComponent implements OnInit, AfterViewChecked {
     if (!this.stripe) {
       // Your Stripe public key
       this.stripe = Stripe(this.stripePublicKey);
-      // this.setupStripeElements();
       const elements = this.stripe.elements();
 
       this.stripeCard = elements.create('card', {

@@ -7,3 +7,5 @@ export * from './lib/state/user-billing/user-billing-state.context';
 export * from './lib/state/user-billing/user-billing.state';
 export * from './lib/utils/lcu.utils';
 export * from './lib/elements/plan-view/plan-view.component';
+export * from './lib/elements/upgrade/upgrade.component';
+export * from './lib/elements/update-credit-card/update-credit-card.component';

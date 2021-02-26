@@ -1,105 +1,4 @@
-<div [fxShow]="!State.Loading">
-  <!-- <mat-icon class="back-arrow" (click)="GoBack()">arrow_back</mat-icon> -->
-
-  <div
-    class="billing-page-container"
-    fxLayout.lg="row"
-    fxLayout.md="row"
-    fxLayout.sm="column"
-    fxLayout.xs="column"
-    fxLayoutAlign.xl="center end"
-    fxLayoutAlign.lg="center end"
-    fxLayoutAlign.md="center end"
-    fxLayoutAlign.sm="center center"
-    fxLayoutAlign.xs="center center"
-    fxLayoutGap.xl="50px"
-    fxLayoutGap.lg="50px"
-    fxLayoutGap.md="50px"
-    fxLayoutGap.sm="30px"
-    fxLayoutGap.xs="30px"
-  >
-    <!-- PRICING CONTAINER -->
-    <div
-      class="plan-card-container"
-      fxLayout="row"
-      fxLayoutAlign="start center"
-    >
-      <lcu-plan-card
-        *ngIf="State.Plans"
-        [plan]="SelectedPlan"
-        [all-plans]="State.Plans"
-        [show-back-button]="ShowBackButton"
-        [featured-plan-group]="State.FeaturedPlanGroup"
-        [popular-plan-group]="State.PopularPlanGroup"
-        (interval-toggled)="IntervalToggled($event)"
-        (go-back-clicked)="GoBackClicked($event)"
-      >
-      </lcu-plan-card>
-
-      <!-- <div class='vertical-line'></div> -->
-    </div>
-
-    <!-- BILLING CONTAINER -->
-    <!-- <div fxLayout.lg="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign="center"></div> -->
-    <!-- <mat-card [ngClass]="{'one-billing': SelectedPlan?.PlanGroup === PlanGroups[0],
-    'two-billing': SelectedPlan?.PlanGroup === PlanGroups[1],
-    'three-billing': SelectedPlan?.PlanGroup === PlanGroups[2],
-    'four-billing': SelectedPlan?.PlanGroup === PlanGroups[3]
-   }" fxFlex="45%" fxFlex.xs="15%" style="height: 100%"> -->
-
-    <mat-card
-      class="billing-card"
-      fxFlex="45%"
-      fxFlex.xs="15%"
-      style="height: 100%"
-      fxLayout="column"
-    >
-      <mat-card-header
-        class="billing-header-container"
-        fxLayout="row"
-        fxLayoutAlign="start center"
-      >
-        <div class="fathym-logo-container">
-          <div class="fathym-logo"></div>
-        </div>
-        <div
-          class="billing-header-section"
-          fxLayout="column"
-          fxLayoutAlign="start start"
-        >
-          <h2 class="fathym-header" *ngIf="SelectedPlan?.LicenseType">
-            {{ SelectedPlan?.HeaderName }}
-          </h2>
-          <div fxLayout="row">
-            <h3
-              class="fathym-header"
-              *ngIf="SelectedPlan?.PlanGroup && SelectedPlan?.Interval"
-            >
-              {{ SelectedPlan.PlanGroup | titlecase }} Package
-              <span *ngIf="SelectedPlan?.PlanGroup === 'hobby'" class="asterisk"
-                >*</span
-              >
-              - {{ SelectedPlan.Interval | titlecase }}ly Billing
-            </h3>
-            <!-- <span *ngIf="SelectedPlan?.PlanGroup === 'hobby'" class="asterisk">*</span> -->
-          </div>
-          <div
-            *ngIf="SelectedPlan?.PlanGroup === 'hobby'"
-            class="important-note-container"
-            fxLayout="row"
-            fxFlex="70%"
-          >
-            <span class="asterisk">*</span>
-            <div class="important-note">
-              &nbsp;{{ ImportantNoteText }}
-            </div>
-          </div>
-          <p class="fathym-header">Enter payment information</p>
-        </div>
-      </mat-card-header>
-
-      <!-- STRIPE STUFF -->
-      <mat-card-content
+<div
         class="billing-page-container"
         fxLayout="column"
         fxLayoutAlign="space-around center"
@@ -278,28 +177,13 @@
                     mat-raised-button
                     id="payment-button"
                     class="buy-now-button"
-                    *ngIf="SelectedPlan"
                     [disabled]="IsButtonDisabled()"
                   >
-                    PURCHASE NOW
+                    UPDATE PAYMENT INFO
                   </button>
                 </div>
               </div>
             </div>
           </form>
         </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-  <h1 fxLayoutAlign="center center" class="slogan">
-    If you can Fathym it, you can build it.
-  </h1>
-</div>
-
-<!-- LOADING SCREEN -->
-<div [fxShow]="State.Loading">
-  <div fxLayout="row" fxLayoutAlign="center center" class="spinner-container">
-    <mat-spinner diameter="75"></mat-spinner>
-    <div class="spinner-logo" logo-alt="Fathym Logo"></div>
-  </div>
-</div>
+    </div>

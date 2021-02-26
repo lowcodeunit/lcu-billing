@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
 
+    <script src="https://js.stripe.com/v2/"></script>
+
+
     <script id="lcu-reg">
       const appHost = {
         Toolbar: {
@@ -264,6 +267,9 @@
           Root: "/api/state",
           // Environment: "local",
           UsernameMock: "michael.gearhardt@fathym.com",
+          Stripe: {
+            PublicKey: 'pk_test_KnI6QApAae5tFIxuwuoSBFx6'
+          },
           FreeboardURL: "https://www.iot-ensemble.com/freeboard",
           Analytics: {
             Google: {
@@ -281,6 +287,7 @@
           AppHost: appHost,
         },
         Settings: {},
+        
         User: {
           Email: "local-tester@fathym.com",
         },
