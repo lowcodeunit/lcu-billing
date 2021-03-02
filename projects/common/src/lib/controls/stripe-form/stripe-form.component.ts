@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { LCUServiceSettings } from '@lcu/common';
 import { UserBillingStateContext } from '../../state/user-billing/user-billing-state.context';
@@ -11,7 +11,8 @@ declare var Stripe: any;
   templateUrl: './stripe-form.component.html',
   styleUrls: ['./stripe-form.component.scss']
 })
-export class StripeFormComponent implements OnInit {
+export class StripeFormComponent implements OnInit, AfterViewChecked {
+
 
   @ViewChild('cardElement') cardElement: ElementRef;
 
@@ -195,7 +196,7 @@ export class StripeFormComponent implements OnInit {
    * Sets up the stripe credit card input and styles
    */
   protected setupStripe() {
-    console.log("getting called stripe key: ", this.stripePublicKey)
+    console.log("stripe public key: ", this.stripePublicKey)
     if (!this.stripe) {
       // Your Stripe public key
       this.stripe = Stripe(this.stripePublicKey);

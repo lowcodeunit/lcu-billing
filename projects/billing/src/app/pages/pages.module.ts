@@ -8,10 +8,9 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { CompleteComponent } from './complete/complete.component';
 import { PlansComponent } from './plans/plans.component';
 import { BillingComponent } from './billing/billing.component';
-import { UpdateCreditCardComponent } from './update-credit-card/update-credit-card.component';
 
 @NgModule({
-  declarations: [BillingComponent, CompleteComponent, PlansComponent, UpdateCreditCardComponent],
+  declarations: [BillingComponent, CompleteComponent, PlansComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -22,8 +21,8 @@ import { UpdateCreditCardComponent } from './update-credit-card/update-credit-ca
     LcuBillingModule,
     PipeModule,
   ],
-  exports: [BillingComponent, CompleteComponent, PlansComponent, UpdateCreditCardComponent],
+  exports: [BillingComponent, CompleteComponent, PlansComponent],
   providers: [],
-  entryComponents: [BillingComponent, CompleteComponent, PlansComponent, UpdateCreditCardComponent],
+  entryComponents: [BillingComponent, CompleteComponent, PlansComponent],
 })
 export class PagesModule {}

@@ -235,7 +235,12 @@
 
               <!-- TOS & EA CHECKBOXES *ngIf="State?.RequiredOptIns?.length > 0"-->
               <!-- *ngIf="State.RequiredOptIns.includes('ToS') || State.RequiredOptIns.includes('EA')" -->
-              <div
+
+              <lcu-required-opt-ins
+                (req-opt-ins-changed)="ReqOptsChanged($event)"
+              ></lcu-required-opt-ins>
+
+              <!-- <div
                 class="required-opt-ins"
                 fxLayout="row"
                 fxLayoutAlign="start center"
@@ -259,7 +264,7 @@
                     >Terms of Service</a
                   >
                 </mat-checkbox>
-              </div>
+              </div> -->
               <div
                 class="billing-card-footer"
                 fxLayout="row"

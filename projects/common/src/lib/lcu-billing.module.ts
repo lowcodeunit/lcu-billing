@@ -12,6 +12,8 @@ import { AppHostModule } from '@lowcodeunit/app-host-common';
 import { StripeFormComponent } from './controls/stripe-form/stripe-form.component';
 import { LcuBillingUpgradeElementComponent } from './elements/upgrade/upgrade.component';
 import { LcuBillingUpdateCreditCardElementComponent } from './elements/update-credit-card/update-credit-card.component';
+import { ConfirmPlanChangeComponent } from './controls/confirm-plan-change/confirm-plan-change.component';
+import { RequiredOptInsComponent } from './controls/required-opt-ins/required-opt-ins.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { LcuBillingUpdateCreditCardElementComponent } from './elements/update-cr
     LcuBillingUpgradeElementComponent,
     LcuBillingUpdateCreditCardElementComponent,
     StripeFormComponent,
+    ConfirmPlanChangeComponent,
+    RequiredOptInsComponent,
   ],
   imports: [
     FathymSharedModule,
@@ -42,12 +46,14 @@ import { LcuBillingUpdateCreditCardElementComponent } from './elements/update-cr
     LcuBillingUpdateCreditCardElementComponent,
     AppHostModule,
     StripeFormComponent,
+    ConfirmPlanChangeComponent,
+    RequiredOptInsComponent,
   ],
   entryComponents: [
     LcuBillingPlanViewElementComponent, 
     LcuBillingUpgradeElementComponent, 
     LcuBillingUpdateCreditCardElementComponent, 
-    StripeFormComponent
+    StripeFormComponent, ConfirmPlanChangeComponent, RequiredOptInsComponent
   ],
 })
 export class LcuBillingModule {

@@ -27,6 +27,9 @@ export class BillingDisplayComponent implements OnChanges, OnInit {
   @Input('featured')
   public FeaturedPlanGroup: string;
 
+  @Input('is-upgrade')
+  public IsUpgrade: boolean;
+
   @Input('popular')
   public PopularPlanGroup: string;
 

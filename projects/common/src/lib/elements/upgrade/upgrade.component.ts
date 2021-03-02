@@ -33,11 +33,23 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
 
   public BillingPlanOptionsSorted: BillingPlanOption[];
 
+  /**
+   * whether or not to display the confirmation screen
+   */
+  public IsConfirming: boolean;
+
+  public NewPlan: BillingPlanOption;
+
   public Loading: boolean;
 
   //  Constructors
   constructor(protected injector: Injector) {
     super(injector);
+
+    this.http = injector.get(HttpClient);
+
+    this.IsConfirming = false;
+
     this.userBillStateCtx = injector.get(UserBillingStateContext);
   }
 
@@ -57,6 +69,20 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
   }
 
   //  API Methods
+
+  public ChangePlan(event: BillingPlanOption){
+    console.log("Change plan to: ", event)
+    this.IsConfirming = true;
+    this.NewPlan = event;
+  }
+
+  public GoBackClickEvent(event: any){
+    this.IsConfirming = false;
+  }
+
+  public UpgradeRequest(event: BillingPlanOption){
+    console.log("upgrade to: ", event)
+  }
 
   //  Helpers
   protected loadBillingOptions() {
@@ -85,7 +111,9 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
 
   protected stateChanged(){
 
-    console.log("STATE:",this.Context.State)
+    console.log("STATE:",this.Context);
+
+    this.loadBillingOptions();
 
   }
 }
