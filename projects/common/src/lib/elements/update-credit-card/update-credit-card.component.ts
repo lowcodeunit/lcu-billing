@@ -1,7 +1,8 @@
-import { Component, OnInit, Injector } from '@angular/core';
-import { LCUElementContext, LcuElementComponent } from '@lcu/common';
+import { Component, OnInit, Injector, ElementRef, ViewChild, Input } from '@angular/core';
+import { LCUElementContext, LcuElementComponent, LCUServiceSettings } from '@lcu/common';
 import { UserBillingStateContext } from '../../state/user-billing/user-billing-state.context';
 import { UserBillingState } from '../../state/user-billing/user-billing.state';
+
 
 export class LcuBillingUpdateCreditCardContext extends LCUElementContext<UserBillingState> {
 
@@ -9,6 +10,7 @@ export class LcuBillingUpdateCreditCardContext extends LCUElementContext<UserBil
 }
 
 export const SELECTOR_LCU_BILLING_UPDATE_CREDIT_CARD_ELEMENT = 'lcu-billing-update-credit-card-element';
+
 
 @Component({
   selector: SELECTOR_LCU_BILLING_UPDATE_CREDIT_CARD_ELEMENT,
@@ -18,36 +20,53 @@ export const SELECTOR_LCU_BILLING_UPDATE_CREDIT_CARD_ELEMENT = 'lcu-billing-upda
 export class LcuBillingUpdateCreditCardElementComponent extends LcuElementComponent<LcuBillingUpdateCreditCardContext> implements OnInit {
   //  Fields
 
-  protected userBillStateCtx: UserBillingStateContext;
+  @ViewChild('cardElement') cardElement: ElementRef;
+
+  public BillingHeader: string;
+
+  public State: UserBillingState;
+
+  public SubmitButtonText: string;
 
   //  Properties
 
-  //  Constructors
-  constructor(protected injector: Injector) {
-    super(injector);
-    this.userBillStateCtx = injector.get(UserBillingStateContext);
+  //  Constructor
+ constructor(
+  protected injector: Injector,
+  protected userBillStateCtx: UserBillingStateContext,
+  protected lcuSettings: LCUServiceSettings,
+) {
+  super(injector);
+  this.userBillStateCtx = injector.get(UserBillingStateContext);
+  this.SubmitButtonText = "UPDATE"
+  this.BillingHeader = "Update Payment Information"
+}
 
-  }
+//  Life Cycle
+public ngOnInit() {
+  super.ngOnInit();
 
-  //  Life Cycle
-  public ngOnInit() {
-    super.ngOnInit();
+  this.userBillStateCtx.Context.subscribe((state: any) => {
+    this.Context.State = state;
 
-    this.userBillStateCtx.Context.subscribe((state: any) => {
-      this.Context.State = state;
+    if (this.Context.State) {
+      this.stateChanged();
+    }
 
-      if (this.Context.State) {
-        this.stateChanged();
-      }
+  });
+  this.userBillStateCtx.$Refresh({licenseType: this.Context.LicenseType});
+}
 
-    });
-    this.userBillStateCtx.$Refresh({licenseType: this.Context.LicenseType});
-  }
+  //  API methods
 
-  //  API Methods
-
+  
   //  Helpers
-  protected stateChanged(){
+ 
+ 
+
+  protected stateChanged() {
     console.log("STATE: ", this.Context.State);
   }
 }
+ 
+

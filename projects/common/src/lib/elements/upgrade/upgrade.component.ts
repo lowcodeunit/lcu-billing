@@ -26,7 +26,7 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
 
   protected userBillStateCtx: UserBillingStateContext;
 
-  protected http: HttpClient;
+  // protected http: HttpClient;
 
 
   //  Properties
@@ -46,7 +46,7 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
   constructor(protected injector: Injector) {
     super(injector);
 
-    this.http = injector.get(HttpClient);
+    // this.http = injector.get(HttpClient);
 
     this.IsConfirming = false;
 
@@ -74,6 +74,7 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
     console.log("Change plan to: ", event)
     this.IsConfirming = true;
     this.NewPlan = event;
+    this.userBillStateCtx.ChangeSubscription(this.Context.State.Username, event.Lookup)
   }
 
   public GoBackClickEvent(event: any){
@@ -85,27 +86,12 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
   }
 
   //  Helpers
-  protected loadBillingOptions() {
-    if (this.Context) {
-      this.http.get(this.Context.BillingPlansAPIPath).subscribe(
-        (result: BaseModeledResponse<BillingPlanOption[]>) => {
-          console.log(this.Context?.BillingPlanOptions);
 
-          this.BillingPlanOptionsSorted = [
-            ...(this.Context.BillingPlanOptions || []),
-            ...(result.Model || []),
-          ];
-          this.BillingPlanOptionsSorted.sort((a, b) =>
+  protected sortBillingOptions(){
+    this.BillingPlanOptionsSorted = this.Context.State.Plans;
+    this.BillingPlanOptionsSorted.sort((a, b) =>
             a.Priority < b.Priority ? -1 : a.Priority > b.Priority ? 1 : 0
           );
-          this.Loading = false;
-        },
-        (error) => {
-          console.error('HTTP error ', error);
-          this.Loading = false;
-        }
-      );
-    }
   }
 
 
@@ -113,7 +99,9 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
 
     console.log("STATE:",this.Context);
 
-    this.loadBillingOptions();
+    if(this.Context.State.Plans){
+      this.sortBillingOptions();
+    }
 
   }
 }

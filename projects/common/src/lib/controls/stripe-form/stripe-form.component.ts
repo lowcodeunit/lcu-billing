@@ -1,8 +1,8 @@
-import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { LCUServiceSettings } from '@lcu/common';
 import { UserBillingStateContext } from '../../state/user-billing/user-billing-state.context';
-import { UserBillingState } from '../../state/user-billing/user-billing.state';
+import { BillingPlanOption, UserBillingState } from '../../state/user-billing/user-billing.state';
 
 declare var Stripe: any;
 
@@ -62,6 +62,18 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
    */
   public AcceptedEA: boolean;
 
+  @Input('selected-plan')
+  public SelectedPlan: BillingPlanOption;
+
+  @Input('submit-button-text')
+  public SubmitButtonText: string;
+
+  @Input('billing-header')
+  public BillingHeader: string;
+
+  // @Output('req-opt-ins-changed')
+  // public ReqOptInsChanged: EventEmitter<any>;
+
  //  Constructor
  constructor(
   protected formBldr: FormBuilder,
@@ -70,7 +82,10 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
 ) {
   this.AcceptedTOS = false;
   this.AcceptedEA = false;
+  this.BillingHeader = "Enter Payment Information"
   this.ImportantNoteText = "";
+  // this.ReqOptInsChanged = new EventEmitter<any>();
+  this.SubmitButtonText = "Submit";
 }
 
   ngOnInit(): void {
@@ -94,7 +109,7 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
    * Determines if user has entered all fields and wether or not to show button
    */
   public IsButtonDisabled(): boolean {
-    // console.log("TERMS = ", this.AcceptedEA, this.AcceptedTOS)
+    // console.log("TERMS = ", this.AcceptedEA, this.AcceptedTOS, this.StripeValid, this.BillingForm.value.userName)
     if (
       this.AcceptedEA &&
       this.AcceptedTOS &&
@@ -105,15 +120,16 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
     } else {
       return true;
     }
+    
   }
 
   /**
    * determines if user has accepted the Terms of service  and enterprise agreement from the check boxes
    */
   public ReqOptsChanged(event: any) {
-    // console.log('TOS & EA: ', event);
-    this.AcceptedTOS = event.checked;
     this.AcceptedEA = event.checked;
+    this.AcceptedTOS = event.checked;
+    // this.ReqOptInsChanged.emit(event);
   }
 
   /**
@@ -196,7 +212,7 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
    * Sets up the stripe credit card input and styles
    */
   protected setupStripe() {
-    console.log("stripe public key: ", this.stripePublicKey)
+    // console.log("stripe public key: ", this.stripePublicKey)
     if (!this.stripe) {
       // Your Stripe public key
       this.stripe = Stripe(this.stripePublicKey);

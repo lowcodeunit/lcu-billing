@@ -4,6 +4,7 @@ import {
   BillingPlanOption,
 } from '@lowcodeunit/lcu-billing-common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserBillingState } from 'projects/common/src/lcu.api';
 
 @Component({
   selector: 'lcu-plans',
@@ -32,7 +33,7 @@ export class PlansComponent implements OnInit {
   }
 
   public ngOnInit() {
-    this.userBillStateCtx.Context.subscribe((state: any) => {
+    this.userBillStateCtx.Context.subscribe((state: UserBillingState) => {
       this.State = state;
 
       console.log('Users Billing State: ', this.State);

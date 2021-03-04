@@ -21,6 +21,19 @@ export class UserBillingStateContext extends StateContext<UserBillingState> {
   }
 
   //  API Methods
+  public ChangeSubscription(
+    customerName: string,
+    plan: string,
+  ) {
+    this.Execute({
+      Arguments: {
+        CustomerName: customerName,
+        Plan: plan,
+      },
+      Type: 'ChangeSubscription',
+    });
+  }
+
   public CompletePayment(
     methodId: string,
     customerName: string,
