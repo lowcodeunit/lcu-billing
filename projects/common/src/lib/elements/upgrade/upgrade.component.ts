@@ -26,9 +26,6 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
 
   protected userBillStateCtx: UserBillingStateContext;
 
-  // protected http: HttpClient;
-
-
   //  Properties
 
   public BillingPlanOptionsSorted: BillingPlanOption[];
@@ -74,7 +71,6 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
     console.log("Change plan to: ", event)
     this.IsConfirming = true;
     this.NewPlan = event;
-    this.userBillStateCtx.ChangeSubscription(this.Context.State.Username, event.Lookup)
   }
 
   public GoBackClickEvent(event: any){
@@ -83,6 +79,8 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
 
   public UpgradeRequest(event: BillingPlanOption){
     console.log("upgrade to: ", event)
+    this.userBillStateCtx.ChangeSubscription(this.Context.State.Username, event.Lookup)
+
   }
 
   //  Helpers
