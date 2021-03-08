@@ -1,3 +1,9 @@
+<div *ngIf="Loading">
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
+
 <lcu-billing-display
   [featured]=""
   [is-upgrade]="true"
@@ -15,8 +21,3 @@
   (upgrade-confirmed)="UpgradeRequest($event)">
 </lcu-confirm-plan-change>
 
-<div *ngIf="Loading">
-  <div fxLayout="row" fxLayoutAlign="center center">
-    <mat-spinner></mat-spinner>
-  </div>
-</div>

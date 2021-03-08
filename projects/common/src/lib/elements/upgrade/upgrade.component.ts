@@ -1,14 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Injector } from '@angular/core';
-import { LCUElementContext, LcuElementComponent, BaseModeledResponse } from '@lcu/common';
+import { LCUElementContext, LcuElementComponent } from '@lcu/common';
 import { UserBillingStateContext } from '../../state/user-billing/user-billing-state.context';
 import { BillingPlanOption, UserBillingState } from '../../state/user-billing/user-billing.state';
 
 export class LcuBillingUpgradeContext extends LCUElementContext<UserBillingState> {
-
-  public BillingPlansAPIPath: string;
-
-  public BillingPlanOptions: BillingPlanOption[];
 
   public LicenseType: string;
 
@@ -25,6 +20,7 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
   //  Fields
 
   protected userBillStateCtx: UserBillingStateContext;
+
 
   //  Properties
 
@@ -78,9 +74,9 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
   }
 
   public UpgradeRequest(event: BillingPlanOption){
-    console.log("upgrade to: ", event)
-    this.userBillStateCtx.ChangeSubscription(this.Context.State.Username, event.Lookup)
-
+    console.log("upgrade to: ", event);
+    this.Loading = true;
+    this.userBillStateCtx.ChangeSubscription(this.Context.State.Username, event.Lookup);
   }
 
   //  Helpers
@@ -95,7 +91,9 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
 
   protected stateChanged(){
 
-    console.log("STATE:",this.Context);
+    console.log("CONTEXT:",this.Context);
+
+    this.Loading = this.Context.State.Loading;
 
     if(this.Context.State.Plans){
       this.sortBillingOptions();

@@ -25,7 +25,6 @@ export class UserBillingStateContext extends StateContext<UserBillingState> {
     customerName: string,
     plan: string,
   ) {
-    console.log("wtf")
     this.Execute({
       Arguments: {
         CustomerName: customerName,
