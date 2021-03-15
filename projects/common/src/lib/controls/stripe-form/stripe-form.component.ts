@@ -31,10 +31,13 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
     return stateCfg && stateCfg.Stripe ? stateCfg.Stripe.PublicKey : '';
   }
 
+  protected newPaymentID: string;
+
   /**
    * The billing form
    */
   public BillingForm: FormGroup;
+
 
   /**
    * The text to display when the user enters  cc info for free plan
@@ -62,14 +65,22 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
    */
   public AcceptedEA: boolean;
 
+  @Input('billing-header')
+  public BillingHeader: string;
+
+  @Input('is-update-flow')
+  public IsUpdateFlow: boolean;
+
   @Input('selected-plan')
   public SelectedPlan: BillingPlanOption;
 
   @Input('submit-button-text')
   public SubmitButtonText: string;
 
-  @Input('billing-header')
-  public BillingHeader: string;
+  @Output('card-change-success')
+  public CardChangeSuccess: EventEmitter<boolean>;
+
+  
 
   // @Output('req-opt-ins-changed')
   // public ReqOptInsChanged: EventEmitter<any>;
@@ -82,8 +93,10 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
 ) {
   this.AcceptedTOS = false;
   this.AcceptedEA = false;
-  this.BillingHeader = "Enter Payment Information"
+  this.BillingHeader = "Enter Payment Information";
+  this.CardChangeSuccess = new EventEmitter<boolean>();
   this.ImportantNoteText = "";
+  this.newPaymentID = '';
   // this.ReqOptInsChanged = new EventEmitter<any>();
   this.SubmitButtonText = "Submit";
 }
@@ -155,7 +168,6 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
       .then((result: any) => {
         this.handleStripePaymentMethodCreated(result);
       });
-    // this.userBillStateCtx.ResetState(this.SelectedPlan.LicenseType.Lookup)
   }
 
   //  Helpers
@@ -180,13 +192,31 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
    * Handles the stripe once user has confirmed payment
    */
   protected handleStripePaymentMethodCreated(result: any) {
-    // console.log('payment result: ', result.error);
+    console.log('payment result: ', result);
     if (result.error) {
       this.StripeError = result.error;
     } else {
       this.StripeError = '';
       // console.log('Billing Form: ', this.BillingForm);
+      if(this.SelectedPlan){
+        this.userBillStateCtx.CompletePayment(
+          result.paymentMethod.id,
+          this.BillingForm.value.userName,
+          this.SelectedPlan.Lookup,
+          this.SelectedPlan.TrialPeriodDays
+        );
+
+      }
+
       //TODO handle payment method changed
+      else if(this.IsUpdateFlow){
+        this.newPaymentID = result.paymentMethod.id;
+        this.userBillStateCtx.UpdatePaymentInfo(
+          this.BillingForm.value.userName, 
+          result.paymentMethod.id);
+
+      }
+      
     }
   }
 
@@ -272,6 +302,17 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
     }
   }
 
+  protected determineCardChangeSuccess() {
+
+    if(this.newPaymentID === this.State.PaymentMethodID){
+      this.CardChangeSuccess.emit(true);
+    }
+    else{
+      //TODO
+    }
+
+  }
+
   /**
    * Determines the payment status of the user
    */
@@ -321,6 +362,9 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
   protected stateChanged() {
     
     this.determinePaymentStatus();
+    if(this.IsUpdateFlow){
+      this.determineCardChangeSuccess();
+    }
   }
 
 }

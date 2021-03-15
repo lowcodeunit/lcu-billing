@@ -28,6 +28,8 @@ export class LcuBillingUpdateCreditCardElementComponent extends LcuElementCompon
 
   public SubmitButtonText: string;
 
+  public IsSuccess: boolean;
+
   //  Properties
 
   //  Constructor
@@ -40,6 +42,7 @@ export class LcuBillingUpdateCreditCardElementComponent extends LcuElementCompon
   this.userBillStateCtx = injector.get(UserBillingStateContext);
   this.SubmitButtonText = "UPDATE"
   this.BillingHeader = "Update Payment Information"
+  this.IsSuccess = false;
 }
 
 //  Life Cycle
@@ -58,6 +61,10 @@ public ngOnInit() {
 }
 
   //  API methods
+
+  public CardChangeSuccess(event: boolean){
+    this.IsSuccess = event;
+  }
 
   
   //  Helpers

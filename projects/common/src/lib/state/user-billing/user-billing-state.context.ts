@@ -58,6 +58,16 @@ export class UserBillingStateContext extends StateContext<UserBillingState> {
     });
   }
 
+  public UpdatePaymentInfo(customerName: string, paymentId: string){
+    this.Execute({
+      Arguments: { 
+        CustomerName: customerName,
+        MethodID: paymentId
+      },
+      Type: 'UpdatePaymentInfo'
+    });
+  }
+
   //  Helpers
   protected callRefresh() {}
 

@@ -7,9 +7,16 @@
   </div>
 
 <lcu-stripe-form
+    *ngIf="!IsSuccess"
     [billing-header]="BillingHeader"
     [submit-button-text]="SubmitButtonText"
+    [is-update-flow]='true'
+    (card-change-success)="CardChangeSuccess($event)"
 >
 </lcu-stripe-form> 
+
+<div *ngIf="IsSuccess && !Context?.State?.Loading">
+  <p>Your payment method has successfully been updated</p>
+</div>
 
 
