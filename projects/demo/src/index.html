@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
 
+    <script src="https://js.stripe.com/v3/"></script>
+
+
     <script id="lcu-reg">
       const appHost = {
         Toolbar: {
@@ -256,14 +259,18 @@
       };
 
       window.LCU = {
-        // APIRoot: "https://localhost:44387",
-        APIRoot: "https://www.iot-ensemble.com",
+        APIRoot: "https://localhost:44387",
+        // APIRoot: "https://www.iot-ensemble.com",
         Application: {},
         State: {
           ActionRoot: "/api/state",
           Root: "/api/state",
-          // Environment: "local",
-          UsernameMock: "michael.gearhardt@fathym.com",
+          Environment: "local",
+          UsernameMock: "mjiot0304a@mailinator.com",
+          Stripe: {
+            // PublicKey: 'pk_test_KnI6QApAae5tFIxuwuoSBFx6'
+            PublicKey: 'pk_live_Gl42to53E8DY7zp2i6FNk7yG'
+          },
           FreeboardURL: "https://www.iot-ensemble.com/freeboard",
           Analytics: {
             Google: {
@@ -281,6 +288,7 @@
           AppHost: appHost,
         },
         Settings: {},
+        
         User: {
           Email: "local-tester@fathym.com",
         },

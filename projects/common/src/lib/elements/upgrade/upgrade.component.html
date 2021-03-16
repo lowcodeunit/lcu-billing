@@ -1,0 +1,23 @@
+<div *ngIf="Loading">
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
+
+<lcu-billing-display
+  [featured]=""
+  [is-upgrade]="true"
+  [popular]=""
+  [plans]="BillingPlanOptionsSorted"
+  [show-button]="true"
+  (buy-now)="ChangePlan($event)"
+  *ngIf="BillingPlanOptionsSorted?.length > 0 && !IsConfirming"
+></lcu-billing-display>
+
+<lcu-confirm-plan-change
+  *ngIf="IsConfirming && NewPlan"
+  [plan]="NewPlan"
+  (go-back-click-event)="GoBackClickEvent($event)"
+  (upgrade-confirmed)="UpgradeRequest($event)">
+</lcu-confirm-plan-change>
+

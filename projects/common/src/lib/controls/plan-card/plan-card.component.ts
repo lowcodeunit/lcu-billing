@@ -11,18 +11,27 @@ export class PlanCardComponent implements OnInit {
   /**
    * The Displayed plans from the state
    */
-  @Input('displayed-plans') DisplayedPlans: BillingPlanOption[];
+  @Input('displayed-plans') 
+  public DisplayedPlans: BillingPlanOption[];
 
   /**
    * The Featured Plan group to display the **Most Popular tag**
    */
 
-  @Input('featured-plan-group') FeaturedPlanGroup: string;
+  @Input('featured-plan-group') 
+  public FeaturedPlanGroup: string;
+
+  /**
+   * Determines if the buy now text should say buy now or upgrade
+   */
+  @Input('is-upgrade')
+  public IsUpgrade: boolean;
 
   /**
    * The Popular plan group to display the **Most Popular tag**
    */
-  @Input('popular-plan-group') PopularPlanGroup: string;
+  @Input('popular-plan-group') 
+  public PopularPlanGroup: string;
 
   /**
    * an array of the intervals to display in the toggle
@@ -32,7 +41,8 @@ export class PlanCardComponent implements OnInit {
   /**
    * The plan to be displayed
    */
-  @Input('plan') Plan: BillingPlanOption;
+  @Input('plan') 
+  public Plan: BillingPlanOption;
 
   /**
    * The plan groups to key off of the indexes
@@ -42,17 +52,20 @@ export class PlanCardComponent implements OnInit {
   /**
    * The plans coming back from the state to display the different prices
    */
-  @Input('all-plans') AllPlans: Array<BillingPlanOption>;
+  @Input('all-plans') 
+  public AllPlans: Array<BillingPlanOption>;
 
   /**
    * Whether or not to display the buy now button (Button for plan page only)
    */
-  @Input('show-button') ShowButton: boolean;
+  @Input('show-button') 
+  public ShowButton: boolean;
 
   /**
    * Whether or not to show the back button
    */
-  @Input('show-back-button') ShowBackButton: boolean;
+  @Input('show-back-button') 
+  public ShowBackButton: boolean;
   /**
    * Whether or not to display the toggle button
    */
@@ -61,17 +74,25 @@ export class PlanCardComponent implements OnInit {
   /**
    * Event emitted when the button has been clicked
    */
-  @Output('buy-now-clicked') BuyNowClicked: EventEmitter<any>;
+  @Output('buy-now-clicked') 
+  public BuyNowClicked: EventEmitter<any>;
 
   /**
    * Event emitted when the toggle has been toggled
    */
-  @Output('interval-toggled') IntervalToggled: EventEmitter<BillingPlanOption>;
+  @Output('interval-toggled') 
+  public IntervalToggled: EventEmitter<BillingPlanOption>;
 
   /**
    * Event emitted when back button clicked
    */
-  @Output('go-back-clicked') GoBackClicked: EventEmitter<any>;
+  @Output('go-back-clicked') 
+  public GoBackClicked: EventEmitter<any>;
+
+  /**
+   * The text to display in the buy now button
+   */
+  public BuyNowText: string;
 
   /**
    * The price of the other plan that is not displayed
@@ -113,6 +134,7 @@ export class PlanCardComponent implements OnInit {
     this.determinePlanGroups();
     this.getOtherIntervalPrice(this.Plan);
     this.extractPlanFeatures();
+    this.determineBuyNowText();
   }
   /**
    *
@@ -171,6 +193,7 @@ export class PlanCardComponent implements OnInit {
   }
 
   protected getOtherIntervalPrice(selectedPlan: BillingPlanOption) {
+    if(this.AllPlans){
     // console.log("selected plan = ", selectedPlan);
     let temp = this.AllPlans.filter(
       (plan) =>
@@ -183,12 +206,23 @@ export class PlanCardComponent implements OnInit {
       this.OtherIntervalPrice = this.OtherPlan.Price;
     }
   }
+  }
 
   protected extractPlanFeatures() {
     if (this.Plan.PlanFeatures) {
       this.PlanFeatures = this.Plan.PlanFeatures.split('|');
     }
     // console.log("Plan feats = ", this.PlanFeatures)
+  }
+
+  protected determineBuyNowText(){
+    if(this.IsUpgrade){
+      this.BuyNowText = "Upgrade";
+    }
+    else{
+      this.BuyNowText = "Buy Now"
+      this.IsUpgrade = false;
+    }
   }
 
   protected determinePlanGroups() {

@@ -1,0 +1,28 @@
+<h1>Confirm Plan Change</h1>
+<div 
+    fxLayout="row" 
+    fxLayoutAlign="space-around center" 
+    fxLayout.lt-sm="column"
+    fxLayoutAlign.lt-sm="center center" >
+    <lcu-plan-card 
+        [is-upgrade]=true 
+        [plan]="Plan" 
+        [show-back-button]=true 
+        (go-back-clicked)="GoBackClicked($event)">
+    </lcu-plan-card>
+
+    <div class="confirmation-container">
+        <p>By clicking the confirmation button below you confirm that you wish to change to the {{ Plan.Name }} plan. 
+            The card you have on file will be charged.</p>
+
+        <lcu-required-opt-ins
+        (req-opt-ins-changed)="HandleReqOptInsChange($event)"
+        ></lcu-required-opt-ins>
+        <div fxLayout="row" fxLayoutAlign="end center">
+        <button mat-raised-button class="button" (click)="UpgradeNow(Plan)" [disabled]="!IsReqOptInsChecked">
+            Confirm Plan Change
+        </button>
+        </div>
+    </div>
+
+</div>

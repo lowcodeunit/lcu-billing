@@ -21,6 +21,19 @@ export class UserBillingStateContext extends StateContext<UserBillingState> {
   }
 
   //  API Methods
+  public ChangeSubscription(
+    customerName: string,
+    plan: string,
+  ) {
+    this.Execute({
+      Arguments: {
+        CustomerName: customerName,
+        Plan: plan,
+      },
+      Type: 'ChangeSubscription',
+    });
+  }
+
   public CompletePayment(
     methodId: string,
     customerName: string,
@@ -42,6 +55,16 @@ export class UserBillingStateContext extends StateContext<UserBillingState> {
     this.Execute({
       Arguments: { LicenseType: licenseType },
       Type: 'ResetStateCheck',
+    });
+  }
+
+  public UpdatePaymentInfo(customerName: string, paymentId: string){
+    this.Execute({
+      Arguments: { 
+        CustomerName: customerName,
+        MethodID: paymentId
+      },
+      Type: 'UpdatePaymentInfo'
     });
   }
 
