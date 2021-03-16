@@ -8,10 +8,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './controls/home/home.component';
 import { DocumentationComponent } from './controls/documentation/documentation.component';
 import { LcuDocumentationModule } from '@lowcodeunit/lcu-documentation-common';
-import { LcuBillingModule } from '@lowcodeunit/lcu-billing-common';
 import { UpgradeComponent } from './controls/upgrade/upgrade.component';
 import { environment } from '../environments/environment';
 import { UpdateCreditCardComponent } from './controls/update-credit-card/update-credit-card.component';
+import { LcuBillingModule } from 'projects/common/src/lib/lcu-billing.module';
 
 @NgModule({
   declarations: [

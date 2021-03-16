@@ -8,10 +8,10 @@ import { LcuComponent } from './controls/lcu/lcu.component';
 import { LcuDirective } from './directives/lcu.directive';
 import { PlanCardComponent } from './controls/plan-card/plan-card.component';
 import { LcuBillingPlanViewElementComponent } from './elements/plan-view/plan-view.component';
+import { LcuBillingUpdateCreditCardElementComponent } from './elements/update-credit-card/update-credit-card.component';
+import { LcuBillingUpgradeElementComponent } from './elements/upgrade/upgrade.component';
 import { AppHostModule } from '@lowcodeunit/app-host-common';
 import { StripeFormComponent } from './controls/stripe-form/stripe-form.component';
-import { LcuBillingUpgradeElementComponent } from './elements/upgrade/upgrade.component';
-import { LcuBillingUpdateCreditCardElementComponent } from './elements/update-credit-card/update-credit-card.component';
 import { ConfirmPlanChangeComponent } from './controls/confirm-plan-change/confirm-plan-change.component';
 import { RequiredOptInsComponent } from './controls/required-opt-ins/required-opt-ins.component';
 
@@ -53,7 +53,9 @@ import { RequiredOptInsComponent } from './controls/required-opt-ins/required-op
     LcuBillingPlanViewElementComponent, 
     LcuBillingUpgradeElementComponent, 
     LcuBillingUpdateCreditCardElementComponent, 
-    StripeFormComponent, ConfirmPlanChangeComponent, RequiredOptInsComponent
+    StripeFormComponent, 
+    ConfirmPlanChangeComponent, 
+    RequiredOptInsComponent
   ],
 })
 export class LcuBillingModule {

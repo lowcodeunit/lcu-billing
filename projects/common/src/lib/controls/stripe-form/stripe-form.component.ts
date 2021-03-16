@@ -209,7 +209,8 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
       }
 
       //TODO handle payment method changed
-      else if(this.IsUpdateFlow){
+      else if(this.IsUpdateFlow && result.paymentMethod.id){
+        console.log("GETTING CALLED", result)
         this.newPaymentID = result.paymentMethod.id;
         this.userBillStateCtx.UpdatePaymentInfo(
           this.BillingForm.value.userName, 

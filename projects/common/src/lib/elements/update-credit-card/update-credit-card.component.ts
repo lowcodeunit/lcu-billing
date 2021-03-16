@@ -1,4 +1,4 @@
-import { Component, OnInit, Injector, ElementRef, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, Injector, ElementRef, ViewChild } from '@angular/core';
 import { LCUElementContext, LcuElementComponent, LCUServiceSettings } from '@lcu/common';
 import { UserBillingStateContext } from '../../state/user-billing/user-billing-state.context';
 import { UserBillingState } from '../../state/user-billing/user-billing.state';
