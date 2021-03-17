@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './controls/home/home.component';
 import { DocumentationComponent } from './controls/documentation/documentation.component';
+import { PlanSignUpComponent } from './controls/plan-sign-up/plan-sign-up.component';
 import { UpgradeComponent } from './controls/upgrade/upgrade.component';
 import { UpdateCreditCardComponent } from './controls/update-credit-card/update-credit-card.component';
 
 const routes: Routes = [
+  { path: 'billing', component: PlanSignUpComponent },
   { path: 'home', component: HomeComponent },
   { path: 'upgrade', component: UpgradeComponent },
   { path: 'update', component: UpdateCreditCardComponent },

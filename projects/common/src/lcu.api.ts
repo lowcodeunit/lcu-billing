@@ -9,3 +9,4 @@ export * from './lib/utils/lcu.utils';
 export * from './lib/elements/plan-view/plan-view.component';
 export * from './lib/elements/upgrade/upgrade.component';
 export * from './lib/elements/update-credit-card/update-credit-card.component';
+export * from './lib/elements/plan-sign-up/plan-sign-up.component';

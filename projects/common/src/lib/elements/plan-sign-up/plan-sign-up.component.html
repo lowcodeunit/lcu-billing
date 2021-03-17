@@ -1,0 +1,23 @@
+<!-- Plans page -->
+<lcu-plans-page
+    *ngIf="!SelectedPlan"
+    (selected-plan)="PlanSelected($event)">
+</lcu-plans-page>
+
+
+<!-- Billing Page -->
+<lcu-plan-billing
+    *ngIf="SelectedPlan && !ShowConfirmationPage"
+    [selected-plan]="SelectedPlan"
+    (back-button-clicked)="HandleBackButtonClick($event)"
+    (payment-success)="HandleSuccessfulPayment($event)"
+    (selected-plan-changed)="HandleSelectedPlanChange($event)">
+</lcu-plan-billing>
+
+
+<!-- Confirmation Page -->
+<lcu-plan-confirmation-page
+    *ngIf="ShowConfirmationPage && SelectedPlan"
+    [selected-plan]="SelectedPlan">
+</lcu-plan-confirmation-page>
+
