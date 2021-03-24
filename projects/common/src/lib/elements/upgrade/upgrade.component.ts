@@ -1,5 +1,5 @@
 import { Component, OnInit, Injector } from '@angular/core';
-import { LCUElementContext, LcuElementComponent } from '@lcu/common';
+import { LCUElementContext, LcuElementComponent, Status } from '@lcu/common';
 import { UserBillingStateContext } from '../../state/user-billing/user-billing-state.context';
 import { BillingPlanOption, UserBillingState } from '../../state/user-billing/user-billing.state';
 
@@ -24,6 +24,8 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
 
   //  Properties
 
+  public BillingHeader: string;
+
   public BillingPlanOptionsSorted: BillingPlanOption[];
 
   /**
@@ -35,6 +37,12 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
 
   public Loading: boolean;
 
+  public PaymentInfoNeedsUpdate: boolean;
+
+  public SubmitButtonText: string; 
+
+  public PaymentInfoValid: boolean;
+
   //  Constructors
   constructor(protected injector: Injector) {
     super(injector);
@@ -44,6 +52,10 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
     this.IsConfirming = false;
 
     this.userBillStateCtx = injector.get(UserBillingStateContext);
+
+    this.BillingHeader = "Please Update Your Credit Card on File";
+
+    this.SubmitButtonText = "Update";
   }
 
   //  Life Cycle
@@ -62,6 +74,10 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
   }
 
   //  API Methods
+
+  public CardChangeSuccess(event: boolean){
+    this.PaymentInfoValid = event;
+  }
 
   public ChangePlan(event: BillingPlanOption){
     console.log("Change plan to: ", event)
@@ -98,6 +114,7 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
     if(this.Context.State.Plans){
       this.sortBillingOptions();
     }
+
 
   }
 }

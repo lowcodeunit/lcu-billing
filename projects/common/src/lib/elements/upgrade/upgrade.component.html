@@ -3,7 +3,7 @@
     <mat-spinner></mat-spinner>
   </div>
 </div>
-
+<ng-container *ngIf="Context.State?.PaymentStatus?.Code === 0">
 <lcu-billing-display
   [featured]=""
   [is-upgrade]="true"
@@ -17,7 +17,18 @@
 <lcu-confirm-plan-change
   *ngIf="IsConfirming && NewPlan"
   [plan]="NewPlan"
+  [payment-status]="Context.State.PaymentStatus"
   (go-back-click-event)="GoBackClickEvent($event)"
   (upgrade-confirmed)="UpgradeRequest($event)">
 </lcu-confirm-plan-change>
+</ng-container>
+
+<lcu-stripe-form
+    *ngIf="Context.State?.PaymentStatus?.Code > 0"
+    [billing-header]="BillingHeader"
+    [submit-button-text]="SubmitButtonText"
+    [is-update-flow]='true'
+    (card-change-success)="CardChangeSuccess($event)"
+>
+</lcu-stripe-form>
 
