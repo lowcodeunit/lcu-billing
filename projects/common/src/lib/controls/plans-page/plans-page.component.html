@@ -1,0 +1,31 @@
+<!-- MAIN SCREEN -->
+<div
+  [fxShow]="!State.Loading"
+  class="plan-page-container"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+>
+  <h3 class="choose-header" fxLayoutAlign="center center">
+    Choose Your Perfect Plan
+  </h3>
+
+  <lcu-billing-display
+    [featured]="State.FeaturedPlanGroup"
+    [popular]="State.PopularPlanGroup"
+    [plans]="State.Plans"
+    [show-button]="ShowButton"
+    (buy-now)="BuyNowClicked($event)"
+  ></lcu-billing-display>
+
+  <h2 fxLayoutAlign="center center" class="tag-line">
+    If You Can Fathym It, You Can Build It.
+  </h2>
+</div>
+
+<!-- LOADING SCREEN -->
+<div [fxShow]="State.Loading">
+  <div fxLayout="row" fxLayoutAlign="center center" class="spinner-container">
+    <mat-spinner diameter="75"></mat-spinner>
+    <div class="spinner-logo" logo-alt="Fathym Logo"></div>
+  </div>
+</div>

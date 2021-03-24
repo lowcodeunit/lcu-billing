@@ -17,6 +17,9 @@
 			},
 			"update-credit-card": {
 				"element": "lcu-billing-update-credit-card-element"
+			},
+			"plan-sign-up": {
+				"element": "lcu-billing-plan-sign-up-element"
 			}
 		},
 		"elements": {},
