@@ -12,12 +12,14 @@ import { UpgradeComponent } from './controls/upgrade/upgrade.component';
 import { environment } from '../environments/environment';
 import { UpdateCreditCardComponent } from './controls/update-credit-card/update-credit-card.component';
 import { LcuBillingModule } from 'projects/common/src/lib/lcu-billing.module';
+import { PlanSignUpComponent } from './controls/plan-sign-up/plan-sign-up.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     UpgradeComponent,
+    PlanSignUpComponent,
     UpdateCreditCardComponent,
     DocumentationComponent
   ],

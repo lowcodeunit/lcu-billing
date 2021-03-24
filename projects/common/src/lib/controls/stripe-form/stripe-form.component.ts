@@ -80,6 +80,9 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
   @Output('card-change-success')
   public CardChangeSuccess: EventEmitter<boolean>;
 
+  @Output('payment-successful')
+  public PaymentSuccessful: EventEmitter<boolean>;
+
   
 
   // @Output('req-opt-ins-changed')
@@ -95,6 +98,7 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
   this.AcceptedEA = false;
   this.BillingHeader = "Enter Payment Information";
   this.CardChangeSuccess = new EventEmitter<boolean>();
+  this.PaymentSuccessful = new EventEmitter<boolean>();
   this.ImportantNoteText = "";
   this.newPaymentID = '';
   // this.ReqOptInsChanged = new EventEmitter<any>();
@@ -210,7 +214,6 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
 
       //TODO handle payment method changed
       else if(this.IsUpdateFlow && result.paymentMethod.id){
-        console.log("GETTING CALLED", result)
         this.newPaymentID = result.paymentMethod.id;
         this.userBillStateCtx.UpdatePaymentInfo(
           this.BillingForm.value.userName, 
@@ -320,7 +323,7 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
   protected determinePaymentStatus() {
     console.log('Payment Status = ', this.State.PaymentStatus);
     if (this.State.PaymentStatus) {
-      // console.log('Payment Status', this.State.PaymentStatus);
+      console.log('Payment Status', this.State.PaymentStatus);
       if (this.State.PaymentStatus.Code === 101) {
         this.stripe
           .confirmCardPayment('requires_action')
@@ -335,7 +338,22 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
               this.paymentSuccess();
             }
           });
-      } else if (this.State.PaymentStatus.Code === 1) {
+      } else if (this.State.PaymentStatus.Code === 102) {
+        this.stripe
+          .confirmCardPayment('requires_payment_method')
+          .then(function (result: any) {
+            if (result.error) {
+              // Display error message in  UI.
+              this.StripeError = this.State.PaymentStatus.Message;
+
+              // The card was declined (i.e. insufficient funds, card has expired, etc)
+            } else {
+              // Show a success message to your customer
+              this.paymentSuccess();
+            }
+          });
+      }
+      else if (this.State.PaymentStatus.Code === 1) {
         // this.StripeError = this.State.PaymentStatus.Message;
         this.StripeError =
           'There has been an issue processing the card you provided, please ensure you entered the information properly or try a different card.';
@@ -357,6 +375,8 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
     // this.router.navigate([this.SelectedPlan.Lookup, 'complete']);
     // console.log("LicenseType", this.SelectedPlan.LicenseType)
     // this.router.navigate(['complete', this.State.PurchasedPlanLookup]);
+    this.PaymentSuccessful.emit(true);
+    console.log("Payment successful")
   }
 
 
