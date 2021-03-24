@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Status } from '@lcu/common';
 import { BillingPlanOption } from '../../state/user-billing/user-billing.state';
 
 @Component({
@@ -9,6 +10,9 @@ import { BillingPlanOption } from '../../state/user-billing/user-billing.state';
 export class ConfirmPlanChangeComponent implements OnInit {
 
   public IsReqOptInsChecked: boolean;
+
+  @Input('payment-status')
+  public PaymentStatus: Status;
 
   @Input('plan')
   public Plan: BillingPlanOption;
@@ -28,6 +32,15 @@ export class ConfirmPlanChangeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  public IsButtonDisabled(): boolean{
+    if(this.IsReqOptInsChecked && this.PaymentStatus.Code === 0){
+      return false;
+    }
+    else{
+      return true;
+    }
   }
 
   public GoBackClicked(event: any){
