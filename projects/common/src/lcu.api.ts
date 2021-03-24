@@ -5,6 +5,8 @@ export * from './lib/models/lcu.model';
 export * from './lib/services/lcu.service';
 export * from './lib/state/user-billing/user-billing-state.context';
 export * from './lib/state/user-billing/user-billing.state';
+export * from './lib/state/user-mgmt-state/user-management-state.context';
+export * from './lib/state/user-mgmt-state/user-management.state';
 export * from './lib/utils/lcu.utils';
 export * from './lib/elements/plan-view/plan-view.component';
 export * from './lib/elements/upgrade/upgrade.component';
