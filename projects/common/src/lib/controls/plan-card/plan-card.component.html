@@ -113,7 +113,7 @@
 
   <!-- BUTTON -->
 
-  <mat-card-actions
+  <!-- <mat-card-actions
   *ngIf="ShowButton === true && IsUpgrade === true"
   class="button-container"
   fxLayoutAlign="center center"
@@ -121,14 +121,24 @@
     <button mat-raised-button class="button" (click)="BuyNow(Plan)">
      {{ BuyNowText }}
     </button>
-  </mat-card-actions>
+  </mat-card-actions> -->
 
-  <mat-card-actions
+  <!-- <mat-card-actions
     *ngIf="ShowButton === true && Plan.TrialPeriodDays === 0 && IsUpgrade === false"
     class="button-container"
     fxLayoutAlign="center center"
   >
     <button mat-raised-button class="button" (click)="BuyNow(Plan)">
+      {{ BuyNowText }}
+    </button>
+  </mat-card-actions> -->
+
+  <mat-card-actions
+    *ngIf="ShowButton === true && Plan.TrialPeriodDays === 0"
+    class="button-container"
+    fxLayoutAlign="center center"
+  >
+    <button mat-raised-button class="button" (click)="BuyNow(Plan)" [disabled]=" Plan.UserHasAccess">
       {{ BuyNowText }}
     </button>
   </mat-card-actions>
@@ -138,7 +148,7 @@
     class="button-container"
     fxLayoutAlign="center center"
   >
-    <button mat-raised-button class="button" (click)="BuyNow(Plan)">
+    <button mat-raised-button class="button" (click)="BuyNow(Plan)" [disabled]=" Plan.UserHasAccess">
       Start Free Trial
     </button>
   </mat-card-actions>

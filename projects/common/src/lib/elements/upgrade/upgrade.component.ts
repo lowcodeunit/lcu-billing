@@ -22,9 +22,14 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
   protected userBillStateCtx: UserBillingStateContext;
 
 
+
   //  Properties
 
   public BillingPlanOptionsSorted: BillingPlanOption[];
+
+  //the plans the user currently has access to
+
+  // public UsersPlans: Array<BillingPlanOption>;
 
   /**
    * whether or not to display the confirmation screen
@@ -44,6 +49,9 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
     this.IsConfirming = false;
 
     this.userBillStateCtx = injector.get(UserBillingStateContext);
+
+    // this.UsersPlans = new Array<BillingPlanOption>();
+
   }
 
   //  Life Cycle
@@ -81,6 +89,28 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
 
   //  Helpers
 
+  protected determineUsersPlans(){
+      console.log("billing plan options: ", this.Context.State.Plans);
+
+      this.Context.State.ExistingLicenseTypes.forEach(licType =>{
+
+        console.log("LOOKUP: ", licType.Details.Lookup);
+        console.log("billing opts: ", this.BillingPlanOptionsSorted)
+
+        let tempPlan = this.BillingPlanOptionsSorted.find(plan => {
+          plan.Lookup === licType.Details.Lookup
+        });
+
+        console.log("TEMP PLAN: ", tempPlan);
+        if(tempPlan){
+          tempPlan.UserHasAccess = true;
+          console.log("user has access: ", true)
+        }
+      })
+      console.log("billing plan options after: ", this.Context.State.Plans);
+
+  }
+
   protected sortBillingOptions(){
     this.BillingPlanOptionsSorted = this.Context.State.Plans;
     this.BillingPlanOptionsSorted.sort((a, b) =>
@@ -97,6 +127,11 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
 
     if(this.Context.State.Plans){
       this.sortBillingOptions();
+    }
+console.log('case:', this.BillingPlanOptionsSorted);
+
+    if(this.Context.State.ExistingLicenseTypes && this.BillingPlanOptionsSorted){
+      this.determineUsersPlans();
     }
 
     

@@ -66,6 +66,9 @@ export class PlanCardComponent implements OnInit {
    */
   @Input('show-back-button') 
   public ShowBackButton: boolean;
+
+  // @Input('users-plans')
+  // public UsersPlans: Array<BillingPlanOption>;
   /**
    * Whether or not to display the toggle button
    */

@@ -12,7 +12,7 @@ export class UpdateCreditCardComponent implements OnInit {
 
   constructor() {
     this.Context = {
-      LicenseType: 'lcu',
+      LicenseType: 'iot',
       State: {}
     };
   }

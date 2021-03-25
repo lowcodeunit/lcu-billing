@@ -21,8 +21,12 @@ export class BillingDisplayComponent implements OnChanges, OnInit {
   @Output('buy-now')
   public BuyNow: EventEmitter<BillingPlanOption>;
 
+  //The current plans the user has access to
+  // @Input('users-plans')
+  // public UsersPlans: Array<BillingPlanOption>
+
   // @Input('displayed-plans')
-  public DisplayedPlans: BillingPlanOption[];
+  public DisplayedPlans: Array<BillingPlanOption>;
 
   @Input('featured')
   public FeaturedPlanGroup: string;

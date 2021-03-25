@@ -3,6 +3,8 @@ import { Status } from '@lcu/common';
 export class UserBillingState {
   public CustomerName?: string;
 
+  public ExistingLicenseTypes?: Array<LicenseAccessToken>; 
+
   public FeaturedPlanGroup?: string;
 
   public Loading?: boolean;
@@ -67,6 +69,8 @@ export class BillingPlanOption {
   public TrialPeriodDays?: number;
 
   public PointQueries?: string;
+
+  public UserHasAccess?: boolean;
 }
 
 // export class StripeSubscriptionDetails{
@@ -89,4 +93,25 @@ export class LicenseTypeDetails {
   public Lookup: string; // Would contain the actual license type value 'LCU' or 'forecast' or whatever else comes down the line
 
   public Name: string;  //  Use this value for display the license type name to a user
+}
+
+export class LicenseAccessToken{
+
+        public AccessStartDate: Date;
+
+        public Details: any;
+
+        public ExpirationDate: Date;
+
+        public EnterpriseOverride: boolean;
+
+        public IsLocked: boolean;
+
+        public IsReset: boolean;
+
+        public Lookup: string;
+
+        public TrialPeriodDays: number;
+
+        public Username: string;
 }
