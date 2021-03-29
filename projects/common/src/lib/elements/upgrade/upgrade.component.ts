@@ -25,6 +25,8 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
 
   //  Properties
 
+  public BillingHeader: string;
+
   public BillingPlanOptionsSorted: BillingPlanOption[];
 
   //the plans the user currently has access to
@@ -40,6 +42,12 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
 
   public Loading: boolean;
 
+  public PaymentInfoNeedsUpdate: boolean;
+
+  public SubmitButtonText: string; 
+
+  public PaymentInfoValid: boolean;
+
   //  Constructors
   constructor(protected injector: Injector) {
     super(injector);
@@ -52,6 +60,9 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
 
     // this.UsersPlans = new Array<BillingPlanOption>();
 
+    this.BillingHeader = "Please Update Your Credit Card on File";
+
+    this.SubmitButtonText = "Update";
   }
 
   //  Life Cycle
@@ -70,6 +81,10 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
   }
 
   //  API Methods
+
+  public CardChangeSuccess(event: boolean){
+    this.PaymentInfoValid = event;
+  }
 
   public ChangePlan(event: BillingPlanOption){
     console.log("Change plan to: ", event)
@@ -135,6 +150,7 @@ console.log('case:', this.BillingPlanOptionsSorted);
     }
 
     
+
 
 
   }
