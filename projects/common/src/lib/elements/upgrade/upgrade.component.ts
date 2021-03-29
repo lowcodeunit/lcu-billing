@@ -87,7 +87,7 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
   }
 
   public ChangePlan(event: BillingPlanOption){
-    console.log("Change plan to: ", event)
+    // console.log("Change plan to: ", event)
     this.IsConfirming = true;
     this.NewPlan = event;
   }
@@ -97,7 +97,7 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
   }
 
   public UpgradeRequest(event: BillingPlanOption){
-    console.log("upgrade to: ", event);
+    // console.log("upgrade to: ", event);
     this.Loading = true;
     this.userBillStateCtx.ChangeSubscription(this.Context.State.Username, event.Lookup);
   }
@@ -105,24 +105,14 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
   //  Helpers
 
   protected determineUsersPlans(){
-      console.log("billing plan options: ", this.Context.State.Plans);
-
       this.Context.State.ExistingLicenseTypes.forEach(licType =>{
 
-        console.log("LOOKUP: ", licType.Details.Lookup);
-        console.log("billing opts: ", this.BillingPlanOptionsSorted)
-
-        let tempPlan = this.BillingPlanOptionsSorted.find(plan => {
-          plan.Lookup === licType.Details.Lookup
-        });
-
-        console.log("TEMP PLAN: ", tempPlan);
-        if(tempPlan){
-          tempPlan.UserHasAccess = true;
-          console.log("user has access: ", true)
-        }
+        this.BillingPlanOptionsSorted.forEach(plan => {
+          if(plan.Lookup === licType.Details.Lookup){
+            plan.UserHasAccess = true;
+          }
+        })
       })
-      console.log("billing plan options after: ", this.Context.State.Plans);
 
   }
 
@@ -136,14 +126,13 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
 
   protected stateChanged(){
 
-    console.log("CONTEXT:",this.Context);
+    // console.log("CONTEXT:",this.Context);
 
     this.Loading = this.Context.State.Loading;
 
     if(this.Context.State.Plans){
       this.sortBillingOptions();
     }
-console.log('case:', this.BillingPlanOptionsSorted);
 
     if(this.Context.State.ExistingLicenseTypes && this.BillingPlanOptionsSorted){
       this.determineUsersPlans();

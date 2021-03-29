@@ -4,6 +4,7 @@
     <div fxLayout="row">
       <lcu-billing-plan-sign-up-element
         [context]="Context"
+        (change-subscription-event)="HandleChangeSubscription($event)"
       >
       </lcu-billing-plan-sign-up-element>
       

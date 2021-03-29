@@ -35,7 +35,7 @@ export class ConfirmPlanChangeComponent implements OnInit {
   }
 
   public IsButtonDisabled(): boolean{
-    if(this.IsReqOptInsChecked && this.PaymentStatus.Code === 0){
+    if(this.IsReqOptInsChecked && (this.PaymentStatus.Code === 0 || this.PaymentStatus === null)){
       return false;
     }
     else{

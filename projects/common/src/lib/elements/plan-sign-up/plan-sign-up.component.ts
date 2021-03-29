@@ -1,4 +1,4 @@
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component, OnInit, Injector, Output, EventEmitter } from '@angular/core';
 import { LCUElementContext, LcuElementComponent } from '@lcu/common';
 import { UserBillingStateContext } from '../../state/user-billing/user-billing-state.context';
 import { BillingPlanOption, UserBillingState } from '../../state/user-billing/user-billing.state';
@@ -25,12 +25,19 @@ export class LcuBillingPlanSignUpElementComponent extends LcuElementComponent<Lc
 
   public ShowConfirmationPage: boolean;
 
+  public UserHasLicenseType: boolean;
+
+  @Output('change-subscription-event')
+  public ChangeSubscriptionEvent: EventEmitter<any>;
+
   //  Constructors
   constructor(protected injector: Injector,
               protected userBillStateCtx: UserBillingStateContext,) {
     super(injector);
     this.SelectedPlan = null;
     this.ShowConfirmationPage = false;
+    this.UserHasLicenseType = false;
+    this.ChangeSubscriptionEvent = new EventEmitter<any>();
   }
 
   //  Life Cycle
@@ -50,6 +57,10 @@ export class LcuBillingPlanSignUpElementComponent extends LcuElementComponent<Lc
 
   //  API Methods
 
+  public ChangeSubscription(){
+    this.ChangeSubscriptionEvent.emit(true);
+  }
+
   public HandleBackButtonClick(event: boolean){
     this.SelectedPlan = null;
   }
@@ -59,7 +70,6 @@ export class LcuBillingPlanSignUpElementComponent extends LcuElementComponent<Lc
   }
 
   public HandleSuccessfulPayment(event: boolean){
-    console.log("show confirmation page: ", event);
     this.ShowConfirmationPage = event;
   }
 
@@ -68,7 +78,20 @@ export class LcuBillingPlanSignUpElementComponent extends LcuElementComponent<Lc
   }
 
   //  Helpers
+
+  protected determineExistingLicenseType(){
+    this.Context.State.ExistingLicenseTypes.forEach(licType =>{
+      if(this.Context.LicenseType === licType.Details.LicenseType){
+        this.UserHasLicenseType = true;
+      }
+    })
+  }
+
   protected stateChanged(){
-    console.log("CONTEXT PLAN SIGN UP: ", this.Context)
+    // console.log("CONTEXT PLAN SIGN UP: ", this.Context)
+
+    if(this.Context.State.ExistingLicenseTypes && !this.ShowConfirmationPage){
+      this.determineExistingLicenseType();
+    }
   }
 }
