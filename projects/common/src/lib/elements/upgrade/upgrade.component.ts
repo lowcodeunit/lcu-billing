@@ -1,5 +1,5 @@
 import { Component, OnInit, Injector } from '@angular/core';
-import { LCUElementContext, LcuElementComponent, Status } from '@lcu/common';
+import { LCUElementContext, LcuElementComponent } from '@lcu/common';
 import { UserBillingStateContext } from '../../state/user-billing/user-billing-state.context';
 import { BillingPlanOption, UserBillingState } from '../../state/user-billing/user-billing.state';
 
@@ -22,11 +22,16 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
   protected userBillStateCtx: UserBillingStateContext;
 
 
+
   //  Properties
 
   public BillingHeader: string;
 
   public BillingPlanOptionsSorted: BillingPlanOption[];
+
+  //the plans the user currently has access to
+
+  // public UsersPlans: Array<BillingPlanOption>;
 
   /**
    * whether or not to display the confirmation screen
@@ -52,6 +57,8 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
     this.IsConfirming = false;
 
     this.userBillStateCtx = injector.get(UserBillingStateContext);
+
+    // this.UsersPlans = new Array<BillingPlanOption>();
 
     this.BillingHeader = "Please Update Your Credit Card on File";
 
@@ -80,7 +87,7 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
   }
 
   public ChangePlan(event: BillingPlanOption){
-    console.log("Change plan to: ", event)
+    // console.log("Change plan to: ", event)
     this.IsConfirming = true;
     this.NewPlan = event;
   }
@@ -90,12 +97,24 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
   }
 
   public UpgradeRequest(event: BillingPlanOption){
-    console.log("upgrade to: ", event);
+    // console.log("upgrade to: ", event);
     this.Loading = true;
     this.userBillStateCtx.ChangeSubscription(this.Context.State.Username, event.Lookup);
   }
 
   //  Helpers
+
+  protected determineUsersPlans(){
+      this.Context.State.ExistingLicenseTypes.forEach(licType =>{
+
+        this.BillingPlanOptionsSorted.forEach(plan => {
+          if(plan.Lookup === licType.Details.Lookup){
+            plan.UserHasAccess = true;
+          }
+        })
+      })
+
+  }
 
   protected sortBillingOptions(){
     this.BillingPlanOptionsSorted = this.Context.State.Plans;
@@ -107,13 +126,20 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
 
   protected stateChanged(){
 
-    console.log("CONTEXT:",this.Context);
+    // console.log("CONTEXT:",this.Context);
 
     this.Loading = this.Context.State.Loading;
 
     if(this.Context.State.Plans){
       this.sortBillingOptions();
     }
+
+    if(this.Context.State.ExistingLicenseTypes && this.BillingPlanOptionsSorted){
+      this.determineUsersPlans();
+    }
+
+    
+
 
 
   }

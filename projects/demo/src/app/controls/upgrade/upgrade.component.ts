@@ -12,7 +12,7 @@ export class UpgradeComponent implements OnInit {
 
   constructor() {
     this.Context = {
-        LicenseType: 'iot',
+        LicenseType: 'forecast',
         State: {}
     };
   }

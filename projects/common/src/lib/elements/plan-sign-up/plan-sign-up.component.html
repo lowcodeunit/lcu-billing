@@ -1,3 +1,5 @@
+<ng-container
+*ngIf="!UserHasLicenseType || ShowConfirmationPage">
 <!-- Plans page -->
 <lcu-plans-page
     *ngIf="!SelectedPlan"
@@ -20,4 +22,17 @@
     *ngIf="ShowConfirmationPage && SelectedPlan"
     [selected-plan]="SelectedPlan">
 </lcu-plan-confirmation-page>
+
+</ng-container>
+
+<ng-container
+*ngIf="UserHasLicenseType && !ShowConfirmationPage">
+<p>We noticed you already have a subscription of this type </p>
+<p>If you would like to change your subscription follow this link.</p>
+<button mat-raised-button class="button" (click)="ChangeSubscription()">
+    Change Subscription
+  </button>
+
+
+</ng-container>
 
