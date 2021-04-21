@@ -220,7 +220,7 @@ export class PlanCardComponent implements OnInit {
 
   protected determineBuyNowText(){
     if(this.IsUpgrade){
-      this.BuyNowText = "Upgrade";
+      this.BuyNowText = "Change Plan";
     }
     else{
       this.BuyNowText = "Buy Now"

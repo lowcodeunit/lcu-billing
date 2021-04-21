@@ -85,10 +85,12 @@ export class LcuBillingPlanSignUpElementComponent extends LcuElementComponent<Lc
         this.UserHasLicenseType = true;
       }
     })
+
   }
 
+
   protected stateChanged(){
-    // console.log("CONTEXT PLAN SIGN UP: ", this.Context)
+    console.log("CONTEXT PLAN SIGN UP: ", this.Context)
 
     if(this.Context.State.ExistingLicenseTypes && !this.ShowConfirmationPage){
       this.determineExistingLicenseType();

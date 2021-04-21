@@ -44,6 +44,8 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
 
   public PaymentInfoNeedsUpdate: boolean;
 
+  public ShowConfirmationPage: boolean;
+
   public SubmitButtonText: string; 
 
   public PaymentInfoValid: boolean;
@@ -61,6 +63,8 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
     // this.UsersPlans = new Array<BillingPlanOption>();
 
     this.BillingHeader = "Please Update Your Credit Card on File";
+
+    this.ShowConfirmationPage = false;
 
     this.SubmitButtonText = "Update";
   }
@@ -116,6 +120,16 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
 
   }
 
+  protected determinePlanChangeSuccess(){
+    this.Context.State.ExistingLicenseTypes.forEach(licType =>{
+      if(licType.Details.Lookup === this.NewPlan.Lookup){
+        this.ShowConfirmationPage = true;
+        this.IsConfirming = false;
+      }
+
+    })
+  }
+
   protected sortBillingOptions(){
     this.BillingPlanOptionsSorted = this.Context.State.Plans;
     this.BillingPlanOptionsSorted.sort((a, b) =>
@@ -126,7 +140,7 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
 
   protected stateChanged(){
 
-    // console.log("CONTEXT:",this.Context);
+    console.log("CONTEXT:",this.Context);
 
     this.Loading = this.Context.State.Loading;
 
@@ -136,6 +150,10 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
 
     if(this.Context.State.ExistingLicenseTypes && this.BillingPlanOptionsSorted){
       this.determineUsersPlans();
+    }
+
+    if(this.Context.State.ExistingLicenseTypes && this.NewPlan){
+      this.determinePlanChangeSuccess();
     }
 
     
