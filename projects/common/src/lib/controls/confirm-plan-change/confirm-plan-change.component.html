@@ -12,20 +12,26 @@
     </lcu-plan-card>
 
     <div class="confirmation-container">
-        <p>By clicking the confirmation button below you confirm that you wish to change to the {{ Plan.Name }} plan. 
-            The card you have on file will be charged.</p>
+        
+        <lcu-stripe-form
+            [submit-button-text]="SubmitButtonText"
+            [is-update-flow]=true
+            [billing-header]="HeaderText"
+            (card-change-success)="HandlePaymentSuccess($event)"
+        >
+        </lcu-stripe-form>
 
-        <lcu-required-opt-ins
+        <!-- <lcu-required-opt-ins
         (req-opt-ins-changed)="HandleReqOptInsChange($event)"
-        ></lcu-required-opt-ins>
-        <div fxLayout="row" fxLayoutAlign="end center">
+        ></lcu-required-opt-ins> -->
+        <!-- <div fxLayout="row" fxLayoutAlign="end center">
         <button mat-raised-button class="button" (click)="UpgradeNow(Plan)" [disabled]="IsButtonDisabled()">
             Confirm Plan Change
         </button>
-        </div>
-        <div *ngIf="PaymentStatus?.Code === 1" class='error-message'>
+        </div> -->
+        <!-- <div *ngIf="PaymentStatus?.Code === 1" class='error-message'>
             <p>You must update your credit card information before proceeding.</p>
-        </div>
+        </div> -->
     </div>
 
 </div>

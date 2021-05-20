@@ -66,7 +66,7 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
 
     this.ShowConfirmationPage = false;
 
-    this.SubmitButtonText = "Update";
+    this.SubmitButtonText = "Confirm Upgrade";
   }
 
   //  Life Cycle
@@ -87,6 +87,8 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
   //  API Methods
 
   public CardChangeSuccess(event: boolean){
+     console.log("Card Change Success: ", event)
+
     this.PaymentInfoValid = event;
   }
 
@@ -101,9 +103,12 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
   }
 
   public UpgradeRequest(event: BillingPlanOption){
-    // console.log("upgrade to: ", event);
-    this.Loading = true;
-    this.userBillStateCtx.ChangeSubscription(this.Context.State.Username, event.Lookup);
+    console.log("upgrade to: ", event);
+    if(this.Context.State.PaymentStatus.Code ===0){
+      this.Loading = true;
+      this.userBillStateCtx.ChangeSubscription(this.Context.State.Username, event.Lookup);
+    }
+   
   }
 
   //  Helpers

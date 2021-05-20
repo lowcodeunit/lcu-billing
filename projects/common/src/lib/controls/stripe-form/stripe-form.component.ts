@@ -65,6 +65,8 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
    */
   public AcceptedEA: boolean;
 
+  public IsSubmitted: boolean;
+
   @Input('billing-header')
   public BillingHeader: string;
 
@@ -83,11 +85,6 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
   @Output('payment-successful')
   public PaymentSuccessful: EventEmitter<boolean>;
 
-  
-
-  // @Output('req-opt-ins-changed')
-  // public ReqOptInsChanged: EventEmitter<any>;
-
  //  Constructor
  constructor(
   protected formBldr: FormBuilder,
@@ -101,8 +98,8 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
   this.PaymentSuccessful = new EventEmitter<boolean>();
   this.ImportantNoteText = "";
   this.newPaymentID = '';
-  // this.ReqOptInsChanged = new EventEmitter<any>();
   this.SubmitButtonText = "Submit";
+  this.IsSubmitted = false;
 }
 
   ngOnInit(): void {
@@ -155,6 +152,9 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
    */
   public SubmitBilling(event: Event) {
     this.State.Loading = true;
+
+    this.IsSubmitted = true;
+    console.log('Setting is submitted to true')
 
     event.preventDefault();
 
@@ -218,7 +218,6 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
         this.userBillStateCtx.UpdatePaymentInfo(
           this.BillingForm.value.userName, 
           result.paymentMethod.id);
-
       }
       
     }
@@ -323,7 +322,6 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
   protected determinePaymentStatus() {
     console.log('Payment Status = ', this.State.PaymentStatus);
     if (this.State.PaymentStatus) {
-      console.log('Payment Status', this.State.PaymentStatus);
       if (this.State.PaymentStatus.Code === 101) {
         this.stripe
           .confirmCardPayment('requires_action')
@@ -338,13 +336,15 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
               this.paymentSuccess();
             }
           });
-      } else if (this.State.PaymentStatus.Code === 102) {
+      } 
+      else if (this.State.PaymentStatus.Code === 102) {
         this.stripe
           .confirmCardPayment('requires_payment_method')
           .then(function (result: any) {
             if (result.error) {
               // Display error message in  UI.
               this.StripeError = this.State.PaymentStatus.Message;
+              console.log("stripe error: ", )
 
               // The card was declined (i.e. insufficient funds, card has expired, etc)
             } else {
@@ -357,9 +357,11 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
         // this.StripeError = this.State.PaymentStatus.Message;
         this.StripeError =
           'There has been an issue processing the card you provided, please ensure you entered the information properly or try a different card.';
-      } else if (this.State.PaymentStatus.Code === 0) {
+      } 
+      else if (this.State.PaymentStatus.Code === 0) {
         this.paymentSuccess();
-      } else {
+      } 
+      else {
         // TODO: What to do in case of other errors
       }
     }
@@ -371,20 +373,24 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
    * When the payment returns Successfully
    */
   protected paymentSuccess(): void {
-    // console.log("selected plan on pay:", this.SelectedPlan)
-    // this.router.navigate([this.SelectedPlan.Lookup, 'complete']);
-    // console.log("LicenseType", this.SelectedPlan.LicenseType)
-    // this.router.navigate(['complete', this.State.PurchasedPlanLookup]);
-    this.PaymentSuccessful.emit(true);
     console.log("Payment successful")
+
+    this.PaymentSuccessful.emit(true);
   }
 
 
   protected stateChanged() {
     
     this.determinePaymentStatus();
+
     if(this.IsUpdateFlow){
       this.determineCardChangeSuccess();
+      console.log("getting called again!!")
+    }
+    console.log('Is submitted: ', this.IsSubmitted)
+
+    if(this.IsSubmitted === false){
+      this.StripeError = null;
     }
   }
 
