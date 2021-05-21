@@ -93,7 +93,6 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
   }
 
   public ChangePlan(event: BillingPlanOption){
-    // console.log("Change plan to: ", event)
     this.IsConfirming = true;
     this.NewPlan = event;
   }
