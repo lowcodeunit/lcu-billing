@@ -38,6 +38,11 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
    */
   public BillingForm: FormGroup;
 
+  /**
+   * In order to track if the card has already been changed
+   */
+  public CardChangeSuccessful: boolean;
+
 
   /**
    * The text to display when the user enters  cc info for free plan
@@ -65,6 +70,8 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
    */
   public AcceptedEA: boolean;
 
+  public IsSubmitted: boolean;
+
   @Input('billing-header')
   public BillingHeader: string;
 
@@ -83,11 +90,6 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
   @Output('payment-successful')
   public PaymentSuccessful: EventEmitter<boolean>;
 
-  
-
-  // @Output('req-opt-ins-changed')
-  // public ReqOptInsChanged: EventEmitter<any>;
-
  //  Constructor
  constructor(
   protected formBldr: FormBuilder,
@@ -101,8 +103,9 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
   this.PaymentSuccessful = new EventEmitter<boolean>();
   this.ImportantNoteText = "";
   this.newPaymentID = '';
-  // this.ReqOptInsChanged = new EventEmitter<any>();
   this.SubmitButtonText = "Submit";
+  this.IsSubmitted = false;
+  this.CardChangeSuccessful = false;
 }
 
   ngOnInit(): void {
@@ -155,6 +158,9 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
    */
   public SubmitBilling(event: Event) {
     this.State.Loading = true;
+
+    this.IsSubmitted = true;
+    // console.log('Setting is submitted to true')
 
     event.preventDefault();
 
@@ -218,7 +224,6 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
         this.userBillStateCtx.UpdatePaymentInfo(
           this.BillingForm.value.userName, 
           result.paymentMethod.id);
-
       }
       
     }
@@ -250,7 +255,7 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
     if (!this.stripe) {
       // Your Stripe public key
       this.stripe = Stripe(this.stripePublicKey);
-      console.log("stripe: ", this.stripe)
+      // console.log("stripe: ", this.stripe)
       const elements = this.stripe.elements();
 
       this.stripeCard = elements.create('card', {
@@ -309,7 +314,9 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
   protected determineCardChangeSuccess() {
 
     if(this.newPaymentID === this.State.PaymentMethodID){
-      this.CardChangeSuccess.emit(true);
+      this.CardChangeSuccessful = true;
+      this.CardChangeSuccess.emit(this.CardChangeSuccessful);
+
     }
     else{
       //TODO
@@ -323,7 +330,6 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
   protected determinePaymentStatus() {
     console.log('Payment Status = ', this.State.PaymentStatus);
     if (this.State.PaymentStatus) {
-      console.log('Payment Status', this.State.PaymentStatus);
       if (this.State.PaymentStatus.Code === 101) {
         this.stripe
           .confirmCardPayment('requires_action')
@@ -338,13 +344,15 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
               this.paymentSuccess();
             }
           });
-      } else if (this.State.PaymentStatus.Code === 102) {
+      } 
+      else if (this.State.PaymentStatus.Code === 102) {
         this.stripe
           .confirmCardPayment('requires_payment_method')
           .then(function (result: any) {
             if (result.error) {
               // Display error message in  UI.
               this.StripeError = this.State.PaymentStatus.Message;
+              console.log("stripe error: ", )
 
               // The card was declined (i.e. insufficient funds, card has expired, etc)
             } else {
@@ -357,9 +365,11 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
         // this.StripeError = this.State.PaymentStatus.Message;
         this.StripeError =
           'There has been an issue processing the card you provided, please ensure you entered the information properly or try a different card.';
-      } else if (this.State.PaymentStatus.Code === 0) {
+      } 
+      else if (this.State.PaymentStatus.Code === 0) {
         this.paymentSuccess();
-      } else {
+      } 
+      else {
         // TODO: What to do in case of other errors
       }
     }
@@ -371,20 +381,23 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
    * When the payment returns Successfully
    */
   protected paymentSuccess(): void {
-    // console.log("selected plan on pay:", this.SelectedPlan)
-    // this.router.navigate([this.SelectedPlan.Lookup, 'complete']);
-    // console.log("LicenseType", this.SelectedPlan.LicenseType)
-    // this.router.navigate(['complete', this.State.PurchasedPlanLookup]);
-    this.PaymentSuccessful.emit(true);
     console.log("Payment successful")
+
+    this.PaymentSuccessful.emit(true);
   }
 
 
   protected stateChanged() {
     
     this.determinePaymentStatus();
-    if(this.IsUpdateFlow){
+
+    if(this.IsUpdateFlow && this.CardChangeSuccessful === false){
       this.determineCardChangeSuccess();
+    }
+    // console.log('Is submitted: ', this.IsSubmitted)
+
+    if(this.IsSubmitted === false){
+      this.StripeError = null;
     }
   }
 

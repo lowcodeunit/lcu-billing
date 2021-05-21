@@ -44,6 +44,8 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
 
   public PaymentInfoNeedsUpdate: boolean;
 
+  public ShowConfirmationPage: boolean;
+
   public SubmitButtonText: string; 
 
   public PaymentInfoValid: boolean;
@@ -62,7 +64,9 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
 
     this.BillingHeader = "Please Update Your Credit Card on File";
 
-    this.SubmitButtonText = "Update";
+    this.ShowConfirmationPage = false;
+
+    this.SubmitButtonText = "Confirm Upgrade";
   }
 
   //  Life Cycle
@@ -83,11 +87,12 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
   //  API Methods
 
   public CardChangeSuccess(event: boolean){
+     console.log("Card Change Success: ", event)
+
     this.PaymentInfoValid = event;
   }
 
   public ChangePlan(event: BillingPlanOption){
-    // console.log("Change plan to: ", event)
     this.IsConfirming = true;
     this.NewPlan = event;
   }
@@ -97,9 +102,12 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
   }
 
   public UpgradeRequest(event: BillingPlanOption){
-    // console.log("upgrade to: ", event);
-    this.Loading = true;
-    this.userBillStateCtx.ChangeSubscription(this.Context.State.Username, event.Lookup);
+    console.log("upgrade to: ", event);
+    if(this.Context.State.PaymentStatus.Code ===0){
+      this.Loading = true;
+      this.userBillStateCtx.ChangeSubscription(this.Context.State.Username, event.Lookup);
+    }
+   
   }
 
   //  Helpers
@@ -116,6 +124,16 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
 
   }
 
+  protected determinePlanChangeSuccess(){
+    this.Context.State.ExistingLicenseTypes.forEach(licType =>{
+      if(licType.Details.Lookup === this.NewPlan.Lookup){
+        this.ShowConfirmationPage = true;
+        this.IsConfirming = false;
+      }
+
+    })
+  }
+
   protected sortBillingOptions(){
     this.BillingPlanOptionsSorted = this.Context.State.Plans;
     this.BillingPlanOptionsSorted.sort((a, b) =>
@@ -126,7 +144,7 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
 
   protected stateChanged(){
 
-    // console.log("CONTEXT:",this.Context);
+    console.log("CONTEXT:",this.Context);
 
     this.Loading = this.Context.State.Loading;
 
@@ -136,6 +154,10 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
 
     if(this.Context.State.ExistingLicenseTypes && this.BillingPlanOptionsSorted){
       this.determineUsersPlans();
+    }
+
+    if(this.Context.State.ExistingLicenseTypes && this.NewPlan){
+      this.determinePlanChangeSuccess();
     }
 
     

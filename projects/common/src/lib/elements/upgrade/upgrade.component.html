@@ -3,7 +3,7 @@
     <mat-spinner></mat-spinner>
   </div>
 </div>
-<ng-container *ngIf="Context.State?.PaymentStatus?.Code === 0 || Context.State?.PaymentStatus === null">
+<ng-container>
 <lcu-billing-display
   [featured]=""
   [is-upgrade]="true"
@@ -11,24 +11,32 @@
   [plans]="BillingPlanOptionsSorted"
   [show-button]="true"
   (buy-now)="ChangePlan($event)"
-  *ngIf="BillingPlanOptionsSorted?.length > 0 && !IsConfirming"
+  *ngIf="BillingPlanOptionsSorted?.length > 0 && !IsConfirming && !ShowConfirmationPage"
 ></lcu-billing-display>
 
 <lcu-confirm-plan-change
   *ngIf="IsConfirming && NewPlan"
   [plan]="NewPlan"
   [payment-status]="Context.State.PaymentStatus"
+  [submit-button-text]="SubmitButtonText"
   (go-back-click-event)="GoBackClickEvent($event)"
-  (upgrade-confirmed)="UpgradeRequest($event)">
+  (upgrade-confirmed)="UpgradeRequest($event)"
+  (payment-success)="CardChangeSuccess($event)">
 </lcu-confirm-plan-change>
+
+<!-- Confirmation Page -->
+<lcu-plan-confirmation-page
+    *ngIf="ShowConfirmationPage && NewPlan"
+    [selected-plan]="NewPlan">
+</lcu-plan-confirmation-page>
 </ng-container>
 
-<lcu-stripe-form
-    *ngIf="Context.State?.PaymentStatus?.Code > 0"
+<!-- <lcu-stripe-form
+    *ngIf="Context.State?.PaymentStatus?.Code > 0 || Context.State?.PaymentStatus === null"
     [billing-header]="BillingHeader"
     [submit-button-text]="SubmitButtonText"
     [is-update-flow]='true'
     (card-change-success)="CardChangeSuccess($event)"
 >
-</lcu-stripe-form>
+</lcu-stripe-form> -->
 
