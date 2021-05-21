@@ -38,6 +38,11 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
    */
   public BillingForm: FormGroup;
 
+  /**
+   * In order to track if the card has already been changed
+   */
+  public CardChangeSuccessful: boolean;
+
 
   /**
    * The text to display when the user enters  cc info for free plan
@@ -100,6 +105,7 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
   this.newPaymentID = '';
   this.SubmitButtonText = "Submit";
   this.IsSubmitted = false;
+  this.CardChangeSuccessful = false;
 }
 
   ngOnInit(): void {
@@ -154,7 +160,7 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
     this.State.Loading = true;
 
     this.IsSubmitted = true;
-    console.log('Setting is submitted to true')
+    // console.log('Setting is submitted to true')
 
     event.preventDefault();
 
@@ -249,7 +255,7 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
     if (!this.stripe) {
       // Your Stripe public key
       this.stripe = Stripe(this.stripePublicKey);
-      console.log("stripe: ", this.stripe)
+      // console.log("stripe: ", this.stripe)
       const elements = this.stripe.elements();
 
       this.stripeCard = elements.create('card', {
@@ -308,7 +314,9 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
   protected determineCardChangeSuccess() {
 
     if(this.newPaymentID === this.State.PaymentMethodID){
-      this.CardChangeSuccess.emit(true);
+      this.CardChangeSuccessful = true;
+      this.CardChangeSuccess.emit(this.CardChangeSuccessful);
+
     }
     else{
       //TODO
@@ -383,11 +391,10 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
     
     this.determinePaymentStatus();
 
-    if(this.IsUpdateFlow){
+    if(this.IsUpdateFlow && this.CardChangeSuccessful === false){
       this.determineCardChangeSuccess();
-      console.log("getting called again!!")
     }
-    console.log('Is submitted: ', this.IsSubmitted)
+    // console.log('Is submitted: ', this.IsSubmitted)
 
     if(this.IsSubmitted === false){
       this.StripeError = null;
