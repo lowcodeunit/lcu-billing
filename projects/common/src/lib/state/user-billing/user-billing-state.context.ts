@@ -1,5 +1,5 @@
 import { UserBillingState } from './user-billing.state';
-import { StateContext } from '@lcu/common';
+import { StateContext, Status } from '@lcu/common';
 import { Injectable, Injector } from '@angular/core';
 
 @Injectable({
@@ -69,7 +69,8 @@ export class UserBillingStateContext extends StateContext<UserBillingState> {
   }
 
   //  Helpers
-  protected callRefresh() {}
+  protected callRefresh() {
+  }
 
   protected defaultValue() {
     return { Loading: true } as UserBillingState;

@@ -1,5 +1,5 @@
 import { Component, OnInit, Injector } from '@angular/core';
-import { LCUElementContext, LcuElementComponent } from '@lcu/common';
+import { LCUElementContext, LcuElementComponent, Status } from '@lcu/common';
 import { UserBillingStateContext } from '../../state/user-billing/user-billing-state.context';
 import { BillingPlanOption, UserBillingState } from '../../state/user-billing/user-billing.state';
 
@@ -79,9 +79,23 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
       if (this.Context.State) {
         this.stateChanged();
       }
-
+      debugger;
     });
-    this.userBillStateCtx.$Refresh({licenseType: this.Context.LicenseType});
+
+        // if (!this.connectedToStateSub) {
+      // this.connectedToStateSub = 
+      this.userBillStateCtx.ConnectedToState.subscribe(
+        (status: Status) => {
+          if (status.Code === 0)
+           {                
+            this.userBillStateCtx.$Refresh({
+              licenseType: this.Context.LicenseType,
+            });
+          }
+        }
+      );
+    // }
+    // this.userBillStateCtx.$Refresh({licenseType: this.Context.LicenseType});
   }
 
   //  API Methods
