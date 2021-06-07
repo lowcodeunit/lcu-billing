@@ -79,7 +79,6 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
       if (this.Context.State) {
         this.stateChanged();
       }
-      debugger;
     });
 
         // if (!this.connectedToStateSub) {
