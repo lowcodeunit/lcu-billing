@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LCUServiceSettings } from '@lcu/common';
 import { LcuBillingUpgradeContext } from 'projects/common/src/lib/elements/upgrade/upgrade.component';
 
 
@@ -10,9 +11,9 @@ import { LcuBillingUpgradeContext } from 'projects/common/src/lib/elements/upgra
 export class UpgradeComponent implements OnInit {
   public Context: LcuBillingUpgradeContext;
 
-  constructor() {
+  constructor(protected settings: LCUServiceSettings) {
     this.Context = {
-        LicenseType: 'forecast',
+        LicenseType: settings.State.LicenseType,
         State: {}
     };
   }
