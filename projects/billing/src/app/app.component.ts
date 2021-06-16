@@ -174,7 +174,8 @@ export class AppComponent implements OnInit {
                   status.Code === 0 &&
                   (!this.State.LicenseType ||
                     this.State.LicenseType.Lookup !== args.licenseType)
-                ) {                
+                ) {
+                  debugger;                
                   this.userBillState.$Refresh(args);
                 }
               }

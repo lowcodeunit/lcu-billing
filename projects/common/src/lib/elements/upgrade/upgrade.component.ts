@@ -86,7 +86,8 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
       this.userBillStateCtx.ConnectedToState.subscribe(
         (status: Status) => {
           if (status.Code === 0)
-           {                
+           {         
+            debugger;       
             this.userBillStateCtx.$Refresh({
               licenseType: this.Context.LicenseType,
             });
