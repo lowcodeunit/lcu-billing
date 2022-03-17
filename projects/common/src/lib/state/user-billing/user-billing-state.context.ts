@@ -81,6 +81,6 @@ export class UserBillingStateContext extends StateContext<UserBillingState> {
   }
 
   protected loadStateName(): string {
-    return 'usermanagement';
+    return 'billing';
   }
 }
