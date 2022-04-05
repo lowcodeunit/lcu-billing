@@ -21,7 +21,7 @@
     "pack:main": "concat-glob-cli -f \"dist/lcu/main.*.js\" -o dist/lcu/wc/lcu.startup.js",
     "pack:pollyfills": "concat-glob-cli -f \"dist/lcu/scripts.*.js\" -o dist/lcu/wc/lcu.pollyfills.js",
     "pack:styles": "concat-glob-cli -f \"dist/lcu/styles.*.css\" -o dist/lcu/wc/lcu-billing.lcu.css",
-    "start": "ng serve billing --port=4252 --aot=false",
+    "start": "ng serve billing --port=4200 --aot=false",
     "build": "npm run build:common && npm run build:lcu",
     "test": "ng test",
     "lint": "ng lint",
@@ -31,7 +31,7 @@
   "dependencies": {
     "@angular/animations": "~11.1.2",
     "@angular/cdk": "^11.2.0",
-    "@angular/common": "~11.1.2",
+    "@angular/.common": "~11.1.2",
     "@angular/compiler": "~11.1.2",
     "@angular/core": "~11.1.2",
     "@angular/elements": "^11.1.2",

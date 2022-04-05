@@ -47,7 +47,7 @@ export class BillingComponent implements OnInit {
   protected get stripePublicKey(): string {
     const stateCfg: any = (window as any).LCU.State;
 
-    return stateCfg && stateCfg.Stripe ? stateCfg.Stripe.PublicKey : '';
+    return stateCfg && stateCfg.Stripe ? stateCfg.Stripe.PublicKey : 'pk_test_KnI6QApAae5tFIxuwuoSBFx6';
   }
 
   //  Properties
