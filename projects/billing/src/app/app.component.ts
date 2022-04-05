@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
   protected get licenseType(): string {
     const stateCfg: any = (window as any).LCU.State;
 
-    return stateCfg ? stateCfg.LicenseType : '';
+    return stateCfg ? stateCfg.LicenseType : 'fathym';
   }
 
   protected routerEventSub: Subscription;

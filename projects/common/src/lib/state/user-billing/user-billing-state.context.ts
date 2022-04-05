@@ -10,7 +10,7 @@ export class UserBillingStateContext extends StateContext<UserBillingState> {
   protected get licenseType(): string {
     const stateCfg: any = (window as any).LCU.State;
 
-    return stateCfg ? stateCfg.LicenseType : '';
+    return stateCfg ? stateCfg.LicenseType : 'fathym';
   }
 
   //  Properties
