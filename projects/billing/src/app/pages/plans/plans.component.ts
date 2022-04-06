@@ -59,7 +59,6 @@ export class PlansComponent implements OnInit {
    */
   protected stateChanged(): void {
     // console.log('state plan page = ', this.State);
-
     // if (this.State.Plans) {
     //   this.DisplayedPlans = new Array<BillingPlanOption>();
     //   this.State.Plans.forEach((plan: BillingPlanOption) => {
