@@ -102,7 +102,7 @@
           <div fxLayout="column" *ngFor="let feat of PlanFeatures;index as i;">
             <div fxLayout="row" fxLayoutAlign="center center">
               <mat-icon>check_circle_outline</mat-icon>
-              <div>{{ feat }}</div>
+              <div [innerHTML]="SafeHtml(feat)"></div>
             </div>
             <div class="vl" *ngIf="DeterminePlanFeatIndex(i)"></div>
           </div>
