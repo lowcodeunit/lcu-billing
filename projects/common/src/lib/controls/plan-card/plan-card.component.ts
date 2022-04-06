@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UserBillingStateContext } from '../../state/user-billing/user-billing-state.context';
 import { BillingPlanOption } from '../../state/user-billing/user-billing.state';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'lcu-plan-card',
@@ -11,14 +12,14 @@ export class PlanCardComponent implements OnInit {
   /**
    * The Displayed plans from the state
    */
-  @Input('displayed-plans') 
+  @Input('displayed-plans')
   public DisplayedPlans: BillingPlanOption[];
 
   /**
    * The Featured Plan group to display the **Most Popular tag**
    */
 
-  @Input('featured-plan-group') 
+  @Input('featured-plan-group')
   public FeaturedPlanGroup: string;
 
   /**
@@ -30,7 +31,7 @@ export class PlanCardComponent implements OnInit {
   /**
    * The Popular plan group to display the **Most Popular tag**
    */
-  @Input('popular-plan-group') 
+  @Input('popular-plan-group')
   public PopularPlanGroup: string;
 
   /**
@@ -41,7 +42,7 @@ export class PlanCardComponent implements OnInit {
   /**
    * The plan to be displayed
    */
-  @Input('plan') 
+  @Input('plan')
   public Plan: BillingPlanOption;
 
   /**
@@ -52,19 +53,19 @@ export class PlanCardComponent implements OnInit {
   /**
    * The plans coming back from the state to display the different prices
    */
-  @Input('all-plans') 
+  @Input('all-plans')
   public AllPlans: Array<BillingPlanOption>;
 
   /**
    * Whether or not to display the buy now button (Button for plan page only)
    */
-  @Input('show-button') 
+  @Input('show-button')
   public ShowButton: boolean;
 
   /**
    * Whether or not to show the back button
    */
-  @Input('show-back-button') 
+  @Input('show-back-button')
   public ShowBackButton: boolean;
 
   // @Input('users-plans')
@@ -77,19 +78,19 @@ export class PlanCardComponent implements OnInit {
   /**
    * Event emitted when the button has been clicked
    */
-  @Output('buy-now-clicked') 
+  @Output('buy-now-clicked')
   public BuyNowClicked: EventEmitter<any>;
 
   /**
    * Event emitted when the toggle has been toggled
    */
-  @Output('interval-toggled') 
+  @Output('interval-toggled')
   public IntervalToggled: EventEmitter<BillingPlanOption>;
 
   /**
    * Event emitted when back button clicked
    */
-  @Output('go-back-clicked') 
+  @Output('go-back-clicked')
   public GoBackClicked: EventEmitter<any>;
 
   /**
@@ -122,7 +123,7 @@ export class PlanCardComponent implements OnInit {
    */
   public ToggleChecked: boolean;
 
-  constructor() {
+  constructor(protected sanitizer: DomSanitizer) {
     this.BuyNowClicked = new EventEmitter<any>();
     this.IntervalToggled = new EventEmitter<BillingPlanOption>();
     this.GoBackClicked = new EventEmitter<any>();
@@ -166,6 +167,10 @@ export class PlanCardComponent implements OnInit {
     }
   }
 
+  public SafeHtml(html: string): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(html);
+  }
+
   /**
    * Toggles planid and plan card to the selected plan
    * @param toggleSelected
@@ -196,19 +201,19 @@ export class PlanCardComponent implements OnInit {
   }
 
   protected getOtherIntervalPrice(selectedPlan: BillingPlanOption) {
-    if(this.AllPlans){
-    // console.log("selected plan = ", selectedPlan);
-    let temp = this.AllPlans.filter(
-      (plan) =>
-        plan.Interval !== selectedPlan.Interval &&
-        plan.PlanGroup === selectedPlan.PlanGroup
-    );
-    this.OtherPlan = temp[0];
-    // console.log("Other plan interval:", this.OtherPlan);
-    if (this.OtherPlan) {
-      this.OtherIntervalPrice = this.OtherPlan.Price;
+    if (this.AllPlans) {
+      // console.log("selected plan = ", selectedPlan);
+      let temp = this.AllPlans.filter(
+        (plan) =>
+          plan.Interval !== selectedPlan.Interval &&
+          plan.PlanGroup === selectedPlan.PlanGroup
+      );
+      this.OtherPlan = temp[0];
+      // console.log("Other plan interval:", this.OtherPlan);
+      if (this.OtherPlan) {
+        this.OtherIntervalPrice = this.OtherPlan.Price;
+      }
     }
-  }
   }
 
   protected extractPlanFeatures() {
@@ -218,12 +223,11 @@ export class PlanCardComponent implements OnInit {
     // console.log("Plan feats = ", this.PlanFeatures)
   }
 
-  protected determineBuyNowText(){
-    if(this.IsUpgrade){
-      this.BuyNowText = "Change Plan";
-    }
-    else{
-      this.BuyNowText = "Buy Now"
+  protected determineBuyNowText() {
+    if (this.IsUpgrade) {
+      this.BuyNowText = 'Change Plan';
+    } else {
+      this.BuyNowText = 'Buy Now';
       this.IsUpgrade = false;
     }
   }
