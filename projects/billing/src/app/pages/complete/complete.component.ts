@@ -124,7 +124,7 @@ export class CompleteComponent implements OnInit {
 
     if(this.SelectedPlan?.SuccessRedirect?.startsWith('=>')){
       this.Redirect = this.SelectedPlan?.SuccessRedirect.substring(2);
-      console.log("redirect: ", this.Redirect);
+      // console.log("redirect: ", this.Redirect);
     }
     else{
       this.Redirect = this.SelectedPlan?.SuccessRedirect;
