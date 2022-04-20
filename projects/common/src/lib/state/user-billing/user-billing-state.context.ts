@@ -39,8 +39,8 @@ export class UserBillingStateContext extends StateContext<UserBillingState> {
     customerName: string,
     plan: string,
     trialPeriodDays: number
-  ) {
-    this.Execute({
+  ):Promise<object> {
+    return this.Execute({
       Arguments: {
         CustomerName: customerName,
         MethodID: methodId,

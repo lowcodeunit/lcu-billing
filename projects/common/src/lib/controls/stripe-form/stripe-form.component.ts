@@ -202,19 +202,29 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
    * Handles the stripe once user has confirmed payment
    */
   protected handleStripePaymentMethodCreated(result: any) {
-    console.log('payment result: ', result);
+    // console.log('payment result: ', result);
     if (result.error) {
       this.StripeError = result.error;
     } else {
       this.StripeError = '';
       // console.log('Billing Form: ', this.BillingForm);
       if(this.SelectedPlan){
+        //TODO change completePayment to return status, and emit boolean
         this.userBillStateCtx.CompletePayment(
           result.paymentMethod.id,
           this.BillingForm.value.userName,
           this.SelectedPlan.Lookup,
           this.SelectedPlan.TrialPeriodDays
-        );
+        ).then((result: any) =>{
+          // console.log("complete payment result: ", result)
+          if(result.body.code === 0){
+            this.PaymentSuccessful.emit(true);
+          }
+          else{
+            this.PaymentSuccessful.emit(false);
+          }
+
+        });
 
       }
 

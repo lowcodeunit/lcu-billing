@@ -59,11 +59,11 @@ export class PlansComponent implements OnInit {
   public BuyNowClicked(plan: BillingPlanOption) {
     // console.log('Buy Now Clicked:', plan);
 
-    if (!plan.SuccessRedirect.startsWith('=>')) {
+    // if (!plan.SuccessRedirect.startsWith('=>')) {
       this.router.navigate(['plan', plan.PlanGroup, plan.Interval]);
-    } else {
-      window.location.href = plan.SuccessRedirect;
-    }
+    // } else {
+    //   window.location.href = plan.SuccessRedirect;
+    // }
   }
 
   protected loadBillingOptions(): void {

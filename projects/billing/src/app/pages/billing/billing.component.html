@@ -40,7 +40,8 @@
 
         <lcu-stripe-form
           [selected-plan]="SelectedPlan"
-          [submit-button-text]="SubmitButtonText">
+          [submit-button-text]="SubmitButtonText"
+          (payment-successful)="HandlePaymentSuccess($event)">
         </lcu-stripe-form> 
   </div>
   <h1 fxLayoutAlign="center center" class="slogan">

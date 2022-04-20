@@ -140,6 +140,13 @@ export class BillingComponent implements OnInit {
 
 
   //  API methods
+
+  public HandlePaymentSuccess(event: any){
+    // console.log('recieved payment success event: ', event);
+    if(event === true){
+      this.router.navigate(['complete', this.SelectedPlan.Lookup]);
+    }
+  }
   
 
   public IntervalToggled(plan: BillingPlanOption) {
