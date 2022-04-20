@@ -31,6 +31,11 @@ export class CompleteComponent implements OnInit {
   public HeaderName: string;
 
   /**
+   * the redirect once user has selected to go to dashboard
+   */
+  public Redirect: string;
+
+  /**
    * The user billing state to determine payment status
    */
   public State: UserBillingState;
@@ -78,6 +83,7 @@ export class CompleteComponent implements OnInit {
 
   //  Life Cycle
   public ngOnInit() {
+    console.log("STATE: ", this.State)
     this.route.paramMap.subscribe((params) => {
       this.planID = params.get('id');
     });
@@ -114,6 +120,14 @@ export class CompleteComponent implements OnInit {
     }
     if (this.SelectedPlan && this.SelectedPlan.TrialPeriodDays) {
       this.calcDate();
+    }
+
+    if(this.SelectedPlan?.SuccessRedirect?.startsWith('=>')){
+      this.Redirect = this.SelectedPlan?.SuccessRedirect.substring(2);
+      console.log("redirect: ", this.Redirect);
+    }
+    else{
+      this.Redirect = this.SelectedPlan?.SuccessRedirect;
     }
   }
 

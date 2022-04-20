@@ -66,9 +66,11 @@ export class BillingPlanOption {
 
   public PlanFeatures?: string;
 
-  public TrialPeriodDays?: number;
-
   public PointQueries?: string;
+
+  public SuccessRedirect?: string;
+
+  public TrialPeriodDays?: number;
 
   public UserHasAccess?: boolean;
 }

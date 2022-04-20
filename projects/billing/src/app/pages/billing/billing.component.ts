@@ -131,6 +131,7 @@ export class BillingComponent implements OnInit {
       this.State = state;
 
       if (this.State) {
+        console.log("Billing State: ", this.State);
         this.stateChanged();
       }
     });
@@ -143,7 +144,8 @@ export class BillingComponent implements OnInit {
 
   public HandlePaymentSuccess(event: any){
     // console.log('recieved payment success event: ', event);
-    if(event === true){
+    //add back in && (this.State.PaymentStatus.Code === 0)
+    if((event === true) && (this.State.PaymentStatus.Code === 0)){
       this.router.navigate(['complete', this.SelectedPlan.Lookup]);
     }
   }
