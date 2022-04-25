@@ -21,10 +21,17 @@ export class UserBillingStateContext extends StateContext<UserBillingState> {
   }
 
   //  API Methods
-  public ChangeSubscription(
-    customerName: string,
-    plan: string,
-  ) {
+  public CancelSubscription(customerName: string, plan: string) {
+    this.Execute({
+      Arguments: {
+        CustomerName: customerName,
+        Plan: plan,
+      },
+      Type: 'CancelSubscription',
+    });
+  }
+
+  public ChangeSubscription(customerName: string, plan: string) {
     this.Execute({
       Arguments: {
         CustomerName: customerName,
@@ -39,7 +46,7 @@ export class UserBillingStateContext extends StateContext<UserBillingState> {
     customerName: string,
     plan: string,
     trialPeriodDays: number
-  ):Promise<object> {
+  ): Promise<object> {
     return this.Execute({
       Arguments: {
         CustomerName: customerName,
@@ -58,19 +65,18 @@ export class UserBillingStateContext extends StateContext<UserBillingState> {
     });
   }
 
-  public UpdatePaymentInfo(customerName: string, paymentId: string){
+  public UpdatePaymentInfo(customerName: string, paymentId: string) {
     this.Execute({
-      Arguments: { 
+      Arguments: {
         CustomerName: customerName,
-        MethodID: paymentId
+        MethodID: paymentId,
       },
-      Type: 'UpdatePaymentInfo'
+      Type: 'UpdatePaymentInfo',
     });
   }
 
   //  Helpers
-  protected callRefresh() {
-  }
+  protected callRefresh() {}
 
   protected defaultValue() {
     return { Loading: true } as UserBillingState;
