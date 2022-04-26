@@ -105,7 +105,8 @@ fxLayout="column"
           <div id="card-element" [ngClass]="{
                     'stripe-card': !StripeError,
                     'stripe-card-error': StripeError
-                  }" fxFlex="100%"></div>
+                  }" fxFlex="100%">
+          </div>
 
           
           <div id="card-errors mat-error" role="alert" class="spread" *ngIf="StripeError">
