@@ -362,7 +362,7 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
     console.log('Payment Status = ', this.State.PaymentStatus);
     if (this.State.PaymentStatus) {
       if (this.State.PaymentStatus.Code === 0) {
-        this.stripe.paymentSuccess();
+        this.paymentSuccess();
       }
 
       //Note: Previously, we were checking the payment status, but that's already being accounted for in the state api. We were also missing some parameters
