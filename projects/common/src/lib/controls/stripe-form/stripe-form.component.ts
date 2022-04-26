@@ -137,8 +137,9 @@ export class StripeFormComponent implements OnInit {
 
         this.stateChanged();
       }
-      this.setupStripe();
     });
+
+    this.setupStripe();
   }
 
   // public ngAfterViewInit(): void {
