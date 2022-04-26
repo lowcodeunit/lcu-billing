@@ -29,7 +29,7 @@ declare var Stripe: any;
   templateUrl: './stripe-form.component.html',
   styleUrls: ['./stripe-form.component.scss'],
 })
-export class StripeFormComponent implements OnInit, AfterViewInit {
+export class StripeFormComponent implements OnInit {
   @ViewChild('cardElement') cardElement: ElementRef;
 
   /**
@@ -137,24 +137,24 @@ export class StripeFormComponent implements OnInit, AfterViewInit {
 
         this.stateChanged();
       }
+      this.setupStripe();
     });
   }
 
-  public ngAfterViewInit(): void {
-    this.userBillStateCtx.Context.subscribe((state: any) => {
-      this.State = state;
+  // public ngAfterViewInit(): void {
+  //   this.userBillStateCtx.Context.subscribe((state: any) => {
+  //     this.State = state;
 
-      // console.log('State Im interested in: ', this.State);
+  //     // console.log('State Im interested in: ', this.State);
 
-      if (this.State) {
-        console.log('ngAfterViewInit: ', this.State);
+  //     if (this.State) {
+  //       console.log('ngAfterViewInit: ', this.State);
 
-        this.stateChanged();
-      }
-    });
+  //       this.stateChanged();
+  //     }
+  //   });
 
-    this.setupStripe();
-  }
+  // }
 
   //  API methods
 
