@@ -29,7 +29,7 @@ declare var Stripe: any;
   templateUrl: './stripe-form.component.html',
   styleUrls: ['./stripe-form.component.scss'],
 })
-export class StripeFormComponent implements OnInit {
+export class StripeFormComponent implements OnInit, AfterViewChecked {
   @ViewChild('cardElement') cardElement: ElementRef;
 
   /**
@@ -138,24 +138,11 @@ export class StripeFormComponent implements OnInit {
         this.stateChanged();
       }
     });
-
-    this.setupStripe();
   }
 
-  // public ngAfterViewInit(): void {
-  //   this.userBillStateCtx.Context.subscribe((state: any) => {
-  //     this.State = state;
-
-  //     // console.log('State Im interested in: ', this.State);
-
-  //     if (this.State) {
-  //       console.log('ngAfterViewInit: ', this.State);
-
-  //       this.stateChanged();
-  //     }
-  //   });
-
-  // }
+  public ngAfterViewChecked(): void {
+    this.setupStripe();
+  }
 
   //  API methods
 
@@ -374,44 +361,12 @@ export class StripeFormComponent implements OnInit {
   protected determinePaymentStatus() {
     console.log('Payment Status = ', this.State.PaymentStatus);
     if (this.State.PaymentStatus) {
-      if (this.State.PaymentStatus.Code === 101) {
-        this.stripe
-          .confirmCardPayment('requires_action')
-          .then(function (result: any) {
-            if (result.error) {
-              // Display error message in  UI.
-              this.StripeError = this.State.PaymentStatus.Message;
-
-              // The card was declined (i.e. insufficient funds, card has expired, etc)
-            } else {
-              // Show a success message to your customer
-              this.paymentSuccess();
-            }
-          });
-        // } else if (this.State.PaymentStatus.Code === 102) {
-        //   this.stripe
-        //     .confirmCardPayment('requires_payment_method')
-        //     .then(function (result: any) {
-        //       if (result.error) {
-        //         // Display error message in  UI.
-        //         this.StripeError = this.State.PaymentStatus.Message;
-        //         console.log('stripe error: ');
-
-        //         // The card was declined (i.e. insufficient funds, card has expired, etc)
-        //       } else {
-        //         // Show a success message to your customer
-        //         this.paymentSuccess();
-        //       }
-        //     });
-        // } else if (this.State.PaymentStatus.Code === 1) {
-        // this.StripeError = this.State.PaymentStatus.Message;
-        this.StripeError =
-          'There has been an issue processing the card you provided, please ensure you entered the information properly or try a different card.';
-      } else if (this.State.PaymentStatus.Code === 0) {
-        this.paymentSuccess();
-      } else {
-        // TODO: What to do in case of other errors
+      if (this.State.PaymentStatus.Code === 0) {
+        this.stripe.paymentSuccess();
       }
+
+      //Note: Previously, we were checking the payment status, but that's already being accounted for in the state api. We were also missing some parameters
+      //which was causing an error. That error was then causing the process to break and not return the state correctly
     }
   }
 
