@@ -1,20 +1,20 @@
-
-
 <mat-card
 class="billing-card"
-fxFlex="100%"
-fxFlex.xs="50%"
-style="height: 100%"
 fxLayout="column"
 >
 <mat-card-header
   class="billing-header-container"
-  fxLayout="row"
+  fxLayout.lg="row"
+  fxLayout.md="row"
+  fxLayout.sm="column"
+  fxLayout.xs="column"
   fxLayoutAlign="start center"
 >
+
   <div class="fathym-logo-container">
     <div class="fathym-logo"></div>
   </div>
+
   <div
     class="billing-header-section"
     fxLayout="column"
@@ -107,38 +107,7 @@ fxLayout="column"
                     'stripe-card-error': StripeError
                   }" fxFlex="100%"></div>
 
-          <!-- <div fxLayout="row" fxLayoutAlign="start center"> -->
-          <!-- <mat-icon >credit_card</mat-icon> -->
-          <!-- </div> -->
-
-          <!-- <div class="stripe-container" fxLayout="row" fxLayoutAlign="start start"> -->
-
-          <!-- CARD NUMBER -->
-          <!-- <div class="card-num-container" fxLayout="column">
-                    <label for="card-number">Credit Card Number</label>
-                    <div fxLayout="row" fxLayoutAlign="start center">
-                      <mat-icon>credit_card</mat-icon>
-                      <div id="card-number" class="stripe-card"></div>
-                    </div>
-                  </div> -->
-
-          <!-- EXPIRATION DATE -->
-          <!-- <div class="expiry-date-container" fxLayout="column">
-                    <label for="card-expiry">Expiration Date</label>
-                    <div fxLayout="row" fxLayoutAlign="start center">
-                      <mat-icon>today</mat-icon>
-                      <div id="card-expiry" class="stripe-card"></div>
-                    </div>
-                  </div> -->
-          <!-- CVC NUMBER -->
-          <!-- <div class="cvc-num-container" fxLayout="column">
-                    <label for="card-cvc">CVC</label>
-                    <div fxLayout="row" fxLayoutAlign="start center">
-                      <mat-icon>lock</mat-icon>
-                      <div id="card-cvc" class="stripe-card"></div>
-                    </div>
-                  </div> -->
-          <!-- </div> -->
+          
           <div id="card-errors mat-error" role="alert" class="spread" *ngIf="StripeError">
             {{ StripeError }}
           </div>
@@ -147,45 +116,14 @@ fxLayout="column"
 
       <!-- TOGGLE & BUTTON -->
       <div class="checkbox-container" fxLayout="column" fxLayoutAlign="center center">
-        <!-- <lcu-interval-toggle *ngIf="SelectedPlan" [current-interval]="SelectedPlan.Interval"
-                [intervals]="Intervals" (interval-selected)="ToggleChanged($event)">
-              </lcu-interval-toggle> -->
-        <!-- <div class="plan-cost-selection-container" fxLayout="row" fxLayoutAlign="space-between"
-                  fxFlex="100%"  >
-                <div *ngIf="SelectedPlan" class="interval-radio-container">
-                  <mat-radio-group aria-labelledby="example-radio-group-label" class="interval-radio-group"
-                    [(ngModel)]="SelectedInterval" [ngModelOptions]="{standalone: true}"
-                    (change)="ToggleChanged($event)">
-                    <mat-radio-button class="interval-radio-button" *ngFor="let interval of Intervals"
-                      [value]="interval" fxLayout="column" fxLayoutAlign="start start">
-                      Pay {{interval | titlecase}}ly
-                    </mat-radio-button>
-                  </mat-radio-group>
-                </div>
-
-                <div class="price-interval-container" fxLayout="column">
-                  <div *ngFor="let plan of SelectedPlanGroupPlans" class="price-interval">
-                    ${{plan.Price}}/{{plan.Interval}}
-                  </div>
-                </div>
-              </div> -->
-
-        <!-- TOS & EA CHECKBOXES *ngIf="State?.RequiredOptIns?.length > 0"-->
-        <!-- *ngIf="State.RequiredOptIns.includes('ToS') || State.RequiredOptIns.includes('EA')" -->
-
+        
         <lcu-required-opt-ins
+          fxLayout="row wrap"
           (req-opt-ins-changed)="ReqOptsChanged($event)">
         </lcu-required-opt-ins>
-        <!-- <div class="required-opt-ins" fxLayout="row" fxLayoutAlign="start center">
-          <mat-checkbox (change)="ReqOptsChanged($event)" class="checkbox-label">
-            By checking this box, you agree to Fathym's
-            <a target="blank" href="https://fathym.com/enterprise-agreement/" id="ea-anchor">Enterprise Agreement</a>
-            and
-            <a target="blank" href="https://fathym.com/terms-of-services/" id="tos-anchor">Terms of Service</a>
-          </mat-checkbox>
-        </div> -->
+
         <div class="billing-card-footer" fxLayout="row" fxLayoutAlign="end end">
-          <div class="button-container" fxLayoutAlign="end end" fxFlex="33%">
+          <div class="button-container" fxLayoutAlign="end end" fxFlex="51%">
             <button 
               mat-raised-button 
               id="payment-button" 

@@ -14,4 +14,8 @@ $Pro-primary: mat-color(map-get($global-theme, primary), A200);
         color: $Pro-primary;
       }
     }
-  }
+}
+
+::ng-deep .mat-checkbox-layout{
+  white-space: normal !important;
+}
