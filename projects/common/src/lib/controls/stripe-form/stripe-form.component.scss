@@ -9,7 +9,9 @@ $Fathym-Green: mat-color(map-get($global-theme, primary), A200);
 $Fathym-Green-BG: mat-color(map-get($global-theme, primary), A200,.5);
 $Trans-container: rgba(map-get(map-get($global-theme, 'background'), 'background'), .5);
 
-
+input { 
+  touch-action: none; 
+}
 
 @mixin input-box() {
   border-radius: 2px;
