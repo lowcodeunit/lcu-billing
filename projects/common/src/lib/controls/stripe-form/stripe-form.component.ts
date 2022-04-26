@@ -174,7 +174,7 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
   public SubmitBilling(event: Event) {
     this.State.Loading = true;
 
-    this.State.PaymentStatus = null;
+    // this.State.PaymentStatus = null;
 
     this.IsSubmitted = true;
     // console.log('Setting is submitted to true')
@@ -235,6 +235,7 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
           )
           .then((result: any) => {
             console.log('complete payment result: ', result.body.code);
+            console.log('State: ', this.State);
             if (result.body.code === 0 && this.State.PaymentStatus.Code === 0) {
               this.PaymentSuccessful.emit(true);
             } else if (
