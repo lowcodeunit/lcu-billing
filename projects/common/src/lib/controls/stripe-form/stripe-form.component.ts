@@ -1,5 +1,6 @@
 import {
   AfterViewChecked,
+  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
@@ -28,7 +29,7 @@ declare var Stripe: any;
   templateUrl: './stripe-form.component.html',
   styleUrls: ['./stripe-form.component.scss'],
 })
-export class StripeFormComponent implements OnInit, AfterViewChecked {
+export class StripeFormComponent implements OnInit, AfterViewInit {
   @ViewChild('cardElement') cardElement: ElementRef;
 
   /**
@@ -139,12 +140,18 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
     });
   }
 
-  public ngAfterViewChecked(): void {
-    if (this.State) {
-      console.log('ngAfterViewChecked: ', this.State);
+  public ngAfterViewInit(): void {
+    this.userBillStateCtx.Context.subscribe((state: any) => {
+      this.State = state;
 
-      this.stateChanged();
-    }
+      // console.log('State Im interested in: ', this.State);
+
+      if (this.State) {
+        console.log('ngAfterViewInit: ', this.State);
+
+        this.stateChanged();
+      }
+    });
 
     this.setupStripe();
   }
