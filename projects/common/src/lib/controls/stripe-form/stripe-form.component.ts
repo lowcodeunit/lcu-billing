@@ -388,22 +388,22 @@ export class StripeFormComponent implements OnInit {
               this.paymentSuccess();
             }
           });
-      } else if (this.State.PaymentStatus.Code === 102) {
-        this.stripe
-          .confirmCardPayment('requires_payment_method')
-          .then(function (result: any) {
-            if (result.error) {
-              // Display error message in  UI.
-              this.StripeError = this.State.PaymentStatus.Message;
-              console.log('stripe error: ');
+        // } else if (this.State.PaymentStatus.Code === 102) {
+        //   this.stripe
+        //     .confirmCardPayment('requires_payment_method')
+        //     .then(function (result: any) {
+        //       if (result.error) {
+        //         // Display error message in  UI.
+        //         this.StripeError = this.State.PaymentStatus.Message;
+        //         console.log('stripe error: ');
 
-              // The card was declined (i.e. insufficient funds, card has expired, etc)
-            } else {
-              // Show a success message to your customer
-              this.paymentSuccess();
-            }
-          });
-      } else if (this.State.PaymentStatus.Code === 1) {
+        //         // The card was declined (i.e. insufficient funds, card has expired, etc)
+        //       } else {
+        //         // Show a success message to your customer
+        //         this.paymentSuccess();
+        //       }
+        //     });
+        // } else if (this.State.PaymentStatus.Code === 1) {
         // this.StripeError = this.State.PaymentStatus.Message;
         this.StripeError =
           'There has been an issue processing the card you provided, please ensure you entered the information properly or try a different card.';
