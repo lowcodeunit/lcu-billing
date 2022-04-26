@@ -60,7 +60,7 @@ export class PlansComponent implements OnInit {
     // console.log('Buy Now Clicked:', plan);
 
     // if (!plan.SuccessRedirect.startsWith('=>')) {
-      this.router.navigate(['plan', plan.PlanGroup, plan.Interval]);
+    this.router.navigate(['plan', plan.PlanGroup, plan.Interval]);
     // } else {
     //   window.location.href = plan.SuccessRedirect;
     // }
