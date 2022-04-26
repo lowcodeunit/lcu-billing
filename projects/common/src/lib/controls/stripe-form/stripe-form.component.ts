@@ -140,17 +140,11 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
   }
 
   public ngAfterViewChecked(): void {
-    this.userBillStateCtx.Context.subscribe((state: any) => {
-      this.State = state;
+    if (this.State) {
+      console.log('ngAfterViewChecked: ', this.State);
 
-      // console.log('State Im interested in: ', this.State);
-
-      if (this.State) {
-        console.log('ngAfterViewState: ', this.State);
-
-        this.stateChanged();
-      }
-    });
+      this.stateChanged();
+    }
 
     this.setupStripe();
   }
