@@ -126,7 +126,7 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
 
   public ngOnInit(): void {
     this.setupForms();
-    this.userBillStateCtx.Context.subscribe((state: any) => {
+    this.userBillStateCtx.Context.subscribe((state: UserBillingState) => {
       this.State = state;
 
       console.log('State Im interested in: ', this.State);
