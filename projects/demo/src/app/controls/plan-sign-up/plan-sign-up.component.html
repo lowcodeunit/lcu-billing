@@ -1,0 +1,13 @@
+<div fxLayout="column" class="PlanSignUp-container">
+  <h1>Welcome to the PlanSignUp-demo-App</h1>
+  <div fxLayout="column">
+    <div fxLayout="row">
+      <lcu-billing-plan-sign-up-element
+        [context]="Context"
+        (change-subscription-event)="HandleChangeSubscription($event)"
+      >
+      </lcu-billing-plan-sign-up-element>
+      
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+@import "../../../../assets/common-theme";
+
+$Pro-primary: mat-color(map-get($global-theme, primary), A200);
+
+.required-opt-ins{
+    width:100%;
+    margin-top: 10px;
+    .checkbox-label{
+      font-size: 12px;
+      #ea-anchor{
+        color:$Pro-primary
+      }
+      #tos-anchor{
+        color: $Pro-primary;
+      }
+    }
+}
+
+::ng-deep .mat-checkbox-layout{
+  white-space: normal !important;
+}

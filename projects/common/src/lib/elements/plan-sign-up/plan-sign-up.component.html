@@ -1,0 +1,38 @@
+<ng-container
+*ngIf="!UserHasLicenseType || ShowConfirmationPage">
+<!-- Plans page -->
+<lcu-plans-page
+    *ngIf="!SelectedPlan"
+    (selected-plan)="PlanSelected($event)">
+</lcu-plans-page>
+
+
+<!-- Billing Page -->
+<lcu-plan-billing
+    *ngIf="SelectedPlan && !ShowConfirmationPage"
+    [selected-plan]="SelectedPlan"
+    (back-button-clicked)="HandleBackButtonClick($event)"
+    (payment-success)="HandleSuccessfulPayment($event)"
+    (selected-plan-changed)="HandleSelectedPlanChange($event)">
+</lcu-plan-billing>
+
+
+<!-- Confirmation Page -->
+<lcu-plan-confirmation-page
+    *ngIf="ShowConfirmationPage && SelectedPlan"
+    [selected-plan]="SelectedPlan">
+</lcu-plan-confirmation-page>
+
+</ng-container>
+
+<ng-container
+*ngIf="UserHasLicenseType && !ShowConfirmationPage">
+<p>We noticed you already have a subscription of this type </p>
+<p>If you would like to change your subscription follow this link.</p>
+<button mat-raised-button class="button" (click)="ChangeSubscription()">
+    Change Subscription
+  </button>
+
+
+</ng-container>
+

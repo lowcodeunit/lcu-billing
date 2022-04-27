@@ -58,10 +58,14 @@
         fxLayoutAlign="center center"
       >
         <mat-slide-toggle
+          *ngIf="OtherPlan"
           (change)="IntervalSelected($event)"
           [checked]="ToggleChecked"
         ></mat-slide-toggle>
-        <div *ngIf="Plan?.Interval">{{ Plan.Interval | titlecase }}ly</div>
+        <div *ngIf="!OtherPlan && IsUpgrade">
+          Upgrade To
+        </div>
+        <div *ngIf="Plan?.Interval && OtherPlan">{{ Plan.Interval | titlecase }}ly</div>
       </div>
       <div class="priced-content" fxLayout="row" fxLayoutAlign="center end">
         <div *ngIf="Plan?.DiscountedFrom" class="discounted-from" fxLayoutAlign="center center">
@@ -72,7 +76,7 @@
         </div>
         <div class="intervals" fxLayout="column">
           <div>/{{ Plan.Interval }}</div>
-          <div>or ${{ OtherPlan.Price }} {{ OtherPlan.Interval }}</div>
+          <div *ngIf="OtherPlan">or ${{ OtherPlan.Price }} {{ OtherPlan.Interval }}</div>
         </div>
       </div>
     </div>
@@ -98,7 +102,7 @@
           <div fxLayout="column" *ngFor="let feat of PlanFeatures;index as i;">
             <div fxLayout="row" fxLayoutAlign="center center">
               <mat-icon>check_circle_outline</mat-icon>
-              <div>{{ feat }}</div>
+              <div [innerHTML]="SafeHtml(feat)"></div>
             </div>
             <div class="vl" *ngIf="DeterminePlanFeatIndex(i)"></div>
           </div>
@@ -108,22 +112,43 @@
   </mat-card-content>
 
   <!-- BUTTON -->
+
+  <!-- <mat-card-actions
+  *ngIf="ShowButton === true && IsUpgrade === true"
+  class="button-container"
+  fxLayoutAlign="center center"
+  >
+    <button mat-raised-button class="button" (click)="BuyNow(Plan)">
+     {{ BuyNowText }}
+    </button>
+  </mat-card-actions> -->
+
+  <!-- <mat-card-actions
+    *ngIf="ShowButton === true && Plan.TrialPeriodDays === 0 && IsUpgrade === false"
+    class="button-container"
+    fxLayoutAlign="center center"
+  >
+    <button mat-raised-button class="button" (click)="BuyNow(Plan)">
+      {{ BuyNowText }}
+    </button>
+  </mat-card-actions> -->
+
   <mat-card-actions
     *ngIf="ShowButton === true && Plan.TrialPeriodDays === 0"
     class="button-container"
     fxLayoutAlign="center center"
   >
-    <button mat-raised-button class="button" (click)="BuyNow(Plan)">
-      Buy Now
+    <button mat-raised-button class="button" (click)="BuyNow(Plan)" [disabled]=" Plan.UserHasAccess">
+      {{ BuyNowText }}
     </button>
   </mat-card-actions>
 
   <mat-card-actions
-    *ngIf="ShowButton === true && Plan.TrialPeriodDays > 0"
+    *ngIf="ShowButton === true && Plan.TrialPeriodDays > 0 && IsUpgrade === false"
     class="button-container"
     fxLayoutAlign="center center"
   >
-    <button mat-raised-button class="button" (click)="BuyNow(Plan)">
+    <button mat-raised-button class="button" (click)="BuyNow(Plan)" [disabled]=" Plan.UserHasAccess">
       Start Free Trial
     </button>
   </mat-card-actions>

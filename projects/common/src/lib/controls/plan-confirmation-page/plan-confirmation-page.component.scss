@@ -1,0 +1,106 @@
+@import '../../../../assets/styles.scss';
+
+  $Fathym-Green: mat-color(map-get($global-theme, primary), A200);
+  // $BG-color: transparentize(#f5f5f5, .1);
+  $Text-color: map-get(map-get($global-theme, 'foreground'), 'secondary-text');
+
+  .success-page{
+    height: 100%;
+  .fathym-logo{
+    background-image: fathym-logo(thinky-circle, $Fathym-Green, 1);
+    background-repeat: no-repeat;
+    background-size: 135px;
+    height: 135px;
+    width: 205px;
+    margin-left: -20px;
+    margin-top: 10px;
+  }
+  .success-container{
+    height: 100%;
+    width: 100%;
+    // background-color: $BG-color !important;
+    padding: 20px;
+    margin: 10px 0px;
+    border-radius: 2px;
+    color: $Text-color;
+    box-shadow: 1px 1px 3px !important;
+
+    .mat-card-header{
+      width:100%;    
+
+      .success-heading{
+        width: 100%;
+        margin-bottom: 10px;
+
+        .fathym-header{
+          margin:0px;
+          margin-top:10px;
+        }
+
+        .succ-text{
+          margin: 5px 0px;
+          font-size: 15px;
+        }
+      }
+    }
+  .order-summary-container{
+    width:100%;
+    padding: 0px 25px;
+
+    .order-summary-header{
+      width:100%;
+      margin: 20px 0px;
+      .order-summary-header-text{
+        width:180px;
+        margin-top:0px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      .hr-container{
+        width: 100%;
+            .title-hr{
+                width: 100%;
+                margin-left: 5px;
+                margin-top:10px;
+                background-color: $Fathym-Green;
+                border: .5px solid $Fathym-Green;
+            }
+        }
+    }
+    
+    .order-summary{
+      width: 100%;
+      .item{
+        margin-bottom: 10px;
+          .note{
+            font-size: 12px;
+          }
+      }
+    }
+  }
+  .actions-container{
+    width: 100%;
+    margin-bottom: 10px;
+    margin-right:22px;
+    .redirect-button{
+      // background-color: $Fathym-Green;
+      width: 100%;
+      color: $Text-color;
+      letter-spacing: 1px;
+      font-size: 19px;
+    }
+  }
+  }
+  }
+
+  .bold{
+    font-weight: bold;
+  }
+  hr{
+    border: .5px solid $Fathym-Green;
+      width: 95%;
+  }
+  .dashed-hr{
+    border:.5px dashed $Fathym-Green;
+    width: 100%;
+  }
