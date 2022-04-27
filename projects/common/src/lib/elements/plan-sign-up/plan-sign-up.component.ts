@@ -46,6 +46,7 @@ export class LcuBillingPlanSignUpElementComponent extends LcuElementComponent<Lc
 
     this.userBillStateCtx.Context.subscribe((state: any) => {
       this.Context.State = state;
+      // console.log("Context.State = ", this.Context.State)
   
       if (this.Context.State) {
         this.stateChanged();

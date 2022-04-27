@@ -3,6 +3,7 @@
 
   <div
     class="billing-page-container"
+    fxLayout.xl="row"
     fxLayout.lg="row"
     fxLayout.md="row"
     fxLayout.sm="column"
@@ -37,12 +38,22 @@
       </lcu-plan-card>
 
     </div>
+    
+    <div
+      class="stripe-form-container"
+      fxLayout="row"
+      fxLayoutAlign="center center"
+    >
 
-        <lcu-stripe-form
-          [selected-plan]="SelectedPlan"
-          [submit-button-text]="SubmitButtonText">
-        </lcu-stripe-form> 
+      <lcu-stripe-form
+        [selected-plan]="SelectedPlan"
+        [submit-button-text]="SubmitButtonText"
+        (payment-successful)="HandlePaymentSuccess($event)">
+      </lcu-stripe-form> 
+
+    </div>
   </div>
+
   <h1 fxLayoutAlign="center center" class="slogan">
     If you can Fathym it, you can build it.
   </h1>

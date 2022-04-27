@@ -43,7 +43,7 @@ export class PlansComponent implements OnInit {
     this.userBillStateCtx.Context.subscribe((state: UserBillingState) => {
       this.State = state;
 
-      console.log('Users Billing State: ', this.State);
+      // console.log('Users Billing State: ', this.State);
 
       if (this.State) {
         this.stateChanged();
@@ -59,11 +59,11 @@ export class PlansComponent implements OnInit {
   public BuyNowClicked(plan: BillingPlanOption) {
     // console.log('Buy Now Clicked:', plan);
 
-    if (!plan.SuccessRedirect.startsWith('=>')) {
-      this.router.navigate(['plan', plan.PlanGroup, plan.Interval]);
-    } else {
-      window.location.href = plan.SuccessRedirect;
-    }
+    // if (!plan.SuccessRedirect.startsWith('=>')) {
+    this.router.navigate(['plan', plan.PlanGroup, plan.Interval]);
+    // } else {
+    //   window.location.href = plan.SuccessRedirect;
+    // }
   }
 
   protected loadBillingOptions(): void {
