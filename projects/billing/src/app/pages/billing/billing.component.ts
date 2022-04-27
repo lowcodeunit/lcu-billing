@@ -1,12 +1,5 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectorRef,
-} from '@angular/core';
-import {
-  FormGroup,
-  FormBuilder,
-} from '@angular/forms';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import {
   UserBillingStateContext,
   UserBillingState,
@@ -47,7 +40,9 @@ export class BillingComponent implements OnInit {
   protected get stripePublicKey(): string {
     const stateCfg: any = (window as any).LCU.State;
 
-    return stateCfg && stateCfg.Stripe ? stateCfg.Stripe.PublicKey : 'pk_test_KnI6QApAae5tFIxuwuoSBFx6';
+    return stateCfg && stateCfg.Stripe
+      ? stateCfg.Stripe.PublicKey
+      : 'pk_test_KnI6QApAae5tFIxuwuoSBFx6';
   }
 
   //  Properties
@@ -75,15 +70,14 @@ export class BillingComponent implements OnInit {
    */
   public SelectedPlan: BillingPlanOption;
 
-
   /**
    * Whether or not to show the back button in the plan card
    */
   public ShowBackButton: boolean = true;
 
   /*
-  * Text to show in the stripe submit button 
-  */
+   * Text to show in the stripe submit button
+   */
   public SubmitButtonText: string;
 
   /**
@@ -117,8 +111,8 @@ export class BillingComponent implements OnInit {
     protected router: Router
   ) {
     this.PlanGroups = new Array<string>();
-    this.ImportantNoteText = "";
-    this.SubmitButtonText = "PURCHASE NOW"
+    this.ImportantNoteText = '';
+    this.SubmitButtonText = 'PURCHASE NOW';
   }
 
   //  Life Cycle
@@ -131,6 +125,7 @@ export class BillingComponent implements OnInit {
       this.State = state;
 
       if (this.State) {
+        // console.log("Billing State: ", this.State);
         this.stateChanged();
       }
     });
@@ -138,9 +133,15 @@ export class BillingComponent implements OnInit {
     this.setupImportantNote();
   }
 
-
   //  API methods
-  
+
+  public HandlePaymentSuccess(event: any) {
+    // console.log('recieved payment success event: ', event);
+    //add back in && (this.State.PaymentStatus.Code === 0)
+    if (event === true && this.State.PaymentStatus.Code === 0) {
+      this.router.navigate(['complete', this.SelectedPlan.Lookup]);
+    }
+  }
 
   public IntervalToggled(plan: BillingPlanOption) {
     this.SelectedPlan = plan;
@@ -153,23 +154,20 @@ export class BillingComponent implements OnInit {
     // console.log("should be going back: ", event)
     this.router.navigate([event]);
   }
-  
 
   //  Helpers
 
-  protected setupImportantNote(){
-    if(this.lcuSettings.State?.ImportantNote){
+  protected setupImportantNote() {
+    if (this.lcuSettings.State?.ImportantNote) {
       this.ImportantNoteText = this.lcuSettings.State?.ImportantNote;
     }
   }
- 
 
   protected stateChanged() {
     this.findPlan();
     this.determineIntervals();
 
     this.buildSelectedPlanGroupPlans();
-
   }
   /**
    * determines the intervals to display in the radio buttons
@@ -190,7 +188,7 @@ export class BillingComponent implements OnInit {
       // console.log('plan groups', this.PlanGroups);
     }
   }
-  
+
   /**
    * Find the plan based on the params passed in via router
    */

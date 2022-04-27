@@ -136,14 +136,14 @@
     <hr />
     <!-- BUTTON -->
     <mat-card-actions class="actions-container" fxLayoutAlign="end end">
-      <div *ngIf="State.SuccessRedirect" class="button-container">
+      <div *ngIf="SelectedPlan.SuccessRedirect" class="button-container">
         <a
           mat-raised-button
-          [href]="State.SuccessRedirect"
+          [href]="Redirect"
           class="redirect-button"
           target="_parent"
         >
-          Continue to Next Step
+          Continue to Dashboard
         </a>
       </div>
     </mat-card-actions>

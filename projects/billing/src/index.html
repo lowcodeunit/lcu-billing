@@ -5,7 +5,11 @@
     <title>Fathym | The Data Application Framework</title>
     <base href="/" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Zooming issues? this line below prevents zooming added because there is a bug with android devices where
+    it zooms in when selecting the inputs in stripe cc info fields -->
+    <meta name="viewport" content="width=device-width, height=device-height,  initial-scale=1.0, user-scalable=no;user-scalable=0;"/>
+
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1" /> -->
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
