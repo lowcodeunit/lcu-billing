@@ -130,10 +130,8 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
     this.userBillStateCtx.Context.subscribe((state: any) => {
       this.State = state;
 
-      // console.log('State Im interested in: ', this.State);
-
       if (this.State) {
-        console.log('State Im interested in: ', this.State);
+        // console.log('State Im interested in: ', this.State);
 
         this.stateChanged();
       }
