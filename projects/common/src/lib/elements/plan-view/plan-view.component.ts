@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import {
   Component,
-  Input,
   OnInit,
   Injector,
   OnChanges,
@@ -13,7 +12,6 @@ import {
   LCUElementContext,
   LcuElementComponent,
   BaseModeledResponse,
-  LCUServiceSettings,
 } from '@lcu/common';
 import { BillingPlanOption } from '../../state/user-billing/user-billing.state';
 

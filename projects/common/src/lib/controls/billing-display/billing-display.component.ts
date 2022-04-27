@@ -7,7 +7,6 @@ import {
   Output,
   SimpleChanges,
 } from '@angular/core';
-import { emit } from 'process';
 import { BillingPlanOption } from '../../state/user-billing/user-billing.state';
 
 @Component({
@@ -22,11 +21,18 @@ export class BillingDisplayComponent implements OnChanges, OnInit {
   @Output('buy-now')
   public BuyNow: EventEmitter<BillingPlanOption>;
 
+  //The current plans the user has access to
+  // @Input('users-plans')
+  // public UsersPlans: Array<BillingPlanOption>
+
   // @Input('displayed-plans')
-  public DisplayedPlans: BillingPlanOption[];
+  public DisplayedPlans: Array<BillingPlanOption>;
 
   @Input('featured')
   public FeaturedPlanGroup: string;
+
+  @Input('is-upgrade')
+  public IsUpgrade: boolean;
 
   @Input('popular')
   public PopularPlanGroup: string;

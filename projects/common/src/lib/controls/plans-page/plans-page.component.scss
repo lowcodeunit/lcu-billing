@@ -1,0 +1,23 @@
+@import '../../../../assets/styles.scss';
+
+$Text-Color: mat-color(map-get($global-theme, primary), default-contrast);
+$Black: black;
+
+.plan-page-container{
+    height: 100%;
+}
+
+.choose-header{
+    margin-top:0px;
+    padding-top: 20px;
+    // color: $Black;
+}
+
+.lcu-plan-card{
+    margin-top:10px;
+    margin-bottom: 10px;
+}
+
+.tag-line{
+    // color:$Black;
+}

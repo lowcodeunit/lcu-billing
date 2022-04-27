@@ -1,0 +1,37 @@
+<h1>Confirm Plan Change</h1>
+<div 
+    fxLayout="row" 
+    fxLayoutAlign="space-around center" 
+    fxLayout.lt-sm="column"
+    fxLayoutAlign.lt-sm="center center" >
+    <lcu-plan-card 
+        [is-upgrade]=true 
+        [plan]="Plan" 
+        [show-back-button]=true 
+        (go-back-clicked)="GoBackClicked($event)">
+    </lcu-plan-card>
+
+    <div class="confirmation-container">
+        
+        <lcu-stripe-form
+            [submit-button-text]="SubmitButtonText"
+            [is-update-flow]=true
+            [billing-header]="HeaderText"
+            (card-change-success)="HandlePaymentSuccess($event)"
+        >
+        </lcu-stripe-form>
+
+        <!-- <lcu-required-opt-ins
+        (req-opt-ins-changed)="HandleReqOptInsChange($event)"
+        ></lcu-required-opt-ins> -->
+        <!-- <div fxLayout="row" fxLayoutAlign="end center">
+        <button mat-raised-button class="button" (click)="UpgradeNow(Plan)" [disabled]="IsButtonDisabled()">
+            Confirm Plan Change
+        </button>
+        </div> -->
+        <!-- <div *ngIf="PaymentStatus?.Code === 1" class='error-message'>
+            <p>You must update your credit card information before proceeding.</p>
+        </div> -->
+    </div>
+
+</div>

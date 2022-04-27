@@ -1,0 +1,58 @@
+<div [fxShow]="!State.Loading">
+  <!-- <mat-icon class="back-arrow" (click)="GoBack()">arrow_back</mat-icon> -->
+
+  <div
+    class="billing-page-container"
+    fxLayout.lg="row"
+    fxLayout.md="row"
+    fxLayout.sm="column"
+    fxLayout.xs="column"
+    fxLayoutAlign.xl="center end"
+    fxLayoutAlign.lg="center end"
+    fxLayoutAlign.md="center end"
+    fxLayoutAlign.sm="center center"
+    fxLayoutAlign.xs="center center"
+    fxLayoutGap.xl="50px"
+    fxLayoutGap.lg="50px"
+    fxLayoutGap.md="50px"
+    fxLayoutGap.sm="30px"
+    fxLayoutGap.xs="30px"
+  >
+    <!-- PRICING CONTAINER -->
+    <div
+      class="plan-card-container"
+      fxLayout="row"
+      fxLayoutAlign="start center"
+    >
+      <lcu-plan-card
+        *ngIf="State.Plans"
+        [plan]="SelectedPlan"
+        [all-plans]="State.Plans"
+        [show-back-button]="ShowBackButton"
+        [featured-plan-group]="State.FeaturedPlanGroup"
+        [popular-plan-group]="State.PopularPlanGroup"
+        (interval-toggled)="IntervalToggled($event)"
+        (go-back-clicked)="GoBackClicked($event)"
+      >
+      </lcu-plan-card>
+
+    </div>
+
+        <lcu-stripe-form
+          [selected-plan]="SelectedPlan"
+          [submit-button-text]="SubmitButtonText"
+          (payment-successful)="HandlePaymentSuccess($event)">
+        </lcu-stripe-form> 
+  </div>
+  <h1 fxLayoutAlign="center center" class="slogan">
+    If you can Fathym it, you can build it.
+  </h1>
+</div>
+
+<!-- LOADING SCREEN -->
+<div [fxShow]="State.Loading">
+  <div fxLayout="row" fxLayoutAlign="center center" class="spinner-container">
+    <mat-spinner diameter="75"></mat-spinner>
+    <div class="spinner-logo" logo-alt="Fathym Logo"></div>
+  </div>
+</div>

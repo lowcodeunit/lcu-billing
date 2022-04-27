@@ -1,0 +1,141 @@
+<mat-card
+class="billing-card"
+fxLayout="column"
+>
+<mat-card-header
+  class="billing-header-container"
+  fxLayout.lg="row"
+  fxLayout.md="row"
+  fxLayout.sm="column"
+  fxLayout.xs="column"
+  fxLayoutAlign="start center"
+>
+
+  <div class="fathym-logo-container">
+    <div class="fathym-logo"></div>
+  </div>
+
+  <div
+    class="billing-header-section"
+    fxLayout="column"
+    fxLayoutAlign="start start"
+  >
+    <h2 class="fathym-header" *ngIf="SelectedPlan?.LicenseType">
+      {{ SelectedPlan?.HeaderName }}
+    </h2>
+    <div fxLayout="row">
+      <h3
+        class="fathym-header"
+        *ngIf="SelectedPlan?.PlanGroup && SelectedPlan?.Interval"
+      >
+        {{ SelectedPlan.PlanGroup | titlecase }} Package
+        <span *ngIf="SelectedPlan?.PlanGroup === 'hobby'" class="asterisk"
+          >*</span
+        >
+        - {{ SelectedPlan.Interval | titlecase }}ly Billing
+      </h3>
+      <!-- <span *ngIf="SelectedPlan?.PlanGroup === 'hobby'" class="asterisk">*</span> -->
+    </div>
+    <div
+      *ngIf="SelectedPlan?.PlanGroup === 'hobby'"
+      class="important-note-container"
+      fxLayout="row"
+      fxFlex="70%"
+    >
+      <span class="asterisk">*</span>
+      <div class="important-note">
+        &nbsp;{{ ImportantNoteText }}
+      </div>
+    </div>
+    <p class="fathym-header">{{ BillingHeader }}</p>
+  </div>
+</mat-card-header>
+<mat-card-content 
+  class="billing-page-container" 
+  fxLayout="column" 
+  fxLayoutAlign="space-around center">
+
+  <div 
+    class="payment-info-container" 
+    fxLayout="column" 
+    fxLayoutAlign="center center">
+
+    <form 
+      action="/charge" 
+      method="post" 
+      class="billing-form" 
+      id="payment-form" 
+      [formGroup]="BillingForm"
+      (ngSubmit)="SubmitBilling($event)" 
+      fxFlex="80%">
+
+      <div 
+        class="form-row" 
+        fxLayout="column" 
+        fxLayoutAlign="space-around center">
+
+        <div 
+          class="billing-info" 
+          fxLayoutAlign="center center">
+
+          <!-- class to disable autocomplete 'disable-autofill-background-default', -->
+          <mat-form-field [ngClass]="['cardholder-name-input']">
+            <mat-label class="cardholder-label">&nbsp; Cardholder Name</mat-label>
+
+            <mat-icon 
+              matPrefix 
+              class="user-input-icon" 
+              fxLayoutAlign="center end">
+              account_circle
+            </mat-icon>
+
+            <input 
+              autocomplete="off" 
+              matInput 
+              name="cardholder-name" 
+              id="cardholder-name-input"
+              formControlName="userName" 
+              placeholder="Cardholder Name" 
+              fxFlex="100%" />
+
+          </mat-form-field>
+        </div>
+        <div class="billing-info" fxLayout="column" fxLayoutAlign="center center">
+          <label for="card-element" fxLayout="column"></label>
+          <div id="card-element" [ngClass]="{
+                    'stripe-card': !StripeError,
+                    'stripe-card-error': StripeError
+                  }" fxFlex="100%">
+          </div>
+
+          
+          <div id="card-errors mat-error" role="alert" class="spread" *ngIf="StripeError">
+            {{ StripeError }}
+          </div>
+        </div>
+      </div>
+
+      <!-- TOGGLE & BUTTON -->
+      <div class="checkbox-container" fxLayout="column" fxLayoutAlign="center center">
+        
+        <lcu-required-opt-ins
+          fxLayout="row wrap"
+          (req-opt-ins-changed)="ReqOptsChanged($event)">
+        </lcu-required-opt-ins>
+
+        <div class="billing-card-footer" fxLayout="row" fxLayoutAlign="end end">
+          <div class="button-container" fxLayoutAlign="end end" fxFlex="51%">
+            <button 
+              mat-raised-button 
+              id="payment-button" 
+              class="buy-now-button" 
+              [disabled]="IsButtonDisabled()">
+              {{ SubmitButtonText }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</mat-card-content>
+</mat-card>

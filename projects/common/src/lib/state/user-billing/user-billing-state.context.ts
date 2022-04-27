@@ -1,5 +1,5 @@
 import { UserBillingState } from './user-billing.state';
-import { StateContext } from '@lcu/common';
+import { StateContext, Status } from '@lcu/common';
 import { Injectable, Injector } from '@angular/core';
 
 @Injectable({
@@ -10,7 +10,7 @@ export class UserBillingStateContext extends StateContext<UserBillingState> {
   protected get licenseType(): string {
     const stateCfg: any = (window as any).LCU.State;
 
-    return stateCfg ? stateCfg.LicenseType : '';
+    return stateCfg ? stateCfg.LicenseType : 'fathym';
   }
 
   //  Properties
@@ -21,13 +21,33 @@ export class UserBillingStateContext extends StateContext<UserBillingState> {
   }
 
   //  API Methods
+  public CancelSubscription(customerName: string, plan: string) {
+    this.Execute({
+      Arguments: {
+        CustomerName: customerName,
+        Plan: plan,
+      },
+      Type: 'CancelSubscription',
+    });
+  }
+
+  public ChangeSubscription(customerName: string, plan: string) {
+    this.Execute({
+      Arguments: {
+        CustomerName: customerName,
+        Plan: plan,
+      },
+      Type: 'ChangeSubscription',
+    });
+  }
+
   public CompletePayment(
     methodId: string,
     customerName: string,
     plan: string,
     trialPeriodDays: number
-  ) {
-    this.Execute({
+  ): Promise<object> {
+    return this.Execute({
       Arguments: {
         CustomerName: customerName,
         MethodID: methodId,
@@ -45,6 +65,16 @@ export class UserBillingStateContext extends StateContext<UserBillingState> {
     });
   }
 
+  public UpdatePaymentInfo(customerName: string, paymentId: string) {
+    this.Execute({
+      Arguments: {
+        CustomerName: customerName,
+        MethodID: paymentId,
+      },
+      Type: 'UpdatePaymentInfo',
+    });
+  }
+
   //  Helpers
   protected callRefresh() {}
 
@@ -57,6 +87,6 @@ export class UserBillingStateContext extends StateContext<UserBillingState> {
   }
 
   protected loadStateName(): string {
-    return 'usermanagement';
+    return 'billing';
   }
 }
