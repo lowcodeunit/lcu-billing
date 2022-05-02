@@ -230,6 +230,10 @@ export class PlanCardComponent implements OnInit {
       this.BuyNowText = 'Buy Now';
       this.IsUpgrade = false;
     }
+
+    if(this.Plan?.UserHasAccess){
+      this.BuyNowText = 'Current Plan';
+    }
   }
 
   protected determinePlanGroups() {
