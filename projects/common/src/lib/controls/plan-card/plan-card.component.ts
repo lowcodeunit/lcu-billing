@@ -155,6 +155,7 @@ export class PlanCardComponent implements OnInit {
   public IntervalSelected(interval: string) {
     this.ToggleChanged(interval);
     this.IntervalToggled.emit(this.Plan);
+    this.determineBuyNowText();
 
     this.getOtherIntervalPrice(this.Plan);
   }

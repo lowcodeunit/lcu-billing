@@ -185,22 +185,29 @@
             }
         }
     }
+    ::ng-deep .mat-card-actions{
+        margin: 0px;
+    }
     .button-container{
-        // position: absolute;
-        // bottom: 17px;
+        position: absolute;
+        bottom: 0px;
         // left: 69px;
         padding-top: 0px;
         padding-bottom: 20px;
-        margin-top: -25px;
+        width:100%;
 
         .button{
             width: 160px;
             color: $Light-font;
-            // background-color:$theme-color;  
+            background-color:$Main-font;  
+            &:disabled{
+                // color:$Main-font !important;
+                background-color: transparentize($color: $Main-font, $amount: .5);
+            }
         }
         .back-button{
             color: $Light-font;
-            // background-color:$theme-color;  
+            background-color:$Main-font;
             margin-left:30px;
         }
     }

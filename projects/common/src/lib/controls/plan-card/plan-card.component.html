@@ -136,7 +136,7 @@
   <mat-card-actions
     *ngIf="ShowButton === true && Plan.TrialPeriodDays === 0"
     class="button-container"
-    fxLayoutAlign="center center"
+    fxLayoutAlign="center end"
   >
     <button mat-raised-button class="button" (click)="BuyNow(Plan)" [disabled]=" Plan.UserHasAccess">
       {{ BuyNowText }}
