@@ -294,23 +294,23 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
       this.stripeCard = elements.create('card', {
         style: {
           base: {
-            iconColor: '#c7c7c7',
-            color: '#c7c7c7',
+            iconColor: '#282D35',
+            color: '#282D35',
             fontWeight: 600,
             fontFamily: 'Arial, sans-serif',
             fontSize: '16px',
             fontSmoothing: 'antialiased',
 
             ':focus': {
-              color: '#c7c7c7',
+              color: '#282D35',
             },
 
             '::placeholder': {
-              color: '#c7c7c7',
+              color: '#282D35',
             },
 
             ':focus::placeholder': {
-              color: '#c7c7c7',
+              color: '#282D35',
             },
           },
           invalid: {
@@ -320,7 +320,7 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
             },
           },
           '::placeholder': {
-            color: 'grey',
+            color: '282D35',
           },
         },
       });

@@ -1,29 +1,5 @@
-@import '../../../../assets/common-theme';
-
-// PRO
-$Pro-primary: mat-color(map-get($global-theme, primary), A200);
-$Pro-trans: mat-color(map-get($global-theme, primary), A200,50%);
-// Starter
-// $Starter-primary: mat-color(map-get($global-theme, primary), A100);
-// $Starter-trans: mat-color(map-get($global-theme, primary), A100, 50%);
-// INTER
-// $Inter-primary: mat-color(map-get($global-theme, primary), A400);
-// $Inter-trans: mat-color(map-get($global-theme, primary), A400, 50%);
-
-// $Fathym-Grey: darkslategray;
-
-$Fathym-Grey: mat-color(map-get($global-theme, primary), 100);
-$Plan-Card-BG: transparentize(#f5f5f5, .1);
-// $Plan-Card-BG: mat-color(map-get($global-theme, primary), 100);
- $Main-font: map-get(map-get($global-theme, 'foreground'), 'secondary-text');
-
- $Featured-plan-color: blue;
- $Fathym-Green: mat-color(map-get($global-theme, primary), A200);
- $Trans-container: rgba(map-get(map-get($global-theme, 'background'), 'background'), .5);
-
-
-//  $Main-font: black;
-
+// @import '../../../../assets/common-theme';
+@import '../../../../assets/styles.scss';
 
 //----------------------MIXINS------------------------//
 // @mixin accent-background-color($color) {
@@ -49,17 +25,18 @@ $Plan-Card-BG: transparentize(#f5f5f5, .1);
 @mixin plan-card($theme-color, $trans){
     // border: 1px solid;
     width: 275px;
-    height: 100%; //500px
+    // height: 100%; //500px
+    min-height: 100%;
     position: relative;
     border-radius: 4px;
     // background-color: $Plan-Card-BG !important;
+    background: $Card-background;
     // border-color: $theme-color;
     color:$Main-font;
     padding: 0px;
     padding-top:10px;
     padding-bottom: 10px;
-    box-shadow: 1px 1px 3px !important;
-    
+    box-shadow: 2px 2px 10px!important;
     .header{
         // border-bottom: 3px solid $theme-color;
         border-top-right-radius: 4px;
@@ -77,7 +54,7 @@ $Plan-Card-BG: transparentize(#f5f5f5, .1);
             width: 100%;
         .package{
             font-style: italic;
-            color: $theme-color;
+            color: $Fathym-Grey;
             margin-bottom: 5px;
             margin-left: -13px;
         }
@@ -86,8 +63,8 @@ $Plan-Card-BG: transparentize(#f5f5f5, .1);
             .title-hr{
                 width: 100%;
                 margin-left: 5px;
-                background-color: $theme-color;
-                border: .5px solid $theme-color;
+                background-color: $Fathym-Grey;
+                border: .5px solid $Fathym-Grey;
             }
         }
     }
@@ -115,7 +92,7 @@ $Plan-Card-BG: transparentize(#f5f5f5, .1);
             // }
         }
         .popular-plan{  
-           @include banner($Fathym-Green)
+           @include banner($banner-color)
         }
         
     }
@@ -129,16 +106,25 @@ $Plan-Card-BG: transparentize(#f5f5f5, .1);
         height: 70px;
     }
     .pricing-container{
-        background-color: $trans;
+        // background-color: $Light-font;
         // background-color: transparentize($theme-color, .3);
         // background-color: rgba($theme-color, .2);
         // @include accent-background-color($theme-color);
-        border-bottom: 1px solid $theme-color;
+        border-bottom: 1px solid $Fathym-Grey;
         .discounted-from{
             color: $Fathym-Grey;
             text-decoration: line-through;
             padding-bottom: 5px;
     
+        }
+        .plan-toggle{
+            ::ng-deep .mat-slide-toggle-thumb{
+                background-color: $Fathym-Grey;
+            }
+
+            ::ng-deep .mat-slide-toggle-bar{
+                background-color: lightgray;
+            }
         }
         .price{
             font-size: 45px;
@@ -153,7 +139,7 @@ $Plan-Card-BG: transparentize(#f5f5f5, .1);
     
         }
         .intervals{
-            color: $Fathym-Grey;
+            color: $Main-font;
             padding-bottom: 5px;
     
         }
@@ -174,13 +160,18 @@ $Plan-Card-BG: transparentize(#f5f5f5, .1);
         .features{
             font-size: 12px;
             padding: 10px;
-            border: 1px solid $theme-color;
-            border-radius: 2px;
-            background-color: $Trans-container;
+            // border: 1px solid $theme-color;
+            // border-radius: 2px;
+            // background-color: $Trans-container;
             // background-color: rgba(255,255,255,0.1);
 
 
             // background-color: $Plan-Card-BG;
+
+            .feature-item{
+                padding-bottom: 10px;
+            }
+
             .vl{
                 border-left: 1px solid $Fathym-Green;
                 height: 10px;
@@ -190,7 +181,7 @@ $Plan-Card-BG: transparentize(#f5f5f5, .1);
     
             mat-icon{
                 font-size: 20px;
-                color: $theme-color;
+                color: $Bullets;
             }
         }
     }
@@ -204,11 +195,11 @@ $Plan-Card-BG: transparentize(#f5f5f5, .1);
 
         .button{
             width: 160px;
-            color: $Main-font;
+            color: $Light-font;
             // background-color:$theme-color;  
         }
         .back-button{
-            color: $Main-font;
+            color: $Light-font;
             // background-color:$theme-color;  
             margin-left:30px;
         }
@@ -217,20 +208,6 @@ $Plan-Card-BG: transparentize(#f5f5f5, .1);
 }
 //--------------------------END MIXINS------------------------------//
 .card{
-    @include plan-card($Pro-primary, $Pro-trans); 
+    @include plan-card($Bullets, $Pro-trans); 
 
 }
-
-// .two{
-//     @include plan-card($Pro-primary, $Pro-trans);
-
-// }
-
-// .three{
-//     @include plan-card($Inter-primary, $Inter-trans); 
-
-// }
-// .four{
-//     @include plan-card($Inter-primary, $Inter-trans); 
-
-// }

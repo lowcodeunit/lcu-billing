@@ -4,11 +4,13 @@
   fxLayout.md="column"
   fxLayout.sm="column"
   fxLayout.xs="column"
-  fxLayoutAlign="center center"
+  
+  class="card-container"
 >
-  <div class="margin-2" *ngFor="let plan of DisplayedPlans">
+  <!-- <div class="margin-2 plan-card" *ngFor="let plan of DisplayedPlans"> -->
     <lcu-plan-card
-      class="lcu-plan-card"
+      *ngFor="let plan of DisplayedPlans"
+      class="margin-2 plan-card"
       [featured-plan-group]="FeaturedPlanGroup"
       [is-upgrade]="IsUpgrade"
       [popular-plan-group]="PopularPlanGroup"
@@ -19,5 +21,5 @@
       (buy-now-clicked)="BuyNowClicked($event)"
     >
     </lcu-plan-card>
-  </div>
+  <!-- </div> -->
 </div>

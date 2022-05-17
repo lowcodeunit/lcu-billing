@@ -13,25 +13,25 @@
       >{{ Plan.PlanGroup }}</mat-card-title
     >
     <div class="package-line" fxLayout="row" fxLayoutAlign="start center">
-      <div class="package">&nbsp;package</div>
+      <div class="package">&nbsp;plan</div>
       <div class="hr-container" fxLayoutAlign="start start">
         <hr class="title-hr" />
       </div>
     </div>
-    <div
+    <!-- <div
       *ngIf="Plan?.PlanGroup === FeaturedPlanGroup"
       class="featured-plan"
       fxLayoutAlign="center center"
     >
       <div class="feat-text">&nbsp;BEST VALUE</div>
-    </div>
-    <div
+    </div> -->
+    <!-- <div
       *ngIf="Plan?.PlanGroup === PopularPlanGroup"
       class="popular-plan"
       fxLayoutAlign="center center"
     >
       <div class="feat-text">&nbsp;POPULAR</div>
-    </div>
+    </div> -->
   </mat-card-header>
 
   <mat-card-content>
@@ -46,7 +46,6 @@
     </div>
     <!-- PRICING -->
     <div
-      *ngIf="Plan?.DiscountedFrom > 0"
       class="pricing-container"
       fxLayout="row"
       fxLayoutAlign="space-around center"
@@ -59,6 +58,7 @@
       >
         <mat-slide-toggle
           *ngIf="OtherPlan"
+          class="plan-toggle"
           (change)="IntervalSelected($event)"
           [checked]="ToggleChecked"
         ></mat-slide-toggle>
@@ -68,8 +68,8 @@
         <div *ngIf="Plan?.Interval && OtherPlan">{{ Plan.Interval | titlecase }}ly</div>
       </div>
       <div class="priced-content" fxLayout="row" fxLayoutAlign="center end">
-        <div *ngIf="Plan?.DiscountedFrom" class="discounted-from" fxLayoutAlign="center center">
-        ${{Plan.DiscountedFrom}}</div>
+        <!-- <div *ngIf="Plan?.DiscountedFrom" class="discounted-from" fxLayoutAlign="center center">
+        ${{Plan.DiscountedFrom}}</div> -->
         <div class="dollar-symbol">&nbsp;$</div>
         <div *ngIf="Plan?.Price" class="price" fxLayoutAlign="center center">
           {{ Plan.Price }}&nbsp;
@@ -100,11 +100,11 @@
       <div class="features" fxLayout="column" fxLayoutAlign="center start">
         <ng-container *ngIf="PlanFeatures">
           <div fxLayout="column" *ngFor="let feat of PlanFeatures;index as i;">
-            <div fxLayout="row" fxLayoutAlign="center center">
-              <mat-icon>check_circle_outline</mat-icon>
+            <div fxLayout="row" fxLayoutAlign="center center" class="feature-item">
+              <mat-icon>done</mat-icon>
               <div [innerHTML]="SafeHtml(feat)"></div>
             </div>
-            <div class="vl" *ngIf="DeterminePlanFeatIndex(i)"></div>
+            <!-- <div class="vl" *ngIf="DeterminePlanFeatIndex(i)"></div> -->
           </div>
         </ng-container>
       </div>

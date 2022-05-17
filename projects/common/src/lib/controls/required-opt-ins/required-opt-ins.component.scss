@@ -1,19 +1,25 @@
-@import "../../../../assets/common-theme";
+@import "../../../../assets/styles.scss";
 
-$Pro-primary: mat-color(map-get($global-theme, primary), A200);
+// $Trim-color: mat-color(map-get($global-theme, primary), A200);
 
 .required-opt-ins{
     width:100%;
     margin-top: 10px;
     .checkbox-label{
       font-size: 12px;
+      color: $Main-font;
+        
       #ea-anchor{
-        color:$Pro-primary
+        color:$Fathym-Green
       }
       #tos-anchor{
-        color: $Pro-primary;
+        color: $Fathym-Green;
       }
     }
+}
+
+::ng-deep .mat-checkbox-frame {
+  border-color: $Main-font;
 }
 
 ::ng-deep .mat-checkbox-layout{
