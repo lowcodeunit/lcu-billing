@@ -6,12 +6,9 @@
 @include theme-setup($global-theme);
 
 .billing-app-container{
-    // background-image: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(../assets/img/bubble-clean.jpg);
-    // background-image: linear-gradient(rgba(0,0,0,.1), rgba(0,0,0,.1)), url(assets/img/thinky-outside-the-box.jpg);
-    // background-repeat: no-repeat;
-    // background-size: cover;
     
-    background: linear-gradient(#DFEFF2, white);
+    // background: linear-gradient(#DFEFF2, white);
+    background-color: $Page-backgorund;
     min-height: 100%;
     padding-top: 30px;
 }
