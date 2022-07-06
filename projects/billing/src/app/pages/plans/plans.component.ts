@@ -57,13 +57,19 @@ export class PlansComponent implements OnInit {
    *
    */
   public BuyNowClicked(plan: BillingPlanOption) {
-    // console.log('Buy Now Clicked:', plan);
 
     // if (!plan.SuccessRedirect.startsWith('=>')) {
     this.router.navigate(['plan', plan.PlanGroup, plan.Interval]);
     // } else {
     //   window.location.href = plan.SuccessRedirect;
     // }
+  }
+  protected checkIfUpgrade(){
+    this.DisplayedPlans.forEach(plan =>{
+      if(plan.UserHasAccess){
+        this.router.navigate(['upgrade']);
+      }
+    })
   }
 
   protected loadBillingOptions(): void {
@@ -81,5 +87,8 @@ export class PlansComponent implements OnInit {
    */
   protected stateChanged(): void {
     this.loadBillingOptions();
+    this.checkIfUpgrade();
+    
+    
   }
 }

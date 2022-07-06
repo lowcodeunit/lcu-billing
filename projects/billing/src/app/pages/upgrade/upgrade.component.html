@@ -1,0 +1,65 @@
+<!-- MAIN SCREEN -->
+<div
+  [fxShow]="!State.Loading"
+  class="plan-page-container"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+>
+  <h3 class="choose-header" fxLayoutAlign="center center">
+    Choose Your Perfect Plan
+  </h3>
+
+  <lcu-billing-display
+    [featured]="State.FeaturedPlanGroup"
+    [is-upgrade]="true"
+    [popular]="State.PopularPlanGroup"
+    [plans]="DisplayedPlans"
+    [show-button]="ShowButton"
+    (buy-now)="UpgradeClicked($event)"
+  ></lcu-billing-display>
+
+  <!-- <h2 fxLayoutAlign="center center" class="tag-line">
+    If You Can Fathym It, You Can Build It.
+  </h2> -->
+</div>
+
+<!-- LOADING SCREEN -->
+<div [fxShow]="State.Loading">
+  <div fxLayout="row" fxLayoutAlign="center center" class="spinner-container">
+    <mat-spinner diameter="75"></mat-spinner>
+    <div class="spinner-logo" logo-alt="Fathym Logo"></div>
+  </div>
+</div>
+
+
+<!-- 
+<ng-container> -->
+<!-- <lcu-billing-display
+  [featured]=""
+  [is-upgrade]="true"
+  [popular]=""
+  [plans]="BillingPlanOptionsSorted"
+  [show-button]="true"
+  (buy-now)="ChangePlan($event)"
+  *ngIf="BillingPlanOptionsSorted?.length > 0 && !IsConfirming && !ShowConfirmationPage"
+></lcu-billing-display> -->
+
+<!-- <lcu-confirm-plan-change
+  *ngIf="IsConfirming && NewPlan"
+  [plan]="NewPlan"
+  [payment-status]="Context.State.PaymentStatus"
+  [submit-button-text]="SubmitButtonText"
+  (go-back-click-event)="GoBackClickEvent($event)"
+  (upgrade-confirmed)="UpgradeRequest($event)"
+  (payment-success)="CardChangeSuccess($event)">
+</lcu-confirm-plan-change> -->
+
+<!-- Confirmation Page -->
+<!-- <lcu-plan-confirmation-page
+    *ngIf="ShowConfirmationPage && NewPlan"
+    [selected-plan]="NewPlan">
+</lcu-plan-confirmation-page> -->
+<!-- </ng-container> -->
+
+
+
