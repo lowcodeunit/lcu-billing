@@ -17,6 +17,7 @@
             [submit-button-text]="SubmitButtonText"
             [is-update-flow]=true
             [billing-header]="HeaderText"
+            [selected-plan]="Plan"
             (card-change-success)="HandlePaymentSuccess($event)"
         >
         </lcu-stripe-form>

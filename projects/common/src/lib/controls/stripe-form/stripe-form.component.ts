@@ -227,8 +227,11 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
       this.StripeError = result.error;
     } else {
       this.StripeError = '';
+      console.log("Selected Plan: ", this.SelectedPlan)
+      console.log("is update: ", this.IsUpdateFlow)
 
       if (this.SelectedPlan && !this.IsUpdateFlow) {
+        console.log("new purchase");
         this.userBillStateCtx
           .CompletePayment(
             result.paymentMethod.id,
@@ -251,21 +254,17 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
           });
       }
       else if (this.SelectedPlan && this.IsUpdateFlow) {
-        this.userBillStateCtx
-          .ChangeSubscription(
-            result.paymentMethod.id,
-            this.BillingForm.value.userName,
-            this.SelectedPlan.Lookup,
-            this.SelectedPlan.TrialPeriodDays
-          )
+        console.log("is upgrade flow")
+      
+        this.userBillStateCtx.ChangeSubscription(this.State?.Username, this.SelectedPlan.Lookup)
           .then((result: any) => {
-            console.log('complete payment result: ', result.body.code);
+            console.log('complete payment result: ', result);
             console.log('State: ', this.State);
-            if (result.body.code === 0 && this.State.PaymentStatus.Code === 0) {
-              this.PaymentSuccessful.emit(true);
+            // && this.State.PaymentStatus.Code === 0
+            if (result.body.code === 0 ) {
+              this.CardChangeSuccess.emit(true);
             } else if (
-              result.body.code === 0 &&
-              this.State.PaymentStatus.Code !== 0
+              result.body.code !== 0 
             ) {
               this.StripeError =
                 'There has been an issue with the card you provided. Try a different payment method, or contact your bank for more information.';
