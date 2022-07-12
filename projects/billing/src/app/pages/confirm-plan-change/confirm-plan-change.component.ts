@@ -53,14 +53,14 @@ export class ConfirmPlanChangePageComponent implements OnInit {
     this.router.navigate(['upgrade']);
   }
 
-  public UpgradeRequest(event: BillingPlanOption){
-    console.log("upgrade to: ", event);
-    if(this.State.PaymentStatus.Code ===0){
-      this.Loading = true;
-      this.userBillStateCtx.ChangeSubscription(this.State?.Username, event.Lookup);
-    }
+  // public UpgradeRequest(event: BillingPlanOption){
+  //   console.log("upgrade to: ", event);
+  //   if(this.State.PaymentStatus.Code ===0){
+  //     this.Loading = true;
+  //     this.userBillStateCtx.ChangeSubscription(this.State?.Username, event.Lookup, event.TrialPeriodDays);
+  //   }
    
-  }
+  // }
 
   public CardChangeSuccess(event: boolean){
     console.log("Card Change Success: ", event);

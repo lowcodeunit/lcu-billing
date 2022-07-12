@@ -1,13 +1,14 @@
 <div
   [fxShow]="!State.Loading"
 >
+<!-- (upgrade-confirmed)="UpgradeRequest($event)" -->
+
     <lcu-confirm-plan-change
     *ngIf="NewPlan"
     [plan]="NewPlan"
     [payment-status]="State?.PaymentStatus"
     [submit-button-text]="SubmitButtonText"
     (go-back-click-event)="GoBackClicked($event)"
-    (upgrade-confirmed)="UpgradeRequest($event)"
     (payment-success)="CardChangeSuccess($event)">
     </lcu-confirm-plan-change>
 </div>

@@ -114,14 +114,14 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
     this.IsConfirming = false;
   }
 
-  public UpgradeRequest(event: BillingPlanOption){
-    console.log("upgrade to: ", event);
-    if(this.Context.State.PaymentStatus.Code ===0){
-      this.Loading = true;
-      this.userBillStateCtx.ChangeSubscription(this.Context.State.Username, event.Lookup);
-    }
+  // public UpgradeRequest(event: BillingPlanOption){
+  //   console.log("upgrade to: ", event);
+  //   if(this.Context.State.PaymentStatus.Code ===0){
+  //     this.Loading = true;
+  //     this.userBillStateCtx.ChangeSubscription(this.Context.State.Username, event.Lookup);
+  //   }
    
-  }
+  // }
 
   //  Helpers
 

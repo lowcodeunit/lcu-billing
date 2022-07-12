@@ -32,34 +32,3 @@
 </div>
 
 
-<!-- 
-<ng-container> -->
-<!-- <lcu-billing-display
-  [featured]=""
-  [is-upgrade]="true"
-  [popular]=""
-  [plans]="BillingPlanOptionsSorted"
-  [show-button]="true"
-  (buy-now)="ChangePlan($event)"
-  *ngIf="BillingPlanOptionsSorted?.length > 0 && !IsConfirming && !ShowConfirmationPage"
-></lcu-billing-display> -->
-
-<!-- <lcu-confirm-plan-change
-  *ngIf="IsConfirming && NewPlan"
-  [plan]="NewPlan"
-  [payment-status]="Context.State.PaymentStatus"
-  [submit-button-text]="SubmitButtonText"
-  (go-back-click-event)="GoBackClickEvent($event)"
-  (upgrade-confirmed)="UpgradeRequest($event)"
-  (payment-success)="CardChangeSuccess($event)">
-</lcu-confirm-plan-change> -->
-
-<!-- Confirmation Page -->
-<!-- <lcu-plan-confirmation-page
-    *ngIf="ShowConfirmationPage && NewPlan"
-    [selected-plan]="NewPlan">
-</lcu-plan-confirmation-page> -->
-<!-- </ng-container> -->
-
-
-
