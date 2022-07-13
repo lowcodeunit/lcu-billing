@@ -235,7 +235,7 @@ export class PlanCardComponent implements OnInit {
     if(this.Plan?.UserHasAccess){
       this.BuyNowText = 'Current Plan';
     }
-    console.log("buy nw text: ", this.BuyNowText)
+    // console.log("buy nw text: ", this.BuyNowText)
   }
 
   protected determinePlanGroups() {

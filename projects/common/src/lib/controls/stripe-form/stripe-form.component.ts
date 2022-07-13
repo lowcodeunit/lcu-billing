@@ -240,7 +240,7 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
             this.SelectedPlan.TrialPeriodDays
           )
           .then((result: any) => {
-            console.log('complete payment result: ', result.body.code);
+            console.log('complete payment result: ', result);
             console.log('State: ', this.State);
             if (result.body.code === 0 && this.State.PaymentStatus.Code === 0) {
               this.PaymentSuccessful.emit(true);
@@ -254,11 +254,15 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
           });
       }
       else if (this.SelectedPlan && this.IsUpdateFlow) {
-        console.log("is upgrade flow")
+        // console.log("is upgrade flow")
       
-        this.userBillStateCtx.ChangeSubscription(this.State?.Username, this.SelectedPlan.Lookup)
+        this.userBillStateCtx.ChangeSubscription(
+          result.paymentMethod.id,
+          this.BillingForm.value.userName,
+          this.SelectedPlan.Lookup,
+          this.SelectedPlan.TrialPeriodDays)
           .then((result: any) => {
-            console.log('complete payment result: ', result);
+            console.log('change subscription result: ', result);
             console.log('State: ', this.State);
             // 
             if (result.body.code === 0 && this.State.PaymentStatus.Code === 0) {

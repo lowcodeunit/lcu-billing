@@ -33,13 +33,17 @@ export class UserBillingStateContext extends StateContext<UserBillingState> {
 
   public ChangeSubscription(
     
+    methodId: string,
     customerName: string,
     plan: string,
+    trialPeriodDays: number
     ): Promise<object> {
     return this.Execute({
       Arguments: {
         CustomerName: customerName,
+        MethodID: methodId,
         Plan: plan,
+        TrialPeriodDays: trialPeriodDays,
       },
       Type: 'ChangeSubscription',
     });
