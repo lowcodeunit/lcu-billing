@@ -260,14 +260,20 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
           .then((result: any) => {
             console.log('complete payment result: ', result);
             console.log('State: ', this.State);
-            // && this.State.PaymentStatus.Code === 0
-            if (result.body.code === 0 ) {
+            // 
+            if (result.body.code === 0 && this.State.PaymentStatus.Code === 0) {
               this.CardChangeSuccess.emit(true);
             } else if (
               result.body.code !== 0 
             ) {
               this.StripeError =
                 'There has been an issue with the card you provided. Try a different payment method, or contact your bank for more information.';
+            }
+            else if(
+              this.State.PaymentStatus.Code !== 0
+            ){
+              this.StripeError =
+                'There is an issue with your account, please contact our support.';
             }
           });
       }

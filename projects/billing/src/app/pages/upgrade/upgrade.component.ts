@@ -206,6 +206,8 @@ export class LcuBillingUpgradeElementComponent extends LcuElementComponent<LcuBi
 
   protected stateChanged(){
 
+    console.log("State: ", this.State);
+
     this.loadBillingOptions();
 
   }
