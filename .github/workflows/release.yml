@@ -2,15 +2,15 @@ name: NPM - Release
 
 on:
   push:
-    branches: [main,integration,feature/**,bug/**,hotfix/**]
+    branches: [main, integration, feature/**, bug/**, hotfix/**]
   pull_request:
-    branches: [main,integration,feature/**,bug/**,hotfix/**]
+    branches: [main, integration, feature/**, bug/**, hotfix/**]
 
 env:
   Branches: main,integration,feature/**,bug/**,hotfix/**
   MainBranch: main
   NPMRegistry: https://registry.npmjs.org/
-  InstallCommand: npm ci
+  InstallCommand: npm i
   DeployCommand: npm run deploy
   Organization: lowcodeunit
   Repository: lcu-billing
@@ -26,7 +26,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
         with:
-          fetch-depth: '0'
+          fetch-depth: "0"
 
       # set variables
       - name: Set variables
@@ -34,7 +34,7 @@ jobs:
         run: |
           branch=${GITHUB_REF##*/}
           echo ::set-output name=branchName::$branch
-           
+
           if [ "$branch" == "${{ env.MainBranch }}" ]
           then
               echo "::set-output name=versionBump::minor"
