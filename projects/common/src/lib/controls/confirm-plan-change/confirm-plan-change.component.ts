@@ -42,7 +42,7 @@ export class ConfirmPlanChangeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.HeaderText = `By entering your credit card information and clicking the confirmation button below you confirm that you wish to change to the ${this.Plan.Name} plan.`
+    this.HeaderText = `By entering your credit card information and clicking the confirmation button below you confirm that you wish to change to the ${this.Plan?.Name} plan.`
   }
 
   public IsButtonDisabled(): boolean{
@@ -55,6 +55,7 @@ export class ConfirmPlanChangeComponent implements OnInit {
   }
 
   public GoBackClicked(event: any){
+    console.log("go back ")
     this.GoBackClickEvent.emit(event);
   }
 

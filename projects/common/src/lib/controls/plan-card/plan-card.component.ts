@@ -155,6 +155,7 @@ export class PlanCardComponent implements OnInit {
   public IntervalSelected(interval: string) {
     this.ToggleChanged(interval);
     this.IntervalToggled.emit(this.Plan);
+    this.determineBuyNowText();
 
     this.getOtherIntervalPrice(this.Plan);
   }
@@ -234,6 +235,7 @@ export class PlanCardComponent implements OnInit {
     if(this.Plan?.UserHasAccess){
       this.BuyNowText = 'Current Plan';
     }
+    // console.log("buy nw text: ", this.BuyNowText)
   }
 
   protected determinePlanGroups() {
