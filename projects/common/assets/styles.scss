@@ -5,13 +5,38 @@
 @import "./_common-theme";
 @include theme-setup($global-theme);
 
-$Fathym-Green: mat-color(map-get($global-theme, primary), A700);
+$Fathym-Green: #4a918e;
+// $Pro-primary: mat-color(map-get($global-theme, primary), A200);
+// $Pro-trans: mat-color(map-get($global-theme, primary), A200,50%);
+$Pro-trans: #9CD8D7;
+
+$Fathym-Grey: #f2f2f7;
+$Fathym-dark-grey: slategrey;
+// $Fathym-Grey: #A4BAB3;
+$banner-color: #4a918e;
+$Bullets: #34c759;
+
+$Card-background: linear-gradient(white, #DFEFF2);
+
+$Card-lower-background: #f2f2f7;
+$Button-color: #2250f4;
+$Page-backgorund: #fefeff;
+
+
+// $Plan-Card-BG: transparentize(#f5f5f5, .1);
+$Plan-Card-BG: #F2F2F7;
+// $Main-font: map-get(map-get($global-theme, 'foreground'), 'secondary-text');
+$Main-font: #282D35;
+$Light-font: white;
+$Featured-plan-color: blue;
+// $Fathym-Green: mat-color(map-get($global-theme, primary), A200);
+$Trans-container: rgba(map-get(map-get($global-theme, 'background'), 'background'), .5);
 
 .billing-app-container{
     // background-image: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url(../assets/img/bubble-clean.jpg);
-    background-image: linear-gradient(rgba(0,0,0,.1), rgba(0,0,0,.1)), url(./img/thinky-outside-the-box.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
+    // background-image: linear-gradient(rgba(0,0,0,.1), rgba(0,0,0,.1)), url(./img/thinky-outside-the-box.jpg);
+    // background-repeat: no-repeat;
+    // background-size: cover;
     min-height: 100%;
     padding-top: 30px;
 }
