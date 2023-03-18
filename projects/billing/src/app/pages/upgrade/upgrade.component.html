@@ -11,10 +11,11 @@
 
   <lcu-billing-display
     [featured]="State.FeaturedPlanGroup"
+    [is-upgrade]="true"
     [popular]="State.PopularPlanGroup"
     [plans]="DisplayedPlans"
     [show-button]="ShowButton"
-    (buy-now)="BuyNowClicked($event)"
+    (buy-now)="UpgradeClicked($event)"
   ></lcu-billing-display>
 
   <!-- <h2 fxLayoutAlign="center center" class="tag-line">
@@ -29,3 +30,5 @@
     <div class="spinner-logo" logo-alt="Fathym Logo"></div>
   </div>
 </div>
+
+

@@ -8,9 +8,17 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { CompleteComponent } from './complete/complete.component';
 import { PlansComponent } from './plans/plans.component';
 import { BillingComponent } from './billing/billing.component';
+import { LcuBillingUpgradeElementComponent } from './upgrade/upgrade.component';
+import { ConfirmPlanChangePageComponent } from './confirm-plan-change/confirm-plan-change.component';
 
 @NgModule({
-  declarations: [BillingComponent, CompleteComponent, PlansComponent],
+  declarations: [
+    BillingComponent, 
+    CompleteComponent, 
+    PlansComponent, 
+    ConfirmPlanChangePageComponent,
+    LcuBillingUpgradeElementComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -21,8 +29,20 @@ import { BillingComponent } from './billing/billing.component';
     LcuBillingModule,
     PipeModule,
   ],
-  exports: [BillingComponent, CompleteComponent, PlansComponent],
+  exports: [
+    BillingComponent, 
+    PlansComponent, 
+    CompleteComponent,
+    LcuBillingUpgradeElementComponent, 
+    ConfirmPlanChangePageComponent
+  ],
   providers: [],
-  entryComponents: [BillingComponent, CompleteComponent, PlansComponent],
+  entryComponents: [
+    BillingComponent, 
+    CompleteComponent, 
+    PlansComponent, 
+    LcuBillingUpgradeElementComponent,
+    ConfirmPlanChangePageComponent
+  ],
 })
 export class PagesModule {}
