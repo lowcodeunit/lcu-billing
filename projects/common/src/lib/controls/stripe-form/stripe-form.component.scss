@@ -1,13 +1,5 @@
-@import '../../../../../common/assets/common-theme';
+@import '../../../../../common/assets/styles.scss';
 
-// PRO
-$Pro-primary: mat-color(map-get($global-theme, primary), A200);
-$Pro-trans: mat-color(map-get($global-theme, primary), A200,10%);
-$Main-font: map-get(map-get($global-theme, 'foreground'), 'secondary-text');
-$Fathym-Grey: mat-color(map-get($global-theme, primary), 300);
-$Fathym-Green: mat-color(map-get($global-theme, primary), A200);
-$Fathym-Green-BG: mat-color(map-get($global-theme, primary), A200,.5);
-$Trans-container: rgba(map-get(map-get($global-theme, 'background'), 'background'), .5);
 
 input { 
   touch-action: none; 
@@ -18,13 +10,17 @@ input {
   margin: 10px 0px;
   padding: 5px;
   color:$Main-font !important;
+  
 }
 
 @mixin stripe-billing-container($global-theme-color, $trans){
   // height:450px;
   width: 100%;
   padding: 20px;
-  box-shadow: 1px 1px 3px !important;
+  // background: $Card-background;
+  background-color: $Card-lower-background;
+  color: $Main-font;
+  box-shadow: 2px 2px 10px!important;
 
   .fathym-logo-container{
     height: 100px;
@@ -35,7 +31,7 @@ input {
       background-size: 100px;
       height: 100px;
       width: 100px;
-      background-color: $trans;
+      // background-color: $trans;
       border-radius: 50px;
     }
   }
@@ -75,6 +71,16 @@ input {
             // width: 500px;
             width:100%;
             outline: none;
+
+            ::ng-deep .mat-form-field-label {
+              color: $Main-font !important;
+          } 
+
+          ::ng-deep .mat-form-field-underline {
+            background-color: $Main-font !important;
+          }
+
+            
             
             
           }
@@ -82,7 +88,7 @@ input {
             margin-left: -6px;
           }
           .user-input-icon{
-            color: $Main-font;
+            color: #c4cdd1;
             margin-right: 8px;
             margin-left: 5px;
           }
@@ -132,6 +138,8 @@ input {
           padding: 10px 0px 0px;
           .buy-now-button{
             // width: 150px;
+            background-color: $Button-color;
+            color: $Light-font;
             display: inline-block;
             text-align: center;
             letter-spacing: 1px;
@@ -176,7 +184,7 @@ input {
 }
 
 .billing-card{
-  @include stripe-billing-container($Pro-primary, $Pro-trans);
+  @include stripe-billing-container($Fathym-Green, $Pro-trans);
 }
 // .one-billing{
 //   @include stripe-billing-container($Starter-primary, $Starter-trans);
@@ -184,7 +192,7 @@ input {
 // }
 
 // .two-billing{
-//   @include stripe-billing-container($Pro-primary, $Pro-trans);
+//   @include stripe-billing-container($Trim-color, $Pro-trans);
 
 // }
 

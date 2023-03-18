@@ -227,8 +227,11 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
       this.StripeError = result.error;
     } else {
       this.StripeError = '';
-      // console.log('Billing Form: ', this.BillingForm);
-      if (this.SelectedPlan) {
+      console.log("Selected Plan: ", this.SelectedPlan)
+      console.log("is update: ", this.IsUpdateFlow)
+
+      if (this.SelectedPlan && !this.IsUpdateFlow) {
+        console.log("new purchase");
         this.userBillStateCtx
           .CompletePayment(
             result.paymentMethod.id,
@@ -237,7 +240,7 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
             this.SelectedPlan.TrialPeriodDays
           )
           .then((result: any) => {
-            console.log('complete payment result: ', result.body.code);
+            console.log('complete payment result: ', result);
             console.log('State: ', this.State);
             if (result.body.code === 0 && this.State.PaymentStatus.Code === 0) {
               this.PaymentSuccessful.emit(true);
@@ -250,15 +253,43 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
             }
           });
       }
+      else if (this.SelectedPlan && this.IsUpdateFlow) {
+        // console.log("is upgrade flow")
+      
+        this.userBillStateCtx.ChangeSubscription(
+          result.paymentMethod.id,
+          this.BillingForm.value.userName,
+          this.SelectedPlan.Lookup,
+          this.SelectedPlan.TrialPeriodDays)
+          .then((result: any) => {
+            console.log('change subscription result: ', result);
+            console.log('State: ', this.State);
+            // 
+            if (result.body.code === 0 && this.State.PaymentStatus.Code === 0) {
+              this.CardChangeSuccess.emit(true);
+            } else if (
+              result.body.code !== 0 
+            ) {
+              this.StripeError =
+                'There has been an issue with the card you provided. Try a different payment method, or contact your bank for more information.';
+            }
+            else if(
+              this.State.PaymentStatus.Code !== 0
+            ){
+              this.StripeError =
+                'There is an issue with your account, please contact our support.';
+            }
+          });
+      }
 
       //TODO handle payment method changed
-      else if (this.IsUpdateFlow && result.paymentMethod.id) {
-        this.newPaymentID = result.paymentMethod.id;
-        this.userBillStateCtx.UpdatePaymentInfo(
-          this.BillingForm.value.userName,
-          result.paymentMethod.id
-        );
-      }
+      // else if (this.IsUpdateFlow && result.paymentMethod.id) {
+      //   this.newPaymentID = result.paymentMethod.id;
+      //   this.userBillStateCtx.UpdatePaymentInfo(
+      //     this.BillingForm.value.userName,
+      //     result.paymentMethod.id
+      //   );
+      // }
     }
   }
 
@@ -294,23 +325,23 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
       this.stripeCard = elements.create('card', {
         style: {
           base: {
-            iconColor: '#c7c7c7',
-            color: '#c7c7c7',
+            iconColor: '#282D35',
+            color: '#282D35',
             fontWeight: 600,
             fontFamily: 'Arial, sans-serif',
             fontSize: '16px',
             fontSmoothing: 'antialiased',
 
             ':focus': {
-              color: '#c7c7c7',
+              color: '#282D35',
             },
 
             '::placeholder': {
-              color: '#c7c7c7',
+              color: '#282D35',
             },
 
             ':focus::placeholder': {
-              color: '#c7c7c7',
+              color: '#282D35',
             },
           },
           invalid: {
@@ -320,7 +351,7 @@ export class StripeFormComponent implements OnInit, AfterViewChecked {
             },
           },
           '::placeholder': {
-            color: 'grey',
+            color: '282D35',
           },
         },
       });

@@ -1,26 +1,5 @@
 @import '../../../../assets/styles.scss';
 
-// PRO
-$Pro-primary: mat-color(map-get($global-theme, primary), A200);
-$Pro-trans: mat-color(map-get($global-theme, primary), A200,10%);
-// Starter
-// $Starter-primary: mat-color(map-get($global-theme, primary), A100);
-// $Starter-trans: mat-color(map-get($global-theme, primary), A100, 90%);
-// INTER
-// $Inter-primary: mat-color(map-get($global-theme, primary), A400);
-// $Inter-trans: mat-color(map-get($global-theme, primary), A400, 90%);
-
-$Main-font: map-get(map-get($global-theme, 'foreground'), 'secondary-text');
-$Fathym-Grey: mat-color(map-get($global-theme, primary), 300);
-
-
-// $Plan-Card-BG: slategrey;
-
-$Fathym-Green: mat-color(map-get($global-theme, primary), A200);
-$Fathym-Green-BG: mat-color(map-get($global-theme, primary), A200,.5);
-// $Text-color: mat-color(map-get($global-theme, primary), default-contrast);
-$Trans-container: rgba(map-get(map-get($global-theme, 'background'), 'background'), .5);
-
 // $Billing-BG: #f5f5f5;
 // $Input-box-color: #f5f5f5;
 // $Fathym-Grey: slategray;
@@ -161,10 +140,10 @@ $Trans-container: rgba(map-get(map-get($global-theme, 'background'), 'background
           .checkbox-label{
             font-size: 12px;
             #ea-anchor{
-              color:$Pro-primary
+              color:$Fathym-Green
             }
             #tos-anchor{
-              color: $Pro-primary;
+              color: $Fathym-Green;
             }
           }
         }
@@ -219,7 +198,7 @@ $Trans-container: rgba(map-get(map-get($global-theme, 'background'), 'background
 }
 
 .billing-card{
-  @include stripe-billing-container($Pro-primary, $Pro-trans);
+  @include stripe-billing-container($Fathym-Green, $Pro-trans);
 }
 // .one-billing{
 //   @include stripe-billing-container($Starter-primary, $Starter-trans);
@@ -227,7 +206,7 @@ $Trans-container: rgba(map-get(map-get($global-theme, 'background'), 'background
 // }
 
 // .two-billing{
-//   @include stripe-billing-container($Pro-primary, $Pro-trans);
+//   @include stripe-billing-container($Trim-color, $Pro-trans);
 
 // }
 

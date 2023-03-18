@@ -1,0 +1,22 @@
+<div
+  [fxShow]="!State.Loading"
+>
+<!-- (upgrade-confirmed)="UpgradeRequest($event)" -->
+
+    <lcu-confirm-plan-change
+    *ngIf="NewPlan"
+    [plan]="NewPlan"
+    [payment-status]="State?.PaymentStatus"
+    [submit-button-text]="SubmitButtonText"
+    (go-back-click-event)="GoBackClicked($event)"
+    (payment-success)="CardChangeSuccess($event)">
+    </lcu-confirm-plan-change>
+</div>
+
+<!-- LOADING SCREEN -->
+<div [fxShow]="State.Loading || Loading">
+    <div fxLayout="row" fxLayoutAlign="center center" class="spinner-container">
+      <mat-spinner diameter="75"></mat-spinner>
+      <div class="spinner-logo" logo-alt="Fathym Logo"></div>
+    </div>
+  </div>
